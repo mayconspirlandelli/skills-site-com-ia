@@ -24,12 +24,18 @@ O plano completo está em `docs/plano.md`.
 - Construa o site seção por seção, conferindo cada uma com o wireframe.
 - Converse com o usuário em português.
 
+## Segurança de skills de terceiros
+- **Nunca** instale, copie ou ative skill, plugin ou marketplace de terceiros sem antes usar a skill **auditar-skill**.
+- Audite sempre em pasta temporária, sem executar nada da skill. Prefira `./scripts/adicionar-skill.sh`, que já audita antes de instalar.
+- Veredito BLOQUEAR: não instale. REVISAR: só com confirmação explícita do usuário após ver os achados.
+- Registre o commit auditado na tabela abaixo. Atualizou a skill? Audite de novo.
+
 ## Stack padrão
 <!-- Ajuste por projeto. Se o briefing definir outra, o briefing vale. -->
 HTML + Tailwind, mobile-first.
 
 ## Skills adicionais deste projeto
 <!-- Registre aqui as skills instaladas durante o projeto e quando usá-las. -->
-| Skill | Origem | Quando usar |
-|-------|--------|-------------|
-| | | |
+| Skill | Origem @ commit auditado | Veredito | Quando usar |
+|-------|--------------------------|----------|-------------|
+| | | | |

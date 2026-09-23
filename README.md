@@ -26,6 +26,7 @@ A skill `site-com-referencias` conduz o processo e chama as demais na ordem cert
 ├── .claude/
 │   ├── settings.json      marketplaces e plugins do projeto
 │   └── skills/            skills do fluxo (versionadas com o projeto)
+├── auditorias/           relatórios de auditoria das skills instaladas
 ├── docs/plano.md          o plano do processo
 ├── scripts/
 │   └── adicionar-skill.sh instala skills de outros repositórios
@@ -47,12 +48,30 @@ A skill `site-com-referencias` conduz o processo e chama as demais na ordem cert
 | `print-para-wireframe` | Prints → wireframe em texto → especificação |
 | `gerar-design-system` | design_system.md, tokens.css e verificação de contraste |
 | `construir-site` | Código seção por seção + checklist de validação |
+| `auditar-skill` | Auditoria de segurança de skills de terceiros antes de instalar |
 
 Requisito dos scripts: Python 3 e `pip install beautifulsoup4`.
 
 ## Adicionando skills durante o projeto
 
-**Opção 1 — Marketplace de plugins (recomendado para coleções).**
+> 🔒 **Toda skill de terceiros passa pela auditoria antes de ser instalada.**
+> Skills dão instruções à IA e podem trazer scripts que rodam no seu computador,
+> com acesso a arquivos, rede e credenciais. A skill `auditar-skill` verifica prompt
+> injection, envio de dados, acesso a credenciais, código ofuscado, persistência e
+> comandos destrutivos, e dá um veredito: ✅ OK, ⚠️ REVISAR ou ⛔ BLOQUEAR.
+> Os relatórios ficam em `auditorias/`.
+
+**Opção 1 — Script com auditoria automática (recomendado).**
+```bash
+./scripts/adicionar-skill.sh https://github.com/<usuario>/<repo> caminho/da/skill
+./scripts/adicionar-skill.sh <url> caminho/da/skill --global   # para todos os projetos
+```
+Baixa em pasta temporária, audita e só instala se passar (REVISAR pede sua confirmação,
+BLOQUEAR impede a instalação).
+
+**Opção 2 — Marketplace de plugins.**
+Antes de instalar um plugin, peça ao Claude Code: *"audite o plugin X do marketplace Y"* —
+a skill `auditar-skill` clona o repositório e audita cada skill, comando e hook do plugin.
 O marketplace oficial da Anthropic já está registrado no `.claude/settings.json`.
 Dentro do Claude Code:
 ```
@@ -61,17 +80,11 @@ Dentro do Claude Code:
 O `--scope project` grava o plugin no `.claude/settings.json`, então ele vai junto no git.
 Para outros marketplaces: `/plugin marketplace add <usuario>/<repo> --scope project`.
 
-**Opção 2 — Copiar uma skill avulsa de um repositório.**
-```bash
-./scripts/adicionar-skill.sh https://github.com/<usuario>/<repo> caminho/da/skill
-./scripts/adicionar-skill.sh <url> caminho/da/skill --global   # para todos os projetos
-```
-
 **Opção 3 — Criar uma skill nova.**
 Peça ao Claude Code: *"use a skill-creator para criar uma skill que ... e salve em .claude/skills/"*.
 
-Depois de instalar: revise o `SKILL.md` (skills de terceiros executam instruções e scripts),
-registre a skill na tabela **Skills adicionais** do `CLAUDE.md` e reinicie o Claude Code.
+Depois de instalar: registre a skill e o commit auditado na tabela **Skills adicionais**
+do `CLAUDE.md` e reinicie o Claude Code. Atualizou a skill? Audite de novo.
 
 Se uma skill criada no projeto se mostrar útil, copie-a de volta para este template.
 
