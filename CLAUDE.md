@@ -6,8 +6,8 @@ O plano completo está em `docs/plano.md`.
 ## Como começar
 - No início de qualquer sessão, use a skill **site-com-referencias** para descobrir em que etapa o projeto está e qual é o próximo passo.
 - **Setup obrigatório, nesta ordem, antes de qualquer outra etapa:**
-  1. Auditar e instalar a skill `grill-me` — sempre a primeira skill do projeto (`./scripts/setup-skills.sh inicial`).
-  2. Entrevistar o usuário com a `grill-me` sobre o website/landing page e salvar o plano em `00_briefing/entrevista.md`.
+  1. Auditar e instalar as skills `grill-me` e `grilling` — sempre as primeiras do projeto (`./scripts/setup-skills.sh inicial`).
+  2. Entrevistar o usuário com a `grilling` (ou o usuário digita `/grill-me`) sobre o website/landing page e salvar o plano em `00_briefing/entrevista.md`.
   3. Auditar e instalar as demais skills obrigatórias (`./scripts/setup-skills.sh obrigatorias`; ver `docs/skills-obrigatorias.md`).
   4. Seguir os passos de `docs/plano.md`.
 - Siga as etapas na ordem. Não gere código do site antes de existir `04_design_system/design_system.md`, a menos que o usuário peça explicitamente — nesse caso, registre as suposições feitas.
@@ -15,7 +15,7 @@ O plano completo está em `docs/plano.md`.
 ## Etapas e pastas
 | Etapa | Skill | Pasta |
 |-------|-------|-------|
-| Setup e entrevista | grill-me (terceiros) | `00_briefing/entrevista.md` |
+| Setup e entrevista | grill-me / grilling (terceiros) | `00_briefing/entrevista.md` |
 | Briefing e referências | referencias-briefing | `00_briefing/`, `01_referencias/` |
 | Extração de HTML | extrair-html-referencia | `02_html_referencias/` |
 | Wireframe e especificação | print-para-wireframe | `03_wireframes/` |
@@ -37,7 +37,7 @@ O plano completo está em `docs/plano.md`.
 - Registre o commit auditado na tabela abaixo. Atualizou a skill? Audite de novo.
 
 ## Skills obrigatórias
-Todo projeto de website precisa de: `grill-me` (a primeira), `frontend-design`, `web-design-guidelines`, `image-to-code`,
+Todo projeto de website precisa de: `grill-me` e `grilling` (as primeiras), `frontend-design`, `web-design-guidelines`, `image-to-code`,
 `design-taste-frontend` e `playwright-cli`. Comandos e passo a passo em `docs/skills-obrigatorias.md`.
 No início do projeto, verifique se estão instaladas; se faltar alguma, audite com **auditar-skill** antes de instalar.
 Se o projeto precisar de animações ou vídeos, inclua também `remotion-best-practices` e `motion-design` (`./scripts/setup-skills.sh animacao`).

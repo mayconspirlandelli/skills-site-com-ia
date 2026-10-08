@@ -31,11 +31,11 @@ projeto-site/
 
 ## Passo S — Setup e entrevista (obrigatório, sempre o primeiro)
 
-1. **Instale a skill `grill-me` antes de qualquer outra** (o script audita antes de instalar):
+1. **Instale as skills `grill-me` e `grilling` antes de qualquer outra** (o script audita antes de instalar):
    ```bash
    ./scripts/setup-skills.sh inicial
    ```
-2. **Faça a entrevista.** A `grill-me` faz uma série de perguntas sobre o website ou landing page e monta o plano para codificar. Salve em `00_briefing/entrevista.md`.
+2. **Faça a entrevista** (digite `/grill-me`). A `grilling` faz uma série de perguntas sobre o website ou landing page e monta o plano para codificar. Salve em `00_briefing/entrevista.md`.
 3. **Instale as demais skills** (`./scripts/setup-skills.sh obrigatorias`; lista em `docs/skills-obrigatorias.md`).
 4. **Siga os passos abaixo**, a partir do Passo 0 — que reaproveita as respostas da entrevista.
 

@@ -4,13 +4,14 @@
 # e só instala o commit auditado em .claude/skills/.
 #
 # Uso:
-#   ./scripts/setup-skills.sh inicial       # 1º passo: só a grill-me (antes da entrevista)
+#   ./scripts/setup-skills.sh inicial       # 1º passo: grill-me + grilling (antes da entrevista)
 #   ./scripts/setup-skills.sh obrigatorias  # depois da entrevista: as demais obrigatórias
 #   ./scripts/setup-skills.sh animacao      # só se o projeto tiver animações ou vídeos
 set -euo pipefail
 
 INICIAL=(
   "https://github.com/mattpocock/skills grill-me"
+  "https://github.com/mattpocock/skills grilling"   # a grill-me só chama a grilling
 )
 OBRIGATORIAS=(
   "https://github.com/anthropics/skills frontend-design"

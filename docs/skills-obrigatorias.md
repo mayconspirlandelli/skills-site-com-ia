@@ -8,7 +8,8 @@ dela). Elas são auditadas e instaladas no seu projeto pelo script `scripts/setu
 
 ## Ordem do setup
 
-1. **`grill-me` primeiro, sempre.** É a primeira skill a ser instalada.
+1. **`grill-me` primeiro, sempre.** É a primeira skill a ser instalada, junto com a `grilling`
+   (a `grill-me` é só um atalho que chama a `grilling`, onde estão as instruções da entrevista).
 2. **Entrevista.** Com a `grill-me`, o Claude faz uma série de perguntas sobre o website ou
    landing page e monta o plano para codificar. Saída: `00_briefing/entrevista.md`.
 3. **Instalar as demais skills** obrigatórias — e as de animação, se a entrevista indicar
@@ -23,7 +24,8 @@ dela). Elas são auditadas e instaladas no seu projeto pelo script `scripts/setu
 
 | Skill | Repositório | Para que serve |
 |-------|-------------|----------------|
-| `grill-me` | [mattpocock/skills](https://github.com/mattpocock/skills) | Entrevista sobre o website/landing page para montar o plano de codificação |
+| `grill-me` | [mattpocock/skills](https://github.com/mattpocock/skills) | Atalho `/grill-me` para iniciar a entrevista (só o usuário aciona) |
+| `grilling` | [mattpocock/skills](https://github.com/mattpocock/skills) | A entrevista em si: rodadas de perguntas numeradas, cada uma com resposta recomendada, até fechar o plano |
 
 ### Obrigatórias (depois da entrevista)
 
@@ -86,6 +88,10 @@ npx skills add https://github.com/mattpocock/skills --skill grill-me
 ```
 
 ```bash
+npx skills add https://github.com/mattpocock/skills --skill grilling
+```
+
+```bash
 npx skills add https://github.com/anthropics/skills --skill frontend-design
 ```
 
@@ -122,7 +128,7 @@ auditado e o veredito de cada skill, e reinicie o Claude Code. Atualizou alguma 
 
 ## Checklist
 
-- [ ] `grill-me` — auditada e instalada **(primeira)**
+- [ ] `grill-me` e `grilling` — auditadas e instaladas **(primeiras)**
 - [ ] Entrevista feita → `00_briefing/entrevista.md`
 - [ ] `frontend-design` — auditada e instalada
 - [ ] `web-design-guidelines` — auditada e instalada

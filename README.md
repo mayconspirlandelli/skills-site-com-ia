@@ -26,7 +26,7 @@ Se criou pelo site, clone o novo repositório:
 git clone https://github.com/<usuario>/<meu-site>.git
 ```
 
-### 2. Instale a primeira skill (`grill-me`)
+### 2. Instale as primeiras skills (`grill-me` + `grilling`)
 
 Na pasta do projeto (no Windows, use o Git Bash):
 
@@ -40,7 +40,7 @@ Na pasta do projeto (no Windows, use o Git Bash):
 claude
 ```
 
-Diga algo como: *"Quero criar uma landing page para [seu negócio]."*
+Digite `/grill-me` ou diga algo como: *"Quero criar uma landing page para [seu negócio]."*
 A skill `site-com-referencias` conduz o processo:
 
 1. **Entrevista:** a `grill-me` faz uma série de perguntas sobre o site ou landing page
@@ -101,7 +101,7 @@ Não vêm versionadas no template — cada uma tem licença e autor próprios. O
 
 | Grupo | Skills | Comando |
 |-------|--------|---------|
-| Inicial | `grill-me` | `./scripts/setup-skills.sh inicial` |
+| Inicial | `grill-me`, `grilling` | `./scripts/setup-skills.sh inicial` |
 | Obrigatórias | `frontend-design`, `web-design-guidelines`, `image-to-code`, `design-taste-frontend`, `playwright-cli` | `./scripts/setup-skills.sh obrigatorias` |
 | Animação/vídeo (opcional) | `remotion-best-practices`, `motion-design` | `./scripts/setup-skills.sh animacao` |
 

@@ -29,7 +29,7 @@ If you created it on the website, clone the new repository:
 git clone https://github.com/<user>/<my-site>.git
 ```
 
-### 2. Install the first skill (`grill-me`)
+### 2. Install the first skills (`grill-me` + `grilling`)
 
 From the project folder (on Windows, use Git Bash):
 
@@ -43,7 +43,7 @@ From the project folder (on Windows, use Git Bash):
 claude
 ```
 
-Say something like: *"I want to build a landing page for [your business]."*
+Type `/grill-me` or say something like: *"I want to build a landing page for [your business]."*
 The `site-com-referencias` skill drives the process:
 
 1. **Interview:** `grill-me` asks a series of questions about the site or landing page
@@ -83,7 +83,7 @@ Details and manual `npx` commands: [`docs/skills-obrigatorias.md`](docs/skills-o
 
 | Group | Skills | Command |
 |-------|--------|---------|
-| First | `grill-me` | `./scripts/setup-skills.sh inicial` |
+| First | `grill-me`, `grilling` | `./scripts/setup-skills.sh inicial` |
 | Required | `frontend-design`, `web-design-guidelines`, `image-to-code`, `design-taste-frontend`, `playwright-cli` | `./scripts/setup-skills.sh obrigatorias` |
 | Animation/video (optional) | `remotion-best-practices`, `motion-design` | `./scripts/setup-skills.sh animacao` |
 
