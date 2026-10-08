@@ -1,52 +1,68 @@
 ---
 name: print-para-wireframe
-description: Converte prints de tela de sites em wireframes em texto (Markdown/ASCII) e depois em uma especificação detalhada de componentes com tipografia, posição, espaçamento, responsividade e estados. Use sempre que o usuário enviar prints/screenshots de sites ou layouts e quiser reproduzir, adaptar ou se inspirar na estrutura, ou pedir wireframe, esqueleto de página, estrutura de layout ou especificação de componentes.
+description: Converte prints/imagens de tela de sites em wireframes no formato SVG (arquivo .svg em tons de cinza, com seções anotadas) e depois em uma especificação detalhada de componentes com tipografia, posição, espaçamento, responsividade e estados. Use sempre que o usuário enviar prints, screenshots ou imagens de sites ou layouts e quiser reproduzir, adaptar ou se inspirar na estrutura, ou pedir wireframe, wireframe SVG, esqueleto de página, estrutura de layout ou especificação de componentes.
 ---
 
-# Print → wireframe → especificação
+# Imagem → wireframe SVG → especificação
 
-A IA erra detalhes finos quando lê imagens: tamanhos de fonte, espaçamentos, cores exatas e alinhamentos. Então o print **nunca** é a referência final. Ele é apenas a entrada para gerar um wireframe em texto, e o wireframe é que passa a ser a referência oficial. Os valores numéricos vêm do HTML extraído (etapa anterior), não da imagem.
+A IA erra detalhes finos quando lê imagens: tamanhos de fonte, espaçamentos, cores exatas e alinhamentos. Então o print **nunca** é a referência final. Ele é apenas a entrada para gerar um **wireframe em SVG**, e o wireframe é que passa a ser a referência oficial. O SVG é texto: a IA lê a estrutura pelos `id` e atributos `data-*`, e o usuário vê o desenho no navegador. Os valores numéricos de estilo vêm do HTML extraído (etapa anterior), não da imagem.
 
 ## Entradas
 
-- Prints das seções (idealmente um print por seção, em largura desktop; prints de mobile ajudam muito na responsividade).
+- Prints/imagens das seções (idealmente um por seção, em largura desktop; prints de mobile ajudam muito na responsividade).
 - `02_html_referencias/<site>/resumo.md`, se existir.
 - `00_briefing/briefing.md` e `01_referencias/referencias.md`.
 
-## Parte 1 — Wireframe (só estrutura)
+## Parte 1 — Wireframe SVG (só estrutura)
 
-Para cada print, descreva a página **de cima para baixo, seção por seção**. Nesta parte, ignore cores e estilos: foque em estrutura. Separar estrutura de estilo evita que a IA "grude" no visual da referência.
+Para cada página, analise as imagens **de cima para baixo, seção por seção**, e desenhe um SVG. Nesta parte, ignore cores e estilos da referência: o wireframe é sempre em tons de cinza. Separar estrutura de estilo evita que a IA "grude" no visual da referência.
 
-Formato obrigatório para cada seção (veja `assets/wireframe_template.md`):
+Comece copiando `assets/wireframe_template.svg` e siga as convenções dele.
 
-```
-### [NOME DA SEÇÃO]
-Layout: <1 coluna | 2 colunas 60/40 | grid 3 colunas | ...>
-Largura: <container | full-width>
-Altura aproximada: <auto | ~100vh | ...>
+### Arquivos
 
-| Coluna esquerda              | Coluna direita       |
-|------------------------------|----------------------|
-| Eyebrow (texto pequeno)      | Imagem ilustrativa   |
-| H1 (2 linhas)                |                      |
-| Parágrafo (3 linhas)         |                      |
-| [Botão primário] [Botão sec.]|                      |
+- `03_wireframes/wireframe_<pagina>-desktop.svg` — obrigatório, largura 1440 (`viewBox="0 0 1440 <altura>"`).
+- `03_wireframes/wireframe_<pagina>-mobile.svg` — recomendado, largura 390. Se não houver print mobile, deduza a partir do desktop e marque as suposições com `(incerto)`.
 
-Elementos: H1, parágrafo, 2 botões, imagem
-Alinhamento: texto à esquerda, bloco centralizado verticalmente
-```
+### Convenções do SVG
 
-Regras:
-- Use nomes de seção padrão (HEADER, HERO, LOGOS, FEATURES, COMO FUNCIONA, DEPOIMENTOS, PREÇOS, FAQ, CTA, FOOTER) para facilitar a reutilização.
-- Registre quantidades (3 cards, 5 itens de menu, 6 logos).
-- Não transcreva os textos da referência. Use a função do texto ("H1 com proposta de valor, ~8 palavras").
-- Se algo no print estiver ambíguo (cortado, pequeno demais), escreva "(incerto)" em vez de inventar.
+- Raiz `<svg>` com `viewBox`, `data-pagina` e `data-viewport` (`desktop` | `mobile`), seguida de `<title>` e `<desc>` (referências usadas).
+- **Cada seção é um `<g class="secao">`** posicionado com `transform="translate(0,y)"`, com:
+  - `id` em minúsculas (`header`, `hero`, `features`...);
+  - `data-nome` — nome padrão: HEADER, HERO, LOGOS, FEATURES, COMO FUNCIONA, DEPOIMENTOS, PREÇOS, FAQ, CTA, FOOTER;
+  - `data-layout` — `1 coluna`, `2 colunas 60/40`, `grid 3 colunas`...;
+  - `data-largura` (`container` | `full-width`), `data-altura` (`auto`, `~100vh`...);
+  - `data-elementos` — lista com quantidades (`H1, parágrafo, 2 botões, imagem`);
+  - `data-mobile` — o que muda no mobile (obrigatório no arquivo desktop);
+  - opcionais: `data-alinhamento`, `data-comportamento` (ex.: `fixo no topo`).
+- Rótulo da seção em `<text class="rotulo-sec">` no canto superior esquerdo.
+- Elementos desenhados com as classes do `<style>` do modelo:
+  - `texto` — barras cinza no lugar de títulos/parágrafos (uma barra por linha);
+  - `bloco` — logo, cards, containers;
+  - `botao-prim` / `botao` — botões primário e secundário;
+  - `imagem` + duas linhas `imagem-x` em diagonal — imagens e ilustrações.
+- Cada elemento tem um `<text class="rotulo">` dizendo a **função** do texto (`H1 (proposta de valor, ~8 palavras, 2 linhas)`), nunca o texto da referência.
+- Grupos repetidos levam `data-elemento` e `data-quantidade` (`<g data-elemento="card" data-quantidade="3">`).
+- Mantenha proporções e posições aproximadas do print (colunas, alinhamentos, alturas relativas), dentro do container de 1200px centralizado (margens de 120px no desktop).
+- Ambíguo no print (cortado, pequeno demais)? Escreva `(incerto)` num `<text class="nota">` em vez de inventar.
 
-**Adapte ao briefing.** O wireframe final é do site do usuário, não da referência. Remova seções que ele não precisa, acrescente as que estão no briefing, e combine referências conforme o mapa página → referência.
+### Proibido no SVG
 
-Mostre o wireframe ao usuário e peça aprovação antes da Parte 2. Mudar estrutura depois é caro.
+- `<image>`, `<script>`, `<foreignObject>`, links externos e imagens em base64 — nunca embuta o print nem partes dele.
+- Cores, fontes, logos ou textos copiados da referência.
 
-Saída: `03_wireframes/wireframe_<pagina>.md`.
+### Adapte ao briefing
+
+O wireframe final é do site do usuário, não da referência. Remova seções que ele não precisa, acrescente as que estão no briefing, e combine referências conforme o mapa página → referência.
+
+### Validar e aprovar
+
+1. Rode o validador (sintaxe, atributos obrigatórios e itens proibidos):
+   ```bash
+   python3 .claude/skills/print-para-wireframe/scripts/validar_wireframe.py 03_wireframes/*.svg
+   ```
+   Corrija tudo o que aparecer com ✗.
+2. Mostre o SVG ao usuário (abra no navegador) e peça aprovação antes da Parte 2. Mudar estrutura depois é caro.
 
 ## Parte 2 — Especificação de componentes
 

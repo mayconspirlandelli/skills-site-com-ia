@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1180" viewBox="0 0 1440 1180" data-pagina="home" data-viewport="desktop">
+  <title>Wireframe — Home (desktop 1440px)</title>
+  <desc>Referências usadas: Ref 1 (layout), Ref 2 (hero). Estrutura apenas: sem cores, fontes ou textos das referências.</desc>
+
+  <style>
+    .fundo      { fill: #ffffff; }
+    .secao-bg   { fill: #fafafa; stroke: #d4d4d4; stroke-width: 1; }
+    .bloco      { fill: #e5e5e5; stroke: #a3a3a3; stroke-width: 1; }
+    .texto      { fill: #d4d4d4; }
+    .botao      { fill: #ffffff; stroke: #404040; stroke-width: 2; }
+    .botao-prim { fill: #737373; stroke: #404040; stroke-width: 2; }
+    .imagem     { fill: #f5f5f5; stroke: #a3a3a3; stroke-width: 1; }
+    .imagem-x   { stroke: #a3a3a3; stroke-width: 1; }
+    .rotulo     { font-family: Arial, sans-serif; font-size: 14px; fill: #404040; }
+    .rotulo-sec { font-family: Arial, sans-serif; font-size: 12px; font-weight: 700; fill: #737373; letter-spacing: 1px; }
+    .nota       { font-family: Arial, sans-serif; font-size: 12px; fill: #737373; font-style: italic; }
+  </style>
+
+  <rect class="fundo" width="1440" height="1180"/>
+
+  <!-- HEADER -->
+  <g id="header" class="secao" transform="translate(0,0)"
+     data-nome="HEADER" data-layout="3 zonas (esq / centro / dir)" data-largura="container"
+     data-altura="80px" data-comportamento="fixo no topo"
+     data-elementos="logo, menu (5 itens), botão CTA"
+     data-mobile="logo + ícone hambúrguer">
+    <rect class="secao-bg" width="1440" height="80"/>
+    <text class="rotulo-sec" x="16" y="16">HEADER</text>
+    <rect class="bloco" x="120" y="24" width="140" height="32"/>
+    <text class="rotulo" x="160" y="45">Logo</text>
+    <g data-elemento="menu" data-quantidade="5">
+      <rect class="texto" x="480" y="32" width="70" height="16"/>
+      <rect class="texto" x="580" y="32" width="70" height="16"/>
+      <rect class="texto" x="680" y="32" width="70" height="16"/>
+      <rect class="texto" x="780" y="32" width="70" height="16"/>
+      <rect class="texto" x="880" y="32" width="70" height="16"/>
+      <text class="rotulo" x="640" y="72">Menu (5 itens)</text>
+    </g>
+    <rect class="botao-prim" x="1180" y="20" width="140" height="40" rx="4"/>
+    <text class="rotulo" x="1210" y="45" fill="#ffffff">[Botão CTA]</text>
+  </g>
+
+  <!-- HERO -->
+  <g id="hero" class="secao" transform="translate(0,80)"
+     data-nome="HERO" data-layout="2 colunas 50/50" data-largura="container"
+     data-altura="~80vh" data-alinhamento="texto à esquerda, bloco centralizado verticalmente"
+     data-elementos="eyebrow, H1, parágrafo, 2 botões, imagem"
+     data-mobile="1 coluna, imagem abaixo do texto">
+    <rect class="secao-bg" width="1440" height="640"/>
+    <text class="rotulo-sec" x="16" y="20">HERO</text>
+    <rect class="texto" x="120" y="180" width="160" height="14"/>
+    <text class="rotulo" x="300" y="192">Eyebrow</text>
+    <rect class="texto" x="120" y="214" width="520" height="48"/>
+    <rect class="texto" x="120" y="270" width="400" height="48"/>
+    <text class="rotulo" x="120" y="344">H1 (proposta de valor, ~8 palavras, 2 linhas)</text>
+    <rect class="texto" x="120" y="370" width="500" height="12"/>
+    <rect class="texto" x="120" y="392" width="480" height="12"/>
+    <rect class="texto" x="120" y="414" width="360" height="12"/>
+    <text class="rotulo" x="120" y="446">Parágrafo (3 linhas)</text>
+    <rect class="botao-prim" x="120" y="470" width="180" height="48" rx="4"/>
+    <text class="rotulo" x="150" y="499" fill="#ffffff">[Primário]</text>
+    <rect class="botao" x="316" y="470" width="180" height="48" rx="4"/>
+    <text class="rotulo" x="342" y="499">[Secundário]</text>
+    <g data-elemento="imagem">
+      <rect class="imagem" x="760" y="120" width="560" height="400"/>
+      <line class="imagem-x" x1="760" y1="120" x2="1320" y2="520"/>
+      <line class="imagem-x" x1="1320" y1="120" x2="760" y2="520"/>
+      <text class="rotulo" x="960" y="545">Imagem / ilustração</text>
+    </g>
+  </g>
+
+  <!-- FEATURES -->
+  <g id="features" class="secao" transform="translate(0,720)"
+     data-nome="FEATURES" data-layout="grid 3 colunas" data-largura="container"
+     data-altura="auto" data-elementos="H2, 3 cards (ícone, título, texto)"
+     data-mobile="1 coluna, cards empilhados">
+    <rect class="secao-bg" width="1440" height="460"/>
+    <text class="rotulo-sec" x="16" y="20">FEATURES</text>
+    <rect class="texto" x="520" y="60" width="400" height="36"/>
+    <text class="rotulo" x="660" y="120">H2 centralizado</text>
+    <g data-elemento="card" data-quantidade="3">
+      <rect class="bloco" x="120" y="160" width="373" height="240" rx="8"/>
+      <rect class="bloco" x="533" y="160" width="373" height="240" rx="8"/>
+      <rect class="bloco" x="946" y="160" width="373" height="240" rx="8"/>
+      <text class="rotulo" x="230" y="285">Card: ícone, título, texto</text>
+      <text class="rotulo" x="643" y="285">Card: ícone, título, texto</text>
+      <text class="rotulo" x="1056" y="285">Card: ícone, título, texto</text>
+    </g>
+    <text class="nota" x="120" y="440">(incerto) quantidade de linhas do texto do card</text>
+  </g>
+</svg>

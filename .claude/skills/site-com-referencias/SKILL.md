@@ -9,17 +9,27 @@ Esta skill coordena um fluxo de 6 etapas. Cada etapa tem sua própria skill com 
 
 ## Por que esse fluxo existe
 
-A IA gera sites melhores quando recebe **texto estruturado** (HTML, wireframes em texto, especificações, tokens) do que quando recebe imagens. Prints de tela escondem valores exatos (tamanho de fonte, espaçamento, cor), e a IA tende a chutar. Por isso o fluxo converte tudo em arquivos de texto antes de escrever código, e o `design_system.md` vira a fonte única da verdade.
+A IA gera sites melhores quando recebe **texto estruturado** (HTML, wireframes em SVG, especificações, tokens) do que quando recebe imagens. Prints de tela escondem valores exatos (tamanho de fonte, espaçamento, cor), e a IA tende a chutar. Por isso o fluxo converte tudo em arquivos de texto antes de escrever código, e o `design_system.md` vira a fonte única da verdade.
 
 ## Etapas e skills
 
 | # | Etapa | Skill | Saída principal |
 |---|-------|-------|-----------------|
+| S | Setup: `grill-me`, entrevista, demais skills | `grill-me` + `auditar-skill` | `00_briefing/entrevista.md`, skills instaladas |
 | 0–1 | Briefing e referências | `referencias-briefing` | `00_briefing/briefing.md`, `01_referencias/referencias.md` |
 | 2 | Extrair HTML das referências | `extrair-html-referencia` | `02_html_referencias/<site>/resumo.md` |
-| 3 | Prints → wireframe → especificação | `print-para-wireframe` | `03_wireframes/wireframe_<pagina>.md`, `especificacao_componentes.md` |
+| 3 | Prints → wireframe SVG → especificação | `print-para-wireframe` | `03_wireframes/wireframe_<pagina>-desktop.svg` (+ `-mobile.svg`), `especificacao_componentes.md` |
 | 4 | Design system | `gerar-design-system` | `04_design_system/design_system.md`, `tokens.css` |
 | 5–6 | Construir e validar | `construir-site` | `05_site/` |
+
+## Etapa S — Setup (sempre a primeira)
+
+Nenhuma outra etapa começa antes desta.
+
+1. **Instalar `grill-me`.** Se ela ainda não estiver disponível, peça ao usuário para rodar `./scripts/setup-skills.sh inicial` (audita e instala o commit auditado). Peça ao usuário para reiniciar o Claude Code se a skill não aparecer.
+2. **Entrevista.** Use a `grill-me` para fazer uma série de perguntas sobre o website ou landing page (tipo — site ou landing page —, objetivo, público, páginas e seções, conteúdo, stack, tom, restrições, animações/vídeos). Salve as respostas e o plano para codificar em `00_briefing/entrevista.md`.
+3. **Instalar as demais skills** com `./scripts/setup-skills.sh obrigatorias` (lista em `docs/skills-obrigatorias.md`). Se a entrevista indicar animações ou vídeos, também `./scripts/setup-skills.sh animacao`.
+4. **Seguir o plano** `docs/plano.md`, a partir da etapa 0–1. A `referencias-briefing` deve reaproveitar `entrevista.md` e só perguntar o que faltar.
 
 ## Estrutura de pastas do projeto
 

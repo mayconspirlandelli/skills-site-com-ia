@@ -2,16 +2,17 @@
 # Audita e copia uma skill de um repositório Git para .claude/skills/ deste projeto.
 #
 # Uso:
-#   ./scripts/adicionar-skill.sh <url-do-repo> <caminho-da-skill-no-repo> [--global] [--forcar]
+#   ./scripts/adicionar-skill.sh <url-do-repo> <caminho-ou-nome-da-skill> [--global] [--forcar]
 #
-# Exemplo:
+# Exemplos:
 #   ./scripts/adicionar-skill.sh https://github.com/anthropics/skills skills/frontend-design
+#   ./scripts/adicionar-skill.sh https://github.com/anthropics/skills frontend-design
 #
 # --global  instala em ~/.claude/skills/ (vale para todos os projetos)
 # --forcar  permite instalar mesmo com veredito BLOQUEAR (não recomendado)
 set -euo pipefail
 
-if [ $# -lt 2 ]; then sed -n '2,13p' "$0"; exit 1; fi
+if [ $# -lt 2 ]; then sed -n '2,14p' "$0"; exit 1; fi
 
 REPO="$1"; CAMINHO="${2%/}"; shift 2
 DESTINO_BASE=".claude/skills"; FORCAR=0
@@ -33,24 +34,29 @@ echo "→ Baixando $REPO (pasta temporária, nada é instalado ainda)..."
 git clone --depth 1 --quiet "$REPO" "$TMP/repo"
 COMMIT="$(git -C "$TMP/repo" rev-parse --short HEAD)"
 ORIGEM="$TMP/repo/$CAMINHO"
-[ -f "$ORIGEM/SKILL.md" ] || { echo "Erro: $CAMINHO/SKILL.md não encontrado no repositório."; exit 1; }
+if [ ! -f "$ORIGEM/SKILL.md" ]; then
+  # Aceita só o nome da skill: procura uma pasta com esse nome ou um SKILL.md com "name: <nome>".
+  ACHADO="$(find "$TMP/repo" -path "*/$NOME/SKILL.md" -not -path "*/.git/*" | head -n 1 || true)"
+  [ -n "$ACHADO" ] || ACHADO="$(grep -rlx --include=SKILL.md "name: *$NOME *" "$TMP/repo" | head -n 1 || true)"
+  [ -n "$ACHADO" ] || { echo "Erro: skill '$CAMINHO' não encontrada no repositório."; exit 1; }
+  ORIGEM="$(dirname "$ACHADO")"
+  echo "→ Skill encontrada em ${ORIGEM#$TMP/repo/}"
+fi
 
 RELATORIO="$RAIZ/auditorias/${NOME}_${COMMIT}.md"
 mkdir -p "$RAIZ/auditorias"
 echo "→ Auditando '$NOME' (commit $COMMIT)..."
-set +e
-python3 "$AUDITOR" "$ORIGEM" --md "$RELATORIO" > /dev/null
-STATUS=$?
-set -e
+# Lê o veredito impresso (não o código de saída), para um erro do Python nunca virar "REVISAR".
+VEREDITO="$(python3 "$AUDITOR" "$ORIGEM" --md "$RELATORIO" --silencioso | tail -n 1 | tr -d '' || true)"
 
-case $STATUS in
-  0) echo "✅ Veredito: OK" ;;
-  1) echo "⚠️  Veredito: REVISAR — achados que precisam da sua avaliação:"
+case $VEREDITO in
+  OK) echo "✅ Veredito: OK" ;;
+  REVISAR) echo "⚠️  Veredito: REVISAR — achados que precisam da sua avaliação:"
      grep -E '^\- \*\*(CRÍTICO|ALTO|MÉDIO)' "$RELATORIO" | sed 's/^/   /'
      echo "   Relatório completo: $RELATORIO"
      read -r -p "   Você leu os achados e quer instalar mesmo assim? [s/N] " r
      [ "$r" = "s" ] || { echo "Instalação cancelada."; exit 1; } ;;
-  2) echo "⛔ Veredito: BLOQUEAR — achados críticos:"
+  BLOQUEAR) echo "⛔ Veredito: BLOQUEAR — achados críticos:"
      grep -E '^\- \*\*CRÍTICO' "$RELATORIO" | sed 's/^/   /'
      echo "   Relatório completo: $RELATORIO"
      if [ $FORCAR -ne 1 ]; then echo "Instalação bloqueada. (Use --forcar só se tiver certeza absoluta.)"; exit 2; fi

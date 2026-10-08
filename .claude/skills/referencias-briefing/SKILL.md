@@ -20,6 +20,8 @@ Informações necessárias:
 - Tom da marca (sério, divertido, minimalista, premium, técnico)
 - Restrições (cores obrigatórias da marca, acessibilidade, prazo)
 
+Se `00_briefing/entrevista.md` existir (entrevista feita com a `grill-me` no setup), use-o como base e pergunte apenas o que ainda faltar.
+
 Se o usuário não souber algo, registre como "a definir" e siga em frente — não trave o processo.
 
 Gere `00_briefing/briefing.md` usando o modelo em `assets/briefing_template.md`.

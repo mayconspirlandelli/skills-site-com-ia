@@ -9,7 +9,7 @@ description: Constrói o código de um site seção por seção seguindo design_
 
 Leia sempre, nesta ordem:
 1. `04_design_system/design_system.md` e `tokens.css`
-2. `03_wireframes/wireframe_<pagina>.md`
+2. `03_wireframes/wireframe_<pagina>-desktop.svg` e `-mobile.svg` (leia os atributos `data-*` de cada `<g class="secao">`)
 3. `03_wireframes/especificacao_componentes.md`
 4. `00_briefing/briefing.md` (stack, conteúdo real)
 

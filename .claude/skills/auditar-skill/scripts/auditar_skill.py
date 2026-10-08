@@ -167,7 +167,8 @@ def auditar(pasta: Path):
             if ext in EXT_BINARIO_SUSPEITO:
                 add(CRITICO, rel, 0, f"Binário executável/compilado ({ext}) — não é possível revisar o conteúdo.")
                 continue
-            if os.access(p, os.X_OK) and ext not in EXT_CODIGO:
+            # No Windows todo arquivo parece executável; o bit só tem sentido em sistemas POSIX.
+            if os.name != "nt" and os.access(p, os.X_OK) and ext not in EXT_CODIGO:
                 add(MEDIO, rel, 0, "Arquivo com permissão de execução sem extensão de script conhecida.")
             if tamanho > LIMITE_ARQUIVO:
                 add(MEDIO, rel, 0, f"Arquivo grande ({tamanho:,} bytes) — revise manualmente.")
@@ -274,6 +275,9 @@ def main():
     ap.add_argument("--md")
     ap.add_argument("--silencioso", action="store_true", help="imprime só o veredito")
     a = ap.parse_args()
+    # Evita UnicodeEncodeError em consoles Windows (cp1252) ao imprimir o relatório.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
     pasta = Path(a.pasta)
     if not pasta.is_dir():

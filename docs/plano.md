@@ -9,6 +9,7 @@ Este plano organiza o processo de criação de um site usando IA generativa, par
 ```
 projeto-site/
 ├── 00_briefing/
+│   ├── entrevista.md
 │   └── briefing.md
 ├── 01_referencias/
 │   ├── referencias.md
@@ -17,7 +18,7 @@ projeto-site/
 │   ├── site-a/
 │   └── site-b/
 ├── 03_wireframes/
-│   ├── wireframe_home.md
+│   ├── wireframe_home-desktop.svg
 │   └── especificacao_componentes.md
 ├── 04_design_system/
 │   └── design_system.md
@@ -25,6 +26,18 @@ projeto-site/
 │   └── design-system-site/SKILL.md
 └── 05_site/
 ```
+
+---
+
+## Passo S — Setup e entrevista (obrigatório, sempre o primeiro)
+
+1. **Instale a skill `grill-me` antes de qualquer outra** (o script audita antes de instalar):
+   ```bash
+   ./scripts/setup-skills.sh inicial
+   ```
+2. **Faça a entrevista.** A `grill-me` faz uma série de perguntas sobre o website ou landing page e monta o plano para codificar. Salve em `00_briefing/entrevista.md`.
+3. **Instale as demais skills** (`./scripts/setup-skills.sh obrigatorias`; lista em `docs/skills-obrigatorias.md`).
+4. **Siga os passos abaixo**, a partir do Passo 0 — que reaproveita as respostas da entrevista.
 
 ---
 
@@ -213,7 +226,7 @@ Envie para a IA, juntos: `briefing.md`, `referencias.md`, os wireframes, `especi
 
 ```
 Usando a skill design-system-site, crie a seção HERO da Home
-conforme wireframe_home.md. Use conteúdo real do briefing.
+conforme wireframe_home-desktop.svg. Use conteúdo real do briefing.
 Stack: HTML + Tailwind. Mobile-first.
 ```
 
