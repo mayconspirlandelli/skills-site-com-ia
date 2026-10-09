@@ -49,9 +49,12 @@ The `site-com-referencias` skill drives the process:
 1. **Interview:** `grill-me` asks a series of questions about the site or landing page
    (goal, audience, pages, content, stack, animations...) and writes the coding plan to
    `00_briefing/entrevista.md`.
-2. **Remaining skills:** run `./scripts/setup-skills.sh obrigatorias` (plus `animacao` if the
+2. **Image prompts:** based on that plan, Claude writes prompts to generate page mockups and
+   site images (`00_briefing/prompts_imagens.md`). The generated mockups become visual
+   references for the wireframe step.
+3. **Remaining skills:** run `./scripts/setup-skills.sh obrigatorias` (plus `animacao` if the
    site has animations or videos).
-3. **Plan:** follow the steps in [`docs/plano.md`](docs/plano.md) — briefing, references,
+4. **Plan:** follow the steps in [`docs/plano.md`](docs/plano.md) — briefing, references,
    HTML extraction, wireframes, design system and building the site.
 
 ### Requirements

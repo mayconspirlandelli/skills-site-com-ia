@@ -10,6 +10,7 @@ A IA erra detalhes finos quando lê imagens: tamanhos de fonte, espaçamentos, c
 ## Entradas
 
 - Prints/imagens das seções (idealmente um por seção, em largura desktop; prints de mobile ajudam muito na responsividade).
+- Mockups gerados por IA em `01_referencias/prints/gerados/` (a partir de `00_briefing/prompts_imagens.md`). Eles já refletem o plano do site, então servem bem para a estrutura; como não têm HTML, todo valor tirado deles é "(estimado)".
 - `02_html_referencias/<site>/resumo.md`, se existir.
 - `00_briefing/briefing.md` e `01_referencias/referencias.md`.
 

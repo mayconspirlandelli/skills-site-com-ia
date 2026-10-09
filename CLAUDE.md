@@ -8,8 +8,9 @@ O plano completo está em `docs/plano.md`.
 - **Setup obrigatório, nesta ordem, antes de qualquer outra etapa:**
   1. Auditar e instalar as skills `grill-me` e `grilling` — sempre as primeiras do projeto (`./scripts/setup-skills.sh inicial`).
   2. Entrevistar o usuário com a `grilling` (ou o usuário digita `/grill-me`) sobre o website/landing page e salvar o plano em `00_briefing/entrevista.md`.
-  3. Auditar e instalar as demais skills obrigatórias (`./scripts/setup-skills.sh obrigatorias`; ver `docs/skills-obrigatorias.md`).
-  4. Seguir os passos de `docs/plano.md`.
+  3. Com base no plano da entrevista, criar os prompts para gerar as imagens do site (mockups das páginas e imagens de conteúdo) em `00_briefing/prompts_imagens.md`.
+  4. Auditar e instalar as demais skills obrigatórias (`./scripts/setup-skills.sh obrigatorias`; ver `docs/skills-obrigatorias.md`).
+  5. Seguir os passos de `docs/plano.md`.
 - Siga as etapas na ordem. Não gere código do site antes de existir `04_design_system/design_system.md`, a menos que o usuário peça explicitamente — nesse caso, registre as suposições feitas.
 
 ## Etapas e pastas

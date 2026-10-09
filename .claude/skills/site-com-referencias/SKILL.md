@@ -15,7 +15,7 @@ A IA gera sites melhores quando recebe **texto estruturado** (HTML, wireframes e
 
 | # | Etapa | Skill | Saída principal |
 |---|-------|-------|-----------------|
-| S | Setup: `grill-me`, entrevista, demais skills | `grilling` (via `grill-me`) + `auditar-skill` | `00_briefing/entrevista.md`, skills instaladas |
+| S | Setup: `grill-me`, entrevista, demais skills | `grilling` (via `grill-me`) + `auditar-skill` | `00_briefing/entrevista.md`, `prompts_imagens.md`, skills instaladas |
 | 0–1 | Briefing e referências | `referencias-briefing` | `00_briefing/briefing.md`, `01_referencias/referencias.md` |
 | 2 | Extrair HTML das referências | `extrair-html-referencia` | `02_html_referencias/<site>/resumo.md` |
 | 3 | Prints → wireframe SVG → especificação | `print-para-wireframe` | `03_wireframes/wireframe_<pagina>-desktop.svg` (+ `-mobile.svg`), `especificacao_componentes.md` |
@@ -28,8 +28,13 @@ Nenhuma outra etapa começa antes desta.
 
 1. **Instalar `grill-me` e `grilling`.** A `grill-me` é só um atalho para a `grilling` (que tem as instruções da entrevista). Se elas ainda não estiverem disponíveis, peça ao usuário para rodar `./scripts/setup-skills.sh inicial` (audita e instala o commit auditado). Peça ao usuário para reiniciar o Claude Code se a skill não aparecer.
 2. **Entrevista.** Acione a skill `grilling` (a `grill-me` não pode ser acionada pelo modelo, só pelo usuário com `/grill-me`) para fazer uma série de perguntas sobre o website ou landing page (tipo — site ou landing page —, objetivo, público, páginas e seções, conteúdo, stack, tom, restrições, animações/vídeos). Salve as respostas e o plano para codificar em `00_briefing/entrevista.md`.
-3. **Instalar as demais skills** com `./scripts/setup-skills.sh obrigatorias` (lista em `docs/skills-obrigatorias.md`). Se a entrevista indicar animações ou vídeos, também `./scripts/setup-skills.sh animacao`.
-4. **Seguir o plano** `docs/plano.md`, a partir da etapa 0–1. A `referencias-briefing` deve reaproveitar `entrevista.md` e só perguntar o que faltar.
+3. **Prompts de imagens.** Com base **só** no plano de `00_briefing/entrevista.md`, gere `00_briefing/prompts_imagens.md` usando o modelo `assets/prompts_imagens_template.md`:
+   - uma **base comum** (tipo de site, público, tom, paleta e tipografia vindos do plano);
+   - **mockups** de cada página do plano, desktop e mobile, descrevendo as seções na ordem do plano — as imagens geradas vão para `01_referencias/prints/gerados/` e entram na `print-para-wireframe` como qualquer print (nunca são referência final);
+   - **imagens de conteúdo** (hero, ilustrações, ícones) com onde entram e formato.
+   Não invente o que o plano não diz: o que estiver "a definir" fica genérico. Nunca peça para gerar pessoas reais (ex.: equipe, alunos, egressos) — use fotos autorizadas ou `[FOTO: ...]`. Mostre os prompts ao usuário; ele gera as imagens na ferramenta de sua preferência.
+4. **Instalar as demais skills** com `./scripts/setup-skills.sh obrigatorias` (lista em `docs/skills-obrigatorias.md`). Se a entrevista indicar animações ou vídeos, também `./scripts/setup-skills.sh animacao`.
+5. **Seguir o plano** `docs/plano.md`, a partir da etapa 0–1. A `referencias-briefing` deve reaproveitar `entrevista.md` e só perguntar o que faltar.
 
 ## Estrutura de pastas do projeto
 

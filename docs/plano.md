@@ -10,10 +10,11 @@ Este plano organiza o processo de criação de um site usando IA generativa, par
 projeto-site/
 ├── 00_briefing/
 │   ├── entrevista.md
+│   ├── prompts_imagens.md
 │   └── briefing.md
 ├── 01_referencias/
 │   ├── referencias.md
-│   └── prints/
+│   └── prints/          (inclui gerados/: mockups criados por IA)
 ├── 02_html_referencias/
 │   ├── site-a/
 │   └── site-b/
@@ -36,8 +37,11 @@ projeto-site/
    ./scripts/setup-skills.sh inicial
    ```
 2. **Faça a entrevista** (digite `/grill-me`). A `grilling` faz uma série de perguntas sobre o website ou landing page e monta o plano para codificar. Salve em `00_briefing/entrevista.md`.
-3. **Instale as demais skills** (`./scripts/setup-skills.sh obrigatorias`; lista em `docs/skills-obrigatorias.md`).
-4. **Siga os passos abaixo**, a partir do Passo 0 — que reaproveita as respostas da entrevista.
+3. **Crie os prompts de imagens.** Usando o plano da entrevista como referência, o Claude escreve em `00_briefing/prompts_imagens.md` os prompts para gerar:
+   - **mockups** de cada página (desktop e mobile), com as seções na ordem do plano — salve as imagens em `01_referencias/prints/gerados/`; elas passam pelo Passo 3 (wireframe) como qualquer print;
+   - **imagens de conteúdo** (hero, ilustrações, ícones) que vão para o site.
+4. **Instale as demais skills** (`./scripts/setup-skills.sh obrigatorias`; lista em `docs/skills-obrigatorias.md`).
+5. **Siga os passos abaixo**, a partir do Passo 0 — que reaproveita as respostas da entrevista.
 
 ---
 
