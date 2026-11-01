@@ -93,7 +93,7 @@ A skill `site-com-referencias` conduz o processo:
 | Skill | Etapa |
 |-------|-------|
 | `site-com-referencias` | Orquestra o fluxo e indica o próximo passo |
-| `referencias-briefing` | Briefing e coleta de referências |
+| `entrevista-site` | Passo 1: entrevista em rodadas e briefing.md para aprovação |
 | `extrair-html-referencia` | Limpa o HTML e extrai fontes, cores, breakpoints (script Python) |
 | `print-para-wireframe` | Prints → wireframe SVG → especificação (com validador) |
 | `gerar-design-system` | design_system.md, tokens.css e verificação de contraste |

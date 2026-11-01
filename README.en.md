@@ -69,7 +69,7 @@ The `site-com-referencias` skill drives the process:
 | Step | Skill | Output |
 |------|-------|--------|
 | Setup & interview | `grill-me` (third-party) | `etapas/00_briefing/entrevista.md` |
-| Briefing & references | `referencias-briefing` | `etapas/00_briefing/` |
+| Interview & briefing | `entrevista-site` | `etapas/00_briefing/` |
 | HTML extraction | `extrair-html-referencia` | `etapas/01_extracao/codigo/` |
 | Wireframes & specs | `print-para-wireframe` | `etapas/04_wireframes/` (SVG wireframes) |
 | Design system | `gerar-design-system` | `etapas/05_design_system/` |
