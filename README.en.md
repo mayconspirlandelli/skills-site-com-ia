@@ -61,7 +61,7 @@ The `site-com-referencias` skill drives the process:
 
 - [Claude Code](https://claude.com/claude-code)
 - Git and Bash (Git Bash on Windows)
-- Python 3 and `pip install beautifulsoup4`
+- Python 3 and `pip install beautifulsoup4 pillow`
 - Node.js (for the site and for `playwright-cli`)
 
 ## Workflow

@@ -27,6 +27,9 @@ def razao(a, b):
 
 
 if __name__ == "__main__":
+    # Evita caracteres corrompidos em consoles Windows (cp1252).
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     if len(sys.argv) < 2:
         sys.exit(__doc__)
     print("| Texto | Fundo | Razão | AA texto (4.5) | AA grande (3.0) |")

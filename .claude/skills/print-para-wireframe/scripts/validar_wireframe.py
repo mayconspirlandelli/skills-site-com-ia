@@ -71,6 +71,9 @@ def validar(caminho):
 
 
 def main():
+    # Evita UnicodeEncodeError em consoles Windows (cp1252) ao imprimir acentos e símbolos.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     if len(sys.argv) < 2:
         print(__doc__)
         return 1

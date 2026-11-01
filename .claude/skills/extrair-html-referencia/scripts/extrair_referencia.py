@@ -211,6 +211,9 @@ def gerar_resumo(meta, secoes, css_info, fontes_links, avisos):
 
 
 def main():
+    # Evita UnicodeEncodeError em consoles Windows (cp1252) ao imprimir acentos e símbolos.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser()
     fonte = ap.add_mutually_exclusive_group(required=True)
     fonte.add_argument("--html", help="arquivo HTML salvo localmente")
@@ -222,6 +225,12 @@ def main():
 
     base_url = a.url or a.base_url
     html = baixar(a.url) if a.url else Path(a.html).read_text(encoding="utf-8", errors="replace")
+    # HTML capturado com `playwright-cli --raw eval` pode vir como string JSON (entre aspas, com \n escapado).
+    if html.lstrip().startswith('"'):
+        try:
+            html = json.loads(html)
+        except json.JSONDecodeError:
+            pass
     soup = BeautifulSoup(html, "html.parser")
 
     avisos = []

@@ -61,6 +61,9 @@ def gerar_tailwind(tokens):
 
 
 def main():
+    # Evita UnicodeEncodeError em consoles Windows (cp1252) ao imprimir acentos e símbolos.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser()
     ap.add_argument("design_system")
     ap.add_argument("--saida", default="tokens.css")

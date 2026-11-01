@@ -1,58 +1,78 @@
 ---
 name: extrair-html-referencia
-description: Baixa, limpa e resume o código HTML/CSS de sites de referência, extraindo estrutura de seções, fontes, cores, variáveis CSS, breakpoints, bordas e sombras em um resumo.md. Use sempre que o usuário enviar um arquivo HTML de um site, pedir para "pegar o código", "baixar o HTML", "analisar o CSS" ou "extrair o estilo" de um site de referência, ou quando um projeto de site precisar de valores exatos de design vindos de sites existentes.
+description: Extrai o design system dos sites de referência direto do código — HTML, CSS e o resultado do JavaScript (estilos computados no navegador via playwright-cli) — gerando por site um resumo.md com paleta, tipografia, escala de tamanhos, espaçamentos, raios, sombras, containers e breakpoints. Use no passo 2 do fluxo, quando o briefing aprovado tiver URLs de referência, ou sempre que o usuário pedir para "pegar o código", "analisar o CSS" ou "extrair o estilo/design system" de um site.
 ---
 
-# Extrair HTML de referência
+# Design extraído do código das referências (passo 2)
 
-Objetivo: transformar cada site de referência em um `resumo.md` enxuto que a IA consegue ler inteiro, com valores exatos (fontes, tamanhos, cores, breakpoints) em vez de impressões visuais.
+Objetivo: transformar cada site de referência do briefing num `resumo.md` com **valores medidos** — cores, fontes, tamanhos, espaçamentos, raios, sombras, breakpoints — em vez de impressões visuais. Na ordem de confiança do projeto, estes valores só perdem para decisões do usuário.
 
-HTML bruto de sites modernos é enorme e cheio de ruído (scripts, trackers, SVGs, CSS minificado). Colocar isso inteiro no contexto gasta espaço e piora a análise. O script faz a limpeza de forma determinística; a IA entra depois para interpretar.
+Entradas: as URLs da seção **H. Referências** de `etapas/00_briefing/briefing.md` (aprovado), com o que aproveitar e o que evitar de cada uma. Sem URLs, registre o passo 2 como `não se aplica` em `etapas/aprovacoes.md` e siga para o passo 3.
 
-## 1. Obter o HTML
+Saída: uma pasta por site em `etapas/01_extracao/codigo/<nome-site>/`.
 
-Tente nesta ordem:
+## Por que duas capturas
 
-1. **Arquivo enviado pelo usuário** (em uploads ou no projeto). É o caminho mais confiável.
-2. **`--url`** no script, se houver acesso à rede para o domínio. Em ambientes com rede restrita isso falha; nesse caso, peça o arquivo ao usuário.
+- **Código estático** (`extrair_referencia.py`): HTML limpo, CSS concatenado, variáveis, `@font-face`, breakpoints. Rápido, mas sites em React/Vue/Next chegam quase vazios.
+- **Página renderizada** (`playwright-cli` + `estilos_computados.js`): o navegador abre o site, o JavaScript roda, e medimos o que foi **realmente aplicado** — cor de cada texto, fundo por área, fonte por quantidade de texto, estilo de h1/botão/campo. Funciona para qualquer site e é a medida mais fiel.
 
-Instruções para passar ao usuário quando for preciso salvar a página:
-- **Site comum:** no navegador, `Ctrl+S` → "Página da Web, completa". Enviar o `.html` e a pasta `_arquivos` (ou pelo menos os `.css`).
-- **Site em React/Vue/Next (o HTML vem quase vazio):** abrir DevTools (F12) → aba Elements → clicar com o botão direito na tag `<html>` → Copy → Copy outerHTML → colar num arquivo `.html`. Para o CSS: aba Network → filtrar por CSS → recarregar → salvar os arquivos.
-- Linha de comando: `wget --page-requisites --convert-links <url>`.
+Faça as duas sempre que houver `playwright-cli`. Sem ele, use só a estática e avise o usuário sobre o limite.
 
-## 2. Rodar o script
+## 1. Capturar a página renderizada
+
+Para cada URL (troque `<nome-site>` por um nome curto, ex.: `ref1-acme`):
 
 ```bash
-pip install beautifulsoup4 --break-system-packages  # se necessário
-python scripts/extrair_referencia.py --html pagina.html --css estilo.css --saida etapas/01_extracao/codigo/<nome-site>
-# ou
-python scripts/extrair_referencia.py --url https://exemplo.com --saida etapas/01_extracao/codigo/<nome-site>
+D=etapas/01_extracao/codigo/<nome-site>; mkdir -p $D
+JS=.claude/skills/extrair-html-referencia/scripts/estilos_computados.js
+playwright-cli open <url>
+playwright-cli resize 1440 900
+playwright-cli --raw eval "document.documentElement.outerHTML" > $D/renderizado.html
+playwright-cli --raw eval "$(cat $JS)" > $D/computados-desktop.json
+playwright-cli resize 390 844
+playwright-cli --raw eval "$(cat $JS)" > $D/computados-mobile.json
+playwright-cli close
 ```
 
-Use `--base-url` junto com `--html` quando o CSS estiver linkado com caminho relativo e houver rede.
+Se aparecer banner de cookies cobrindo a página, recuse os não essenciais (a opção mais restritiva) antes de medir. Não faça login nem preencha formulários.
 
-Saídas: `limpo.html`, `estilos.css`, `resumo.md`, `dados.json`.
+O `estilos_computados.js` só lê a página: não altera nada e não envia dados.
 
-**Leia os avisos do script.** Se ele disser que a página parece renderizada por JavaScript ou que não achou CSS, não continue com dados vazios — peça ao usuário o HTML renderizado ou os arquivos CSS, explicando como obter.
+## 2. Rodar os scripts
 
-## 3. Interpretar o resumo
+```bash
+pip install beautifulsoup4   # se necessário
+S=.claude/skills/extrair-html-referencia/scripts
+python $S/extrair_referencia.py --html $D/renderizado.html --base-url <url> --saida $D
+python $S/resumir_computados.py --entrada $D/computados-desktop.json $D/computados-mobile.json --saida $D
+```
 
-O resumo traz dados brutos. Complete o `resumo.md` com uma seção **"Interpretação"** no final, respondendo:
+Sem `playwright-cli`: `python $S/extrair_referencia.py --url <url> --saida $D` (ou `--html` com a página salva pelo usuário: `Ctrl+S` → "Página da Web, completa").
 
-- **Ordem das seções da página** em linguagem simples (ex.: header fixo → hero 2 colunas → logos de clientes → 3 cards de recursos → depoimentos → CTA → footer).
-- **Fonte de títulos e fonte de texto.** Separe fontes da marca de fontes de fallback/ícones.
-- **Paleta provável:** identifique primária, secundária, texto, fundo, bordas e estados. Cores muito frequentes costumam ser texto e fundo; a cor dos botões costuma ser a primária. Descarte cores de bibliotecas de terceiros (widgets, ícones).
-- **Escala tipográfica** (tamanhos de H1 a texto pequeno).
-- **Breakpoints principais.**
-- **Relação com o `referencias.md`:** destaque os valores ligados ao que o usuário disse querer aproveitar, e sinalize os que ele disse querer evitar.
+Saídas na pasta do site: `limpo.html`, `estilos.css`, `resumo.md`, `dados.json` (estático) e `computados.md` (medido).
 
-Seja honesto sobre incerteza: se um valor foi deduzido, marque como "(provável)".
+**Leia os avisos.** Se a página parecer vazia, se não houver CSS ou se o `computados.md` analisar poucos elementos (ex.: página de bloqueio, captcha, "acesso negado"), não continue com dados ruins: avise o usuário e peça a página salva ou outra URL.
 
-## 4. Repetir por referência
+## 3. Consolidar o design system do site
 
-Uma pasta por site. Ao final, confirme com o usuário se todas as referências foram processadas e siga para `print-para-wireframe`.
+Acrescente ao final do `resumo.md` a seção **"Design system extraído"**, cruzando `resumo.md` (estático) e `computados.md` (medido). Quando discordarem, vale o medido.
+
+| Item | Como chegar |
+|------|-------------|
+| **Paleta com papéis** | fundo (maior área), texto (mais caracteres), primária (fundo do botão/links), secundária, bordas, estados. Descarte cores de widgets de terceiros (chat, cookies, mapas). |
+| **Tipografia** | fonte de títulos e de texto (separe fontes de ícones e fallbacks), pesos usados. |
+| **Escala de tamanhos** | h1 → h4, texto, texto pequeno — no desktop e no mobile (tabela "Tipografia por viewport"). |
+| **Espaçamento** | gaps e paddings recorrentes; tente reconhecer a escala (múltiplos de 4 ou 8). |
+| **Raios e sombras** | os 2–3 valores mais usados e onde aparecem (botões, cards, campos). |
+| **Container e breakpoints** | largura máxima do conteúdo e media queries principais. |
+| **Relação com o briefing** | destaque os valores ligados ao que o usuário quer **aproveitar** e marque os que ele quer **evitar**. |
+
+Marque como "(provável)" o que foi deduzido em vez de medido.
+
+## 4. Repetir por referência e fechar
+
+Uma pasta por site. Ao final, mostre ao usuário uma tabela curta com a paleta e as fontes de cada referência e siga para o passo 3 (`extrair-design-prints`). Este passo não exige aprovação; registre `concluído` em `etapas/aprovacoes.md`.
 
 ## Limite de uso
 
-O código extraído serve como referência de estrutura e valores de estilo. Não copie textos, imagens, logos ou blocos de código dos sites para o site final.
+O código extraído serve como referência de valores de estilo e estrutura. Não copie textos, imagens, logos, ícones nem blocos de código dos sites para o site final. Fontes pagas que aparecerem na extração não podem ser usadas sem licença — sinalize no resumo e sugira alternativas livres.
