@@ -1,6 +1,6 @@
 ---
 name: gerar-mockup
-description: Gera a imagem do site a partir da prévia — escreve o prompt e cria o mockup com o Nano Banana (Gemini) via MCP em PNG, ou, sem o MCP, desenha um mockup colorido em SVG — e itera com o usuário até a aprovação. Use no passo 5 do fluxo, depois da prévia, ou quando o usuário pedir "a imagem do site", "um mockup", "como o site vai ficar" ou um prompt para gerar a imagem do site.
+description: Gera a imagem do site a partir da prévia — escreve o prompt e desenha um mockup colorido em SVG — e itera com o usuário até a aprovação. Use no passo 5 do fluxo, depois da prévia, ou quando o usuário pedir "a imagem do site", "um mockup", "como o site vai ficar" ou um prompt para gerar a imagem do site.
 ---
 
 # Imagem do site (passo 5)
@@ -21,24 +21,16 @@ Gere `etapas/03_mockup/prompt_imagem.md` a partir de `assets/prompt_imagem_templ
 
 Não invente o que a prévia não diz. Nunca peça pessoas reais que o site apresenta como reais.
 
-## 2. Gerar a imagem
+## 2. Desenhar o mockup em SVG
 
-Veja se a ferramenta do servidor MCP `nanobanana` (`generate_image`) está disponível nesta sessão.
-
-### Com Nano Banana (PNG)
-1. Gere cada tela com o prompt correspondente, salvando em `etapas/03_mockup/` com nomes como `mockup_home-desktop_v1.png`.
-2. Para ajustes, use a mesma ferramenta passando a imagem atual como entrada e descrevendo só a mudança — preserva o resto do layout.
-3. A ferramenta `upload_file` do servidor está bloqueada no projeto por segurança; não é necessária.
-
-### Sem Nano Banana (SVG)
-O Claude desenha o mockup em SVG — menos fotográfico, mas fiel à prévia e editável. Antes de desenhar, carregue as skills `frontend-design` e `design-taste-frontend` para fugir do visual genérico.
+O Claude desenha o mockup em SVG a partir do prompt — fiel à prévia e fácil de ajustar. Antes de desenhar, carregue as skills `frontend-design` e `design-taste-frontend` para fugir do visual genérico.
 
 - `mockup_home-desktop_v1.svg` com `viewBox="0 0 1440 <altura>"`; `mockup_home-mobile_v1.svg` com largura 390.
 - **Colorido e com tipografia de verdade** (não é wireframe): paleta e fontes da prévia (`font-family` com fallback), títulos e botões com o texto real curto, demais textos como linhas ou frases neutras.
 - Imagens como blocos com gradiente suave da paleta e um rótulo discreto (`[FOTO: equipe]`). Ícones simples desenhados em SVG.
 - Nada de `<image>` externo, scripts ou recortes de referências.
 
-Se o usuário quiser o Nano Banana e ele não estiver configurado, aponte `docs/nano-banana.md` e siga com o SVG enquanto isso.
+O `prompt_imagem.md` também serve para o usuário gerar a imagem numa ferramenta de IA de imagem, se quiser. Se ele trouxer uma imagem gerada fora, salve em `etapas/03_mockup/` e trate como mais uma versão para aprovação.
 
 ## 3. Aprovação
 

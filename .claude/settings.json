@@ -7,10 +7,5 @@
       }
     }
   },
-  "enabledPlugins": {},
-  "permissions": {
-    "deny": [
-      "mcp__nanobanana__upload_file"
-    ]
-  }
+  "enabledPlugins": {}
 }

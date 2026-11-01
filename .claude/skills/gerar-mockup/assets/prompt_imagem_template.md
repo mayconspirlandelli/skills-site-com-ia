@@ -1,7 +1,7 @@
 # Prompt da imagem do site — <Projeto>
 
 > Gerado a partir de: `etapas/02_previa/previa_site.md` (<data>)
-> Gerador: <Nano Banana via MCP | SVG pelo Claude>
+> O mockup é desenhado em SVG pelo Claude. O prompt também serve para gerar a imagem em qualquer ferramenta de IA, se o usuário quiser.
 
 ## Base comum (vai no início de todo prompt)
 

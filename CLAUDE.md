@@ -16,7 +16,7 @@ com aprovação do usuário entre as etapas. O plano completo está em `docs/pla
 | 2 | Design extraído do código das referências | extrair-html-referencia | `etapas/01_extracao/codigo/` | |
 | 3 | Design extraído dos prints | extrair-design-prints | `etapas/01_extracao/prints/` | |
 | 4 | Prévia do site | gerar-previa | `etapas/02_previa/` | |
-| 5 | Imagem do site (Nano Banana ou SVG) | gerar-mockup | `etapas/03_mockup/` | ✅ |
+| 5 | Imagem do site (SVG) | gerar-mockup | `etapas/03_mockup/` | ✅ |
 | 6 | Wireframes de todas as páginas | print-para-wireframe | `etapas/04_wireframes/` | ✅ |
 | 7 | Design system (.md + .html) | gerar-design-system | `etapas/05_design_system/` | ✅ |
 | 8 | Plano, construção e validação | construir-site | `etapas/06_construcao/` e `site/` | |
@@ -31,7 +31,7 @@ com aprovação do usuário entre as etapas. O plano completo está em `docs/pla
 - Converse com o usuário em português.
 
 ## Segurança de skills de terceiros
-- **Nunca** instale, copie ou ative skill, plugin ou marketplace de terceiros sem antes usar a skill **auditar-skill**. Vale também para servidores MCP (ex.: o do Nano Banana): leia o código antes de configurar.
+- **Nunca** instale, copie ou ative skill, plugin ou marketplace de terceiros sem antes usar a skill **auditar-skill**. Vale também para servidores MCP: leia o código antes de configurar.
 - Audite sempre em pasta temporária, sem executar nada da skill. Prefira `./scripts/adicionar-skill.sh`, que já audita antes de instalar.
 - Veredito BLOQUEAR: não instale. REVISAR: só com confirmação explícita do usuário após ver os achados.
 - Registre o commit auditado na tabela abaixo. Atualizou a skill? Audite de novo.
