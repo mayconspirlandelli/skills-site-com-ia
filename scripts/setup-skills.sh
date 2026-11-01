@@ -4,15 +4,11 @@
 # e só instala o commit auditado em .claude/skills/.
 #
 # Uso:
-#   ./scripts/setup-skills.sh inicial       # 1º passo: grill-me + grilling (antes da entrevista)
-#   ./scripts/setup-skills.sh obrigatorias  # depois da entrevista: as demais obrigatórias
-#   ./scripts/setup-skills.sh animacao      # só se o projeto tiver animações ou vídeos
+#   ./scripts/setup-skills.sh obrigatorias  # antes do passo 1: skills usadas pelo fluxo
+#   ./scripts/setup-skills.sh animacao      # só se o briefing indicar animações ou vídeos
+#   ./scripts/setup-skills.sh extras        # opcional: grill-me + grilling (entrevistas fora do fluxo)
 set -euo pipefail
 
-INICIAL=(
-  "https://github.com/mattpocock/skills grill-me"
-  "https://github.com/mattpocock/skills grilling"   # a grill-me só chama a grilling
-)
 OBRIGATORIAS=(
   "https://github.com/anthropics/skills frontend-design"
   "https://github.com/vercel-labs/agent-skills web-design-guidelines"
@@ -25,11 +21,15 @@ ANIMACAO=(
   "https://github.com/remotion-dev/skills remotion-best-practices"
   "https://github.com/lottiefiles/motion-design-skill motion-design"
 )
+EXTRAS=(
+  "https://github.com/mattpocock/skills grill-me"
+  "https://github.com/mattpocock/skills grilling"   # a grill-me só chama a grilling
+)
 
 case "${1:-}" in
-  inicial)      LISTA=("${INICIAL[@]}") ;;
   obrigatorias) LISTA=("${OBRIGATORIAS[@]}") ;;
   animacao)     LISTA=("${ANIMACAO[@]}") ;;
+  extras)       LISTA=("${EXTRAS[@]}") ;;
   *) sed -n '2,9p' "$0"; exit 1 ;;
 esac
 

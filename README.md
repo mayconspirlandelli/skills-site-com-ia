@@ -2,12 +2,25 @@
 
 🇧🇷 Português · 🇺🇸 [English](README.en.md)
 
-Template para criar **websites, sites institucionais e landing pages** com o Claude Code a
-partir de sites de referência. O fluxo transforma referências em texto estruturado (HTML limpo,
-wireframes SVG, especificações e design system) antes de gerar código, o que deixa o resultado
-muito mais fiel e consistente.
+Template para criar **websites, sites institucionais e landing pages** com o Claude Code em
+**8 passos**, do entendimento do negócio ao site validado e pronto para deploy. Cada passo gera um
+arquivo de texto estruturado que o próximo lê (briefing, design extraído das referências, prévia,
+wireframes SVG, design system) — e quatro deles só avançam com a sua aprovação.
 
 Plano completo: [`docs/plano.md`](docs/plano.md) · Diagrama do processo: [`docs/diagrama-processo.html`](docs/diagrama-processo.html)
+
+## Os 8 passos
+
+| # | Passo | Aprovação |
+|---|-------|-----------|
+| 1 | **Entrevista e briefing** — negócio, objetivo, público, arquitetura, hospedagem, Docker, design, referências e prints | ✅ |
+| 2 | **Design extraído do código** das referências (HTML, CSS e o resultado do JavaScript) | |
+| 3 | **Design extraído dos prints** de telas | |
+| 4 | **Prévia do site** em Markdown | |
+| 5 | **Imagem do site** — prompt + mockup em SVG | ✅ |
+| 6 | **Wireframes SVG** de todas as páginas, desktop e celular | ✅ |
+| 7 | **Design system** em Markdown e HTML, com tokens | ✅ |
+| 8 | **Plano, construção e validação** — código em `site/`, Docker/deploy e relatório | |
 
 ## Como usar
 
@@ -26,33 +39,23 @@ Se criou pelo site, clone o novo repositório:
 git clone https://github.com/<usuario>/<meu-site>.git
 ```
 
-### 2. Instale as primeiras skills (`grill-me` + `grilling`)
+### 2. Instale as skills de terceiros
 
-Na pasta do projeto (no Windows, use o Git Bash):
+Na pasta do projeto (no Windows, use o Git Bash). O script audita cada skill antes de instalar:
 
 ```bash
-./scripts/setup-skills.sh inicial
+./scripts/setup-skills.sh obrigatorias
 ```
 
-### 3. Abra o Claude Code e faça a entrevista
+### 3. Abra o Claude Code e comece
 
 ```bash
 claude
 ```
 
-Digite `/grill-me` ou diga algo como: *"Quero criar uma landing page para [seu negócio]."*
-A skill `site-com-referencias` conduz o processo:
-
-1. **Entrevista:** a `grill-me` faz uma série de perguntas sobre o site ou landing page
-   (objetivo, público, páginas, conteúdo, stack, animações...) e monta o plano para codificar
-   em `etapas/00_briefing/entrevista.md`.
-2. **Prompts de imagens:** a partir do plano, o Claude cria os prompts para gerar mockups das
-   páginas e imagens do site (`etapas/00_briefing/prompts_imagens.md`). Os mockups gerados viram
-   referência visual na etapa de wireframes.
-3. **Demais skills:** você roda `./scripts/setup-skills.sh obrigatorias` (e `animacao`, se
-   houver animações ou vídeos).
-4. **Plano:** segue os passos de [`docs/plano.md`](docs/plano.md) — briefing, referências,
-   extração de HTML, wireframes, design system e construção do site.
+Diga algo como: *"Quero criar uma landing page para [seu negócio]."* A skill `site-com-referencias`
+conduz os 8 passos, começando pela entrevista. O andamento fica nas pastas de `etapas/` e em
+`etapas/aprovacoes.md` — você pode parar e continuar em outra sessão.
 
 ### Requisitos
 
@@ -70,34 +73,38 @@ A skill `site-com-referencias` conduz o processo:
 │   └── skills/            skills do fluxo (versionadas com o projeto)
 ├── auditorias/            relatórios de auditoria das skills instaladas
 ├── docs/
-│   ├── plano.md           o plano do processo
+│   ├── plano.md           o plano dos 8 passos
 │   ├── diagrama-processo.html  diagrama das etapas (abra no navegador)
 │   ├── skills-obrigatorias.md  skills de terceiros e como instalar
 │   └── recursos.md        links úteis (referências, animações, skills)
 ├── scripts/
 │   ├── setup-skills.sh    audita e instala as skills de terceiros do template
 │   └── adicionar-skill.sh audita e instala qualquer outra skill
-├── etapas/                construção do site, uma pasta por etapa
+├── etapas/                construção do site, uma pasta por passo
+│   ├── aprovacoes.md      registro das suas aprovações
 │   ├── 00_briefing/       briefing.md + prints/ enviados
 │   ├── 01_extracao/       design extraído do código (codigo/) e dos prints (prints/)
 │   ├── 02_previa/         prévia do site
 │   ├── 03_mockup/         prompt e imagem do site
 │   ├── 04_wireframes/     wireframes SVG
-│   ├── 05_design_system/  design_system.md + tokens.css
+│   ├── 05_design_system/  design_system.md + design_system.html + tokens.css
 │   └── 06_construcao/     plano de construção e relatório de validação
 └── site/                  código do site (pronto para Docker e deploy)
 ```
 
 ## Skills incluídas
 
-| Skill | Etapa |
+| Skill | Passo |
 |-------|-------|
-| `site-com-referencias` | Orquestra o fluxo e indica o próximo passo |
-| `entrevista-site` | Passo 1: entrevista em rodadas e briefing.md para aprovação |
-| `extrair-html-referencia` | Limpa o HTML e extrai fontes, cores, breakpoints (script Python) |
-| `gerar-wireframes` | Passo 6: wireframes SVG de todas as páginas + página de revisão |
-| `gerar-design-system` | Passo 7: design_system.md + design_system.html, tokens e contraste |
-| `construir-site` | Código seção por seção + checklist de validação |
+| `site-com-referencias` | Orquestra o fluxo, as aprovações e indica o próximo passo |
+| `entrevista-site` | 1 — entrevista em rodadas com resposta recomendada e briefing.md |
+| `extrair-html-referencia` | 2 — mede o design das referências no navegador (playwright-cli) e no código |
+| `extrair-design-prints` | 3 — paleta dos prints (script) e análise de tipografia e formas |
+| `gerar-previa` | 4 — prévia do site em Markdown |
+| `gerar-mockup` | 5 — prompt e mockup do site em SVG |
+| `gerar-wireframes` | 6 — wireframes SVG de todas as páginas + página de revisão |
+| `gerar-design-system` | 7 — design_system.md + design_system.html, tokens e contraste |
+| `construir-site` | 8 — plano, código em site/, Docker/deploy e relatório de validação |
 | `auditar-skill` | Auditoria de segurança de skills de terceiros antes de instalar |
 
 ## Skills de terceiros (instaladas pelo script)
@@ -108,9 +115,9 @@ Não vêm versionadas no template — cada uma tem licença e autor próprios. O
 
 | Grupo | Skills | Comando |
 |-------|--------|---------|
-| Inicial | `grill-me`, `grilling` | `./scripts/setup-skills.sh inicial` |
 | Obrigatórias | `frontend-design`, `web-design-guidelines`, `image-to-code`, `design-taste-frontend`, `playwright-cli`, `diagram-design` | `./scripts/setup-skills.sh obrigatorias` |
-| Animação/vídeo (opcional) | `remotion-best-practices`, `motion-design` | `./scripts/setup-skills.sh animacao` |
+| Animação/vídeo (se o briefing pedir) | `remotion-best-practices`, `motion-design` | `./scripts/setup-skills.sh animacao` |
+| Extras (opcional) | `grill-me`, `grilling` | `./scripts/setup-skills.sh extras` |
 
 ## Adicionando outras skills
 

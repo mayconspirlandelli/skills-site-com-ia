@@ -6,30 +6,19 @@ além das skills do fluxo que já vêm em `.claude/skills/`.
 As skills de terceiros **não vêm versionadas no template** (cada uma tem a licença e o autor
 dela). Elas são auditadas e instaladas no seu projeto pelo script `scripts/setup-skills.sh`.
 
-## Ordem do setup
+## Quando instalar
 
-1. **`grill-me` primeiro, sempre.** É a primeira skill a ser instalada, junto com a `grilling`
-   (a `grill-me` é só um atalho que chama a `grilling`, onde estão as instruções da entrevista).
-2. **Entrevista.** Com a `grill-me`, o Claude faz uma série de perguntas sobre o website ou
-   landing page e monta o plano para codificar. Saída: `etapas/00_briefing/entrevista.md`.
-3. **Prompts de imagens.** A partir do plano da entrevista, o Claude cria os prompts para gerar
-   as imagens do site — mockups das páginas e imagens de conteúdo. Saída: `etapas/00_briefing/prompts_imagens.md`.
-4. **Instalar as demais skills** obrigatórias — e as de animação, se a entrevista indicar
-   animações ou vídeos.
-5. **Seguir os passos do plano** [`docs/plano.md`](plano.md)
-   (briefing → referências → HTML → wireframes → design system → site), conduzidos pela skill
-   `site-com-referencias`.
+1. **Antes do passo 1:** as **obrigatórias** (`./scripts/setup-skills.sh obrigatorias`). Elas são usadas
+   pelo fluxo: `playwright-cli` mede as referências (passo 2) e valida o site (passo 8);
+   `frontend-design` e `design-taste-frontend` dão direção ao mockup (passo 5) e à construção.
+2. **Depois da entrevista:** as de **animação**, só se o briefing pedir animações ou vídeos.
+3. **Opcional:** os **extras**, para entrevistas fora do fluxo.
+
+A entrevista do fluxo é a skill `entrevista-site`, que já vem no template — não depende de skill de terceiros.
 
 ## Skills
 
-### Inicial (antes da entrevista)
-
-| Skill | Repositório | Para que serve |
-|-------|-------------|----------------|
-| `grill-me` | [mattpocock/skills](https://github.com/mattpocock/skills) | Atalho `/grill-me` para iniciar a entrevista (só o usuário aciona) |
-| `grilling` | [mattpocock/skills](https://github.com/mattpocock/skills) | A entrevista em si: rodadas de perguntas numeradas, cada uma com resposta recomendada, até fechar o plano |
-
-### Obrigatórias (depois da entrevista)
+### Obrigatórias (antes do passo 1)
 
 | Skill | Repositório | Para que serve |
 |-------|-------------|----------------|
@@ -47,6 +36,13 @@ dela). Elas são auditadas e instaladas no seu projeto pelo script `scripts/setu
 | `remotion-best-practices` | [remotion-dev/skills](https://github.com/remotion-dev/skills) | Animações ou vídeos gerados com código (Remotion/React) |
 | `motion-design` | [lottiefiles/motion-design-skill](https://github.com/lottiefiles/motion-design-skill) | Animações / motion design (ex.: Lottie) |
 
+### Extras (opcional)
+
+| Skill | Repositório | Para que serve |
+|-------|-------------|----------------|
+| `grill-me` | [mattpocock/skills](https://github.com/mattpocock/skills) | Atalho `/grill-me` para uma entrevista em rodadas sobre qualquer plano (só o usuário aciona) |
+| `grilling` | [mattpocock/skills](https://github.com/mattpocock/skills) | A entrevista em si, chamada pela `grill-me` |
+
 ## Como instalar
 
 > 🔒 Regra do projeto (ver `CLAUDE.md`): **nenhuma skill de terceiros é instalada sem auditoria.**
@@ -56,19 +52,19 @@ dela). Elas são auditadas e instaladas no seu projeto pelo script `scripts/setu
 Na raiz do projeto (no Windows, use o Git Bash):
 
 ```bash
-./scripts/setup-skills.sh inicial
-```
-
-Faça a entrevista com a `grill-me` e depois:
-
-```bash
 ./scripts/setup-skills.sh obrigatorias
 ```
 
-Só se o projeto tiver animações ou vídeos:
+Só se o briefing pedir animações ou vídeos:
 
 ```bash
 ./scripts/setup-skills.sh animacao
+```
+
+Opcional:
+
+```bash
+./scripts/setup-skills.sh extras
 ```
 
 Para cada skill, o script baixa o repositório numa pasta temporária, roda a auditoria
@@ -79,20 +75,12 @@ Para cada skill, o script baixa o repositório numa pasta temporária, roda a au
 - ⚠️ **REVISAR** — mostra os achados e pede sua confirmação.
 - ⛔ **BLOQUEAR** — não instala.
 
-Requisitos: Git, Python 3 e Bash.
+Requisitos: Git, Python 3 e Bash (no Windows, Git Bash).
 
 ### Opção 2 — `npx skills add` (manual)
 
 O `npx` instala direto, **sem auditar**, e sempre a versão mais nova do repositório. Use só
 depois de auditar a skill pedindo ao Claude Code: *"audite a skill `<nome>` do repositório `<url>`"*.
-
-```bash
-npx skills add https://github.com/mattpocock/skills --skill grill-me
-```
-
-```bash
-npx skills add https://github.com/mattpocock/skills --skill grilling
-```
 
 ```bash
 npx skills add https://github.com/anthropics/skills --skill frontend-design
@@ -126,6 +114,14 @@ npx skills add https://github.com/remotion-dev/skills --skill remotion-best-prac
 npx skills add https://github.com/lottiefiles/motion-design-skill --skill motion-design
 ```
 
+```bash
+npx skills add https://github.com/mattpocock/skills --skill grill-me
+```
+
+```bash
+npx skills add https://github.com/mattpocock/skills --skill grilling
+```
+
 Requisito: Node.js.
 
 ## Depois de instalar
@@ -135,9 +131,6 @@ auditado e o veredito de cada skill, e reinicie o Claude Code. Atualizou alguma 
 
 ## Checklist
 
-- [ ] `grill-me` e `grilling` — auditadas e instaladas **(primeiras)**
-- [ ] Entrevista feita → `etapas/00_briefing/entrevista.md`
-- [ ] Prompts de imagens criados → `etapas/00_briefing/prompts_imagens.md`
 - [ ] `frontend-design` — auditada e instalada
 - [ ] `web-design-guidelines` — auditada e instalada
 - [ ] `image-to-code` — auditada e instalada
@@ -146,4 +139,5 @@ auditado e o veredito de cada skill, e reinicie o Claude Code. Atualizou alguma 
 - [ ] `diagram-design` — auditada e instalada
 - [ ] `remotion-best-practices` — só se houver animações/vídeos
 - [ ] `motion-design` — só se houver animações/motion design
+- [ ] `grill-me` e `grilling` — opcionais
 - [ ] Tabela do `CLAUDE.md` preenchida

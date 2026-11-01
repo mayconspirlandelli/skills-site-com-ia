@@ -2,15 +2,30 @@
 
 🇧🇷 [Português](README.md) · 🇺🇸 English
 
-A template for building **websites, company sites and landing pages** with Claude Code from
-reference sites. The workflow turns references into structured text (clean HTML, SVG wireframes,
-component specs and a design system) before any code is generated, which makes the result far
-more faithful and consistent.
+A template for building **websites, company sites and landing pages** with Claude Code in
+**8 steps**, from understanding the business to a validated site ready to deploy. Each step
+produces a structured text file the next one reads (briefing, design extracted from references,
+preview, SVG wireframes, design system) — and four of them only move on with your approval.
 
 > The workflow files, skills and in-project docs are written in **Portuguese (PT-BR)**.
 > Claude Code works fine with them — you can talk to it in English.
 
 Full plan (PT-BR): [`docs/plano.md`](docs/plano.md) · Process diagram: [`docs/diagrama-processo.html`](docs/diagrama-processo.html)
+
+## The 8 steps
+
+| # | Step | Skill | Approval |
+|---|------|-------|----------|
+| 1 | **Interview & briefing** — business, goal, audience, architecture, hosting, Docker, design, reference URLs and screenshots | `entrevista-site` | ✅ |
+| 2 | **Design extracted from the references' code** (HTML, CSS and computed styles after JavaScript) | `extrair-html-referencia` | |
+| 3 | **Design extracted from screenshots** | `extrair-design-prints` | |
+| 4 | **Site preview** in Markdown | `gerar-previa` | |
+| 5 | **Site image** — prompt + SVG mockup | `gerar-mockup` | ✅ |
+| 6 | **SVG wireframes** of every page, desktop and mobile | `gerar-wireframes` | ✅ |
+| 7 | **Design system** in Markdown and HTML, with tokens | `gerar-design-system` | ✅ |
+| 8 | **Plan, build & validation** — code in `site/`, Docker/deploy files and a report | `construir-site` | |
+
+`site-com-referencias` orchestrates the steps; `auditar-skill` audits any third-party skill before it is installed.
 
 ## How to use
 
@@ -29,33 +44,23 @@ If you created it on the website, clone the new repository:
 git clone https://github.com/<user>/<my-site>.git
 ```
 
-### 2. Install the first skills (`grill-me` + `grilling`)
+### 2. Install the third-party skills
 
-From the project folder (on Windows, use Git Bash):
+From the project folder (on Windows, use Git Bash). The script audits each skill before installing:
 
 ```bash
-./scripts/setup-skills.sh inicial
+./scripts/setup-skills.sh obrigatorias
 ```
 
-### 3. Open Claude Code and do the interview
+### 3. Open Claude Code and start
 
 ```bash
 claude
 ```
 
-Type `/grill-me` or say something like: *"I want to build a landing page for [your business]."*
-The `site-com-referencias` skill drives the process:
-
-1. **Interview:** `grill-me` asks a series of questions about the site or landing page
-   (goal, audience, pages, content, stack, animations...) and writes the coding plan to
-   `etapas/00_briefing/entrevista.md`.
-2. **Image prompts:** based on that plan, Claude writes prompts to generate page mockups and
-   site images (`etapas/00_briefing/prompts_imagens.md`). The generated mockups become visual
-   references for the wireframe step.
-3. **Remaining skills:** run `./scripts/setup-skills.sh obrigatorias` (plus `animacao` if the
-   site has animations or videos).
-4. **Plan:** follow the steps in [`docs/plano.md`](docs/plano.md) — briefing, references,
-   HTML extraction, wireframes, design system and building the site.
+Say something like: *"I want to build a landing page for [your business]."* The
+`site-com-referencias` skill drives the 8 steps, starting with the interview. Progress lives in
+the `etapas/` folders and in `etapas/aprovacoes.md`, so you can stop and resume in another session.
 
 ### Requirements
 
@@ -64,18 +69,14 @@ The `site-com-referencias` skill drives the process:
 - Python 3 and `pip install beautifulsoup4 pillow`
 - Node.js (for the site and for `playwright-cli`)
 
-## Workflow
+## Folder layout
 
-| Step | Skill | Output |
-|------|-------|--------|
-| Setup & interview | `grill-me` (third-party) | `etapas/00_briefing/entrevista.md` |
-| Interview & briefing | `entrevista-site` | `etapas/00_briefing/` |
-| HTML extraction | `extrair-html-referencia` | `etapas/01_extracao/codigo/` |
-| Wireframes & specs | `gerar-wireframes` | `etapas/04_wireframes/` (SVG wireframes) |
-| Design system | `gerar-design-system` | `etapas/05_design_system/` |
-| Build & validate | `construir-site` | `site/` |
-
-`auditar-skill` audits any third-party skill before it is installed.
+```
+├── .claude/skills/   ·  scripts/  ·  docs/  ·  auditorias/     framework
+├── etapas/                 one folder per step (briefing → extraction → preview →
+│                           mockup → wireframes → design system → build) + aprovacoes.md
+└── site/                   the site code only, ready for Docker and deploy
+```
 
 ## Third-party skills (installed by script)
 
@@ -86,9 +87,9 @@ Details and manual `npx` commands: [`docs/skills-obrigatorias.md`](docs/skills-o
 
 | Group | Skills | Command |
 |-------|--------|---------|
-| First | `grill-me`, `grilling` | `./scripts/setup-skills.sh inicial` |
 | Required | `frontend-design`, `web-design-guidelines`, `image-to-code`, `design-taste-frontend`, `playwright-cli`, `diagram-design` | `./scripts/setup-skills.sh obrigatorias` |
-| Animation/video (optional) | `remotion-best-practices`, `motion-design` | `./scripts/setup-skills.sh animacao` |
+| Animation/video (if the briefing asks) | `remotion-best-practices`, `motion-design` | `./scripts/setup-skills.sh animacao` |
+| Extras (optional) | `grill-me`, `grilling` | `./scripts/setup-skills.sh extras` |
 
 ## Adding other skills
 
