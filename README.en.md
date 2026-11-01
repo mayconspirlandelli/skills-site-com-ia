@@ -87,7 +87,7 @@ Details and manual `npx` commands: [`docs/skills-obrigatorias.md`](docs/skills-o
 | Group | Skills | Command |
 |-------|--------|---------|
 | First | `grill-me`, `grilling` | `./scripts/setup-skills.sh inicial` |
-| Required | `frontend-design`, `web-design-guidelines`, `image-to-code`, `design-taste-frontend`, `playwright-cli` | `./scripts/setup-skills.sh obrigatorias` |
+| Required | `frontend-design`, `web-design-guidelines`, `image-to-code`, `design-taste-frontend`, `playwright-cli`, `diagram-design` | `./scripts/setup-skills.sh obrigatorias` |
 | Animation/video (optional) | `remotion-best-practices`, `motion-design` | `./scripts/setup-skills.sh animacao` |
 
 ## Adding other skills

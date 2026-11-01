@@ -105,7 +105,7 @@ Não vêm versionadas no template — cada uma tem licença e autor próprios. O
 | Grupo | Skills | Comando |
 |-------|--------|---------|
 | Inicial | `grill-me`, `grilling` | `./scripts/setup-skills.sh inicial` |
-| Obrigatórias | `frontend-design`, `web-design-guidelines`, `image-to-code`, `design-taste-frontend`, `playwright-cli` | `./scripts/setup-skills.sh obrigatorias` |
+| Obrigatórias | `frontend-design`, `web-design-guidelines`, `image-to-code`, `design-taste-frontend`, `playwright-cli`, `diagram-design` | `./scripts/setup-skills.sh obrigatorias` |
 | Animação/vídeo (opcional) | `remotion-best-practices`, `motion-design` | `./scripts/setup-skills.sh animacao` |
 
 ## Adicionando outras skills

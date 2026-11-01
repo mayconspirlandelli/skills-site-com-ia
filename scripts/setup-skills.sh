@@ -19,6 +19,7 @@ OBRIGATORIAS=(
   "https://github.com/leonxlnx/taste-skill image-to-code"
   "https://github.com/leonxlnx/taste-skill design-taste-frontend"
   "https://github.com/microsoft/playwright-cli playwright-cli"
+  "https://github.com/cathrynlavery/diagram-design diagram-design"
 )
 ANIMACAO=(
   "https://github.com/remotion-dev/skills remotion-best-practices"

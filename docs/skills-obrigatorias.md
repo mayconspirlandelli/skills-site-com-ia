@@ -38,6 +38,7 @@ dela). Elas são auditadas e instaladas no seu projeto pelo script `scripts/setu
 | `image-to-code` | [leonxlnx/taste-skill](https://github.com/leonxlnx/taste-skill) | Converte imagens/prints em código de interface |
 | `design-taste-frontend` | [leonxlnx/taste-skill](https://github.com/leonxlnx/taste-skill) | Evita interfaces genéricas em landing pages, portfólios e redesigns |
 | `playwright-cli` | [microsoft/playwright-cli](https://github.com/microsoft/playwright-cli) | Abre o site no navegador para testar, tirar prints e validar responsividade |
+| `diagram-design` | [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design) | Diagramas (fluxograma, sequência, arquitetura, jornada do usuário, sitemap/árvore...) em HTML/SVG/PNG, com importação de Mermaid, draw.io e Excalidraw. A auditoria dá **REVISAR** por falsos positivos (frases como "do not silently ship" e exemplos de OAuth/git); revisada manualmente no commit `0cf73c3` |
 
 ### Animação e vídeo (só quando precisar)
 
@@ -114,6 +115,10 @@ npx skills add https://github.com/microsoft/playwright-cli --skill playwright-cl
 ```
 
 ```bash
+npx skills add https://github.com/cathrynlavery/diagram-design --skill diagram-design
+```
+
+```bash
 npx skills add https://github.com/remotion-dev/skills --skill remotion-best-practices
 ```
 
@@ -138,6 +143,7 @@ auditado e o veredito de cada skill, e reinicie o Claude Code. Atualizou alguma 
 - [ ] `image-to-code` — auditada e instalada
 - [ ] `design-taste-frontend` — auditada e instalada
 - [ ] `playwright-cli` — auditada e instalada
+- [ ] `diagram-design` — auditada e instalada
 - [ ] `remotion-best-practices` — só se houver animações/vídeos
 - [ ] `motion-design` — só se houver animações/motion design
 - [ ] Tabela do `CLAUDE.md` preenchida

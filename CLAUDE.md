@@ -39,7 +39,7 @@ O plano completo está em `docs/plano.md`.
 
 ## Skills obrigatórias
 Todo projeto de website precisa de: `grill-me` e `grilling` (as primeiras), `frontend-design`, `web-design-guidelines`, `image-to-code`,
-`design-taste-frontend` e `playwright-cli`. Comandos e passo a passo em `docs/skills-obrigatorias.md`.
+`design-taste-frontend`, `playwright-cli` e `diagram-design`. Comandos e passo a passo em `docs/skills-obrigatorias.md`.
 No início do projeto, verifique se estão instaladas; se faltar alguma, audite com **auditar-skill** antes de instalar.
 Se o projeto precisar de animações ou vídeos, inclua também `remotion-best-practices` e `motion-design` (`./scripts/setup-skills.sh animacao`).
 
