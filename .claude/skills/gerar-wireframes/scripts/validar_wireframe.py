@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Valida um wireframe SVG gerado pela skill print-para-wireframe.
+"""Valida um wireframe SVG gerado pela skill gerar-wireframes.
 
 Uso:
     python3 validar_wireframe.py etapas/04_wireframes/wireframe_home-desktop.svg [outros.svg ...]

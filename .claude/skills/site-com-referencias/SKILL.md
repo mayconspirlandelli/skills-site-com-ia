@@ -20,7 +20,7 @@ A IA gera sites melhores quando recebe **texto estruturado** (briefing, design e
 | 3 | Design extraído dos prints | `extrair-design-prints` | `etapas/01_extracao/prints/resumo.md` | — |
 | 4 | Prévia do site | `gerar-previa` | `etapas/02_previa/previa_site.md` | — |
 | 5 | Imagem do site | `gerar-mockup` | `etapas/03_mockup/prompt_imagem.md` + imagem (PNG ou SVG) | ✅ obrigatória |
-| 6 | Wireframes de todas as páginas | `print-para-wireframe` | `etapas/04_wireframes/*.svg` + `especificacao_componentes.md` | ✅ obrigatória |
+| 6 | Wireframes de todas as páginas | `gerar-wireframes` | `etapas/04_wireframes/*.svg` + `especificacao_componentes.md` | ✅ obrigatória |
 | 7 | Design system | `gerar-design-system` | `etapas/05_design_system/design_system.md`, `design_system.html`, `tokens.css` | ✅ obrigatória |
 | 8 | Plano, construção e validação | `construir-site` | `etapas/06_construcao/plano_construcao.md`, `site/`, `relatorio_validacao.md` | — |
 

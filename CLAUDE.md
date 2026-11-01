@@ -17,7 +17,7 @@ com aprovação do usuário entre as etapas. O plano completo está em `docs/pla
 | 3 | Design extraído dos prints | extrair-design-prints | `etapas/01_extracao/prints/` | |
 | 4 | Prévia do site | gerar-previa | `etapas/02_previa/` | |
 | 5 | Imagem do site (SVG) | gerar-mockup | `etapas/03_mockup/` | ✅ |
-| 6 | Wireframes de todas as páginas | print-para-wireframe | `etapas/04_wireframes/` | ✅ |
+| 6 | Wireframes de todas as páginas | gerar-wireframes | `etapas/04_wireframes/` | ✅ |
 | 7 | Design system (.md + .html) | gerar-design-system | `etapas/05_design_system/` | ✅ |
 | 8 | Plano, construção e validação | construir-site | `etapas/06_construcao/` e `site/` | |
 

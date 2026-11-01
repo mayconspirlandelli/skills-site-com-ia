@@ -41,4 +41,4 @@ O `prompt_imagem.md` também serve para o usuário gerar a imagem numa ferrament
 
 A imagem aprovada é **direção visual**, não especificação: na ordem de confiança, valores medidos e decisões do usuário valem mais que cores e medidas "lidas" da imagem. A estrutura oficial nasce nos wireframes.
 
-Próximo passo: `print-para-wireframe` (passo 6).
+Próximo passo: `gerar-wireframes` (passo 6).

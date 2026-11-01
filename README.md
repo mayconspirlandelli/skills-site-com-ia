@@ -95,8 +95,8 @@ A skill `site-com-referencias` conduz o processo:
 | `site-com-referencias` | Orquestra o fluxo e indica o próximo passo |
 | `entrevista-site` | Passo 1: entrevista em rodadas e briefing.md para aprovação |
 | `extrair-html-referencia` | Limpa o HTML e extrai fontes, cores, breakpoints (script Python) |
-| `print-para-wireframe` | Prints → wireframe SVG → especificação (com validador) |
-| `gerar-design-system` | design_system.md, tokens.css e verificação de contraste |
+| `gerar-wireframes` | Passo 6: wireframes SVG de todas as páginas + página de revisão |
+| `gerar-design-system` | Passo 7: design_system.md + design_system.html, tokens e contraste |
 | `construir-site` | Código seção por seção + checklist de validação |
 | `auditar-skill` | Auditoria de segurança de skills de terceiros antes de instalar |
 
