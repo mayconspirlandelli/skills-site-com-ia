@@ -7,3 +7,6 @@ __pycache__/
 # HTML baixado de referências pode ser grande; descomente se não quiser versionar
 # etapas/01_extracao/codigo/**/limpo.html
 # etapas/01_extracao/codigo/**/estilos.css
+
+# Material de venda no agensi.io (não versionar)
+docs_agensi/
