@@ -4,6 +4,8 @@
 
 Este plano organiza o processo de criação de um site usando IA generativa, partindo de sites de referência e transformando-os em artefatos estruturados (código, wireframes, especificações e design system) que a IA consegue interpretar com precisão. A ideia central é **não depender de imagens como fonte de detalhes**, e sim converter tudo em texto estruturado (HTML, Markdown, especificações), que é o formato em que a IA trabalha melhor.
 
+**Visão geral em diagrama:** [`diagrama-processo.html`](diagrama-processo.html) — as 6 etapas, com a skill, a entrada e a saída de cada uma (abra no navegador).
+
 ### Estrutura de pastas sugerida
 
 ```

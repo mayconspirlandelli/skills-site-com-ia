@@ -10,7 +10,7 @@ more faithful and consistent.
 > The workflow files, skills and in-project docs are written in **Portuguese (PT-BR)**.
 > Claude Code works fine with them — you can talk to it in English.
 
-Full plan (PT-BR): [`docs/plano.md`](docs/plano.md)
+Full plan (PT-BR): [`docs/plano.md`](docs/plano.md) · Process diagram: [`docs/diagrama-processo.html`](docs/diagrama-processo.html)
 
 ## How to use
 

@@ -7,7 +7,7 @@ partir de sites de referência. O fluxo transforma referências em texto estrutu
 wireframes SVG, especificações e design system) antes de gerar código, o que deixa o resultado
 muito mais fiel e consistente.
 
-Plano completo: [`docs/plano.md`](docs/plano.md)
+Plano completo: [`docs/plano.md`](docs/plano.md) · Diagrama do processo: [`docs/diagrama-processo.html`](docs/diagrama-processo.html)
 
 ## Como usar
 
@@ -71,6 +71,7 @@ A skill `site-com-referencias` conduz o processo:
 ├── auditorias/            relatórios de auditoria das skills instaladas
 ├── docs/
 │   ├── plano.md           o plano do processo
+│   ├── diagrama-processo.html  diagrama das etapas (abra no navegador)
 │   ├── skills-obrigatorias.md  skills de terceiros e como instalar
 │   └── recursos.md        links úteis (referências, animações, skills)
 ├── scripts/
