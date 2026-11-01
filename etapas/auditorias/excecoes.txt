@@ -1,0 +1,4 @@
+# Exceções revisadas: skills com veredito REVISAR/BLOQUEAR aprovadas pelo usuário após revisão manual.
+# Formato: <skill> <commit-curto-7> <motivo>
+# Vale só para esse commit exato. Atualizou a skill? Revise de novo e troque a linha.
+impeccable e89e3ad Aprovada em 2026-11-02 (ver impeccable_e89e3ad_revisao.md): alertas de texto são falsos positivos; baixa e executa binário do GitHub verificado por checksum e instala hooks com consentimento — aceito pelo usuário.

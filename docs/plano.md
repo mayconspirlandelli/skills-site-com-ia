@@ -27,6 +27,7 @@ A skill `site-com-referencias` conduz tudo: descobre em que passo o projeto est�
 projeto-site/
 ├── etapas/                    construção do site, na ordem do fluxo
 │   ├── aprovacoes.md          registro das aprovações do usuário
+│   ├── auditorias/            relatórios de auditoria das skills + exceções revisadas
 │   ├── 00_briefing/           briefing.md (aprovado) + prints/ enviados pelo usuário
 │   ├── 01_extracao/
 │   │   ├── codigo/<site>/     design extraído do HTML/CSS/JS das referências

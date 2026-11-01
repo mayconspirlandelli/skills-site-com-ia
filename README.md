@@ -73,7 +73,6 @@ conduz os 8 passos, começando pela entrevista. O andamento fica nas pastas de `
 ├── .claude/
 │   ├── settings.json      marketplaces e plugins do projeto
 │   └── skills/            skills do fluxo (versionadas com o projeto)
-├── auditorias/            relatórios de auditoria das skills instaladas
 ├── docs/
 │   ├── plano.md           o plano dos 8 passos
 │   ├── diagrama-processo.html  diagrama dos 8 passos (+ .png)
@@ -84,6 +83,7 @@ conduz os 8 passos, começando pela entrevista. O andamento fica nas pastas de `
 │   └── adicionar-skill.sh audita e instala qualquer outra skill
 ├── etapas/                construção do site, uma pasta por passo
 │   ├── aprovacoes.md      registro das suas aprovações
+│   ├── auditorias/        relatórios de auditoria das skills e exceções revisadas
 │   ├── 00_briefing/       briefing.md + prints/ enviados
 │   ├── 01_extracao/       design extraído do código (codigo/) e dos prints (prints/)
 │   ├── 02_previa/         prévia do site
@@ -117,7 +117,7 @@ Não vêm versionadas no template — cada uma tem licença e autor próprios. O
 
 | Grupo | Skills | Comando |
 |-------|--------|---------|
-| Obrigatórias | `frontend-design`, `web-design-guidelines`, `image-to-code`, `design-taste-frontend`, `playwright-cli`, `diagram-design` | `./scripts/setup-skills.sh obrigatorias` |
+| Obrigatórias | `frontend-design`, `web-design-guidelines`, `image-to-code`, `design-taste-frontend`, `playwright-cli`, `diagram-design`, `impeccable` | `./scripts/setup-skills.sh obrigatorias` |
 | Animação/vídeo (se o briefing pedir) | `remotion-best-practices`, `motion-design` | `./scripts/setup-skills.sh animacao` |
 | Extras (opcional) | `grill-me`, `grilling` | `./scripts/setup-skills.sh extras` |
 
@@ -128,7 +128,7 @@ Não vêm versionadas no template — cada uma tem licença e autor próprios. O
 > com acesso a arquivos, rede e credenciais. A skill `auditar-skill` verifica prompt
 > injection, envio de dados, acesso a credenciais, código ofuscado, persistência e
 > comandos destrutivos, e dá um veredito: ✅ OK, ⚠️ REVISAR ou ⛔ BLOQUEAR.
-> Os relatórios ficam em `auditorias/`.
+> Os relatórios ficam em `etapas/auditorias/`.
 
 **Opção 1 — Script com auditoria automática (recomendado).**
 ```bash

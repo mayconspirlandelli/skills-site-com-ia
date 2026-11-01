@@ -45,6 +45,7 @@ Os passos 1, 5, 6 e 7 só terminam quando o usuário aprova explicitamente o res
 projeto-site/
 ├── etapas/                    construção do site, na ordem do fluxo
 │   ├── aprovacoes.md          registro das aprovações do usuário
+│   ├── auditorias/            relatórios de auditoria das skills + exceções revisadas
 │   ├── 00_briefing/           briefing.md (aprovado) + prints/ enviados pelo usuário
 │   ├── 01_extracao/
 │   │   ├── codigo/<site>/     design extraído do HTML/CSS/JS das referências

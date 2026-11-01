@@ -38,7 +38,7 @@ com aprovação do usuário entre as etapas. O plano completo está em `docs/pla
 
 ## Skills obrigatórias
 Todo projeto de website precisa de: `frontend-design`, `web-design-guidelines`, `image-to-code`,
-`design-taste-frontend`, `playwright-cli` e `diagram-design`. Comandos e passo a passo em `docs/skills-obrigatorias.md`.
+`design-taste-frontend`, `playwright-cli`, `diagram-design` e `impeccable` (commit fixo revisado — ver `etapas/auditorias/excecoes.txt`). Comandos e passo a passo em `docs/skills-obrigatorias.md`.
 No início do projeto, verifique se estão instaladas; se faltar alguma, audite com **auditar-skill** antes de instalar.
 Se o projeto precisar de animações ou vídeos, inclua também `remotion-best-practices` e `motion-design` (`./scripts/setup-skills.sh animacao`).
 

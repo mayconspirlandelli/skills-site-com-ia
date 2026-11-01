@@ -74,9 +74,10 @@ the `etapas/` folders and in `etapas/aprovacoes.md`, so you can stop and resume 
 ## Folder layout
 
 ```
-├── .claude/skills/   ·  scripts/  ·  docs/  ·  auditorias/     framework
+├── .claude/skills/   ·  scripts/  ·  docs/                   framework
 ├── etapas/                 one folder per step (briefing → extraction → preview →
 │                           mockup → wireframes → design system → build) + aprovacoes.md
+│                           + auditorias/ (skill audit reports)
 └── site/                   the site code only, ready for Docker and deploy
 ```
 
@@ -84,12 +85,12 @@ the `etapas/` folders and in `etapas/aprovacoes.md`, so you can stop and resume 
 
 They are **not bundled** with the template — each one has its own license and author.
 `scripts/setup-skills.sh` downloads each skill to a temp folder, runs the security audit,
-saves the report in `auditorias/` and installs only the audited commit.
+saves the report in `etapas/auditorias/` and installs only the audited commit.
 Details and manual `npx` commands: [`docs/skills-obrigatorias.md`](docs/skills-obrigatorias.md).
 
 | Group | Skills | Command |
 |-------|--------|---------|
-| Required | `frontend-design`, `web-design-guidelines`, `image-to-code`, `design-taste-frontend`, `playwright-cli`, `diagram-design` | `./scripts/setup-skills.sh obrigatorias` |
+| Required | `frontend-design`, `web-design-guidelines`, `image-to-code`, `design-taste-frontend`, `playwright-cli`, `diagram-design`, `impeccable` | `./scripts/setup-skills.sh obrigatorias` |
 | Animation/video (if the briefing asks) | `remotion-best-practices`, `motion-design` | `./scripts/setup-skills.sh animacao` |
 | Extras (optional) | `grill-me`, `grilling` | `./scripts/setup-skills.sh extras` |
 
