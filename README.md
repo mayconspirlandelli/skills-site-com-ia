@@ -11,6 +11,8 @@ Plano completo: [`docs/plano.md`](docs/plano.md) · Diagrama do processo: [`docs
 
 ## Os 8 passos
 
+![Diagrama dos 8 passos](docs/diagrama-processo.png)
+
 | # | Passo | Aprovação |
 |---|-------|-----------|
 | 1 | **Entrevista e briefing** — negócio, objetivo, público, arquitetura, hospedagem, Docker, design, referências e prints | ✅ |
@@ -74,7 +76,7 @@ conduz os 8 passos, começando pela entrevista. O andamento fica nas pastas de `
 ├── auditorias/            relatórios de auditoria das skills instaladas
 ├── docs/
 │   ├── plano.md           o plano dos 8 passos
-│   ├── diagrama-processo.html  diagrama das etapas (abra no navegador)
+│   ├── diagrama-processo.html  diagrama dos 8 passos (+ .png)
 │   ├── skills-obrigatorias.md  skills de terceiros e como instalar
 │   └── recursos.md        links úteis (referências, animações, skills)
 ├── scripts/

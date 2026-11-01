@@ -14,6 +14,8 @@ Full plan (PT-BR): [`docs/plano.md`](docs/plano.md) · Process diagram: [`docs/d
 
 ## The 8 steps
 
+![Diagram of the 8 steps](docs/diagrama-processo.png)
+
 | # | Step | Skill | Approval |
 |---|------|-------|----------|
 | 1 | **Interview & briefing** — business, goal, audience, architecture, hosting, Docker, design, reference URLs and screenshots | `entrevista-site` | ✅ |

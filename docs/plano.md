@@ -4,7 +4,9 @@
 
 O template organiza a criação de um site em **8 passos**, do entendimento do negócio ao site validado. A ideia central: a IA trabalha melhor com **texto estruturado** (briefing, design extraído, wireframes, tokens) do que improvisando a partir de imagens — então cada passo produz um arquivo que o próximo lê. Quatro passos só avançam com a **aprovação do usuário**, porque decisões tomadas cedo contaminam todo o resto.
 
-**Diagrama do processo:** [`diagrama-processo.html`](diagrama-processo.html) (abra no navegador).
+![Diagrama dos 8 passos](diagrama-processo.png)
+
+Versão interativa: [`diagrama-processo.html`](diagrama-processo.html) (abra no navegador).
 
 | # | Passo | Skill | Saída | Aprovação |
 |---|-------|-------|-------|-----------|
