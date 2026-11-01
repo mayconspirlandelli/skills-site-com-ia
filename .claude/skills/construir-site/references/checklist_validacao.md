@@ -29,6 +29,12 @@
 - [ ] Fontes com `display=swap`
 - [ ] Lighthouse: Performance, Acessibilidade, Boas práticas e SEO ≥ 90
 
+## Entrega
+- [ ] Build sem erros (`npm run build`, se houver build)
+- [ ] Docker (se pedido): `docker build` passa e o container serve o site em `http://localhost:8080`
+- [ ] Arquivos de deploy da hospedagem escolhida criados (workflow, `netlify.toml`...)
+- [ ] `site/` contém só arquivos de produção (nada de `etapas/`, `.env` ou rascunhos)
+
 ## Conteúdo e direitos
 - [ ] Nenhum texto, imagem, logo ou código copiado das referências
 - [ ] Placeholders `[TEXTO: ...]` listados para o usuário preencher
