@@ -1,6 +1,6 @@
 # Prompts de imagens — <Projeto>
 
-Gerado a partir de: `00_briefing/entrevista.md` (versão de <data>)
+Gerado a partir de: `etapas/00_briefing/entrevista.md` (versão de <data>)
 Ferramenta sugerida: <ChatGPT/DALL·E, Midjourney, Gemini/Imagen, Ideogram, Firefly...>
 
 ## Base comum (cole no início de cada prompt)
@@ -14,7 +14,7 @@ Ferramenta sugerida: <ChatGPT/DALL·E, Midjourney, Gemini/Imagen, Ideogram, Fire
 
 ## 1. Mockups das páginas (referência visual)
 
-Salvar as imagens geradas em `01_referencias/prints/gerados/`. Elas entram na etapa
+Salvar as imagens geradas em `etapas/03_mockup/`. Elas entram na etapa
 `print-para-wireframe` como qualquer outro print — **nunca são a referência final**.
 
 ### <Página> — desktop
@@ -35,7 +35,7 @@ Menu hambúrguer, seções empilhadas em 1 coluna na mesma ordem do desktop.
 
 ## 2. Imagens de conteúdo do site
 
-Salvar em `05_site/assets/img/` (ou a pasta de imagens da stack). Use texto alternativo (`alt`) ao inserir.
+Salvar em `site/assets/img/` (ou a pasta de imagens da stack). Use texto alternativo (`alt`) ao inserir.
 
 | # | Onde entra | Formato | Prompt |
 |---|-----------|---------|--------|

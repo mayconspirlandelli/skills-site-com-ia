@@ -3,8 +3,8 @@
 Extrai e limpa o HTML de um site de referência e gera um resumo estruturado.
 
 Uso:
-  python extrair_referencia.py --html pagina.html --saida 02_html_referencias/site-a
-  python extrair_referencia.py --url https://exemplo.com --saida 02_html_referencias/site-a
+  python extrair_referencia.py --html pagina.html --saida etapas/01_extracao/codigo/site-a
+  python extrair_referencia.py --url https://exemplo.com --saida etapas/01_extracao/codigo/site-a
   python extrair_referencia.py --html pagina.html --css estilo1.css estilo2.css --saida ...
 
 Gera na pasta de saída:

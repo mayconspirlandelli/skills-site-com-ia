@@ -48,9 +48,9 @@ The `site-com-referencias` skill drives the process:
 
 1. **Interview:** `grill-me` asks a series of questions about the site or landing page
    (goal, audience, pages, content, stack, animations...) and writes the coding plan to
-   `00_briefing/entrevista.md`.
+   `etapas/00_briefing/entrevista.md`.
 2. **Image prompts:** based on that plan, Claude writes prompts to generate page mockups and
-   site images (`00_briefing/prompts_imagens.md`). The generated mockups become visual
+   site images (`etapas/00_briefing/prompts_imagens.md`). The generated mockups become visual
    references for the wireframe step.
 3. **Remaining skills:** run `./scripts/setup-skills.sh obrigatorias` (plus `animacao` if the
    site has animations or videos).
@@ -68,12 +68,12 @@ The `site-com-referencias` skill drives the process:
 
 | Step | Skill | Output |
 |------|-------|--------|
-| Setup & interview | `grill-me` (third-party) | `00_briefing/entrevista.md` |
-| Briefing & references | `referencias-briefing` | `00_briefing/`, `01_referencias/` |
-| HTML extraction | `extrair-html-referencia` | `02_html_referencias/` |
-| Wireframes & specs | `print-para-wireframe` | `03_wireframes/` (SVG wireframes) |
-| Design system | `gerar-design-system` | `04_design_system/` |
-| Build & validate | `construir-site` | `05_site/` |
+| Setup & interview | `grill-me` (third-party) | `etapas/00_briefing/entrevista.md` |
+| Briefing & references | `referencias-briefing` | `etapas/00_briefing/` |
+| HTML extraction | `extrair-html-referencia` | `etapas/01_extracao/codigo/` |
+| Wireframes & specs | `print-para-wireframe` | `etapas/04_wireframes/` (SVG wireframes) |
+| Design system | `gerar-design-system` | `etapas/05_design_system/` |
+| Build & validate | `construir-site` | `site/` |
 
 `auditar-skill` audits any third-party skill before it is installed.
 

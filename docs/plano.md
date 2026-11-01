@@ -10,24 +10,17 @@ Este plano organiza o processo de criação de um site usando IA generativa, par
 
 ```
 projeto-site/
-├── 00_briefing/
-│   ├── entrevista.md
-│   ├── prompts_imagens.md
-│   └── briefing.md
-├── 01_referencias/
-│   ├── referencias.md
-│   └── prints/          (inclui gerados/: mockups criados por IA)
-├── 02_html_referencias/
-│   ├── site-a/
-│   └── site-b/
-├── 03_wireframes/
-│   ├── wireframe_home-desktop.svg
-│   └── especificacao_componentes.md
-├── 04_design_system/
-│   └── design_system.md
-├── skills/
-│   └── design-system-site/SKILL.md
-└── 05_site/
+├── etapas/                    construção do site, na ordem do fluxo
+│   ├── 00_briefing/           briefing.md (aprovado) + prints/ enviados pelo usuário
+│   ├── 01_extracao/
+│   │   ├── codigo/<site>/     design extraído do HTML/CSS/JS das referências
+│   │   └── prints/            design extraído dos prints
+│   ├── 02_previa/             previa_site.md
+│   ├── 03_mockup/             prompt da imagem + imagem do site aprovada
+│   ├── 04_wireframes/         wireframes SVG de todas as páginas (aprovados)
+│   ├── 05_design_system/      design_system.md + design_system.html + tokens.css
+│   └── 06_construcao/         plano_construcao.md + relatorio_validacao.md
+└── site/                      só o código do site (pronto para Docker e deploy)
 ```
 
 ---
@@ -38,9 +31,9 @@ projeto-site/
    ```bash
    ./scripts/setup-skills.sh inicial
    ```
-2. **Faça a entrevista** (digite `/grill-me`). A `grilling` faz uma série de perguntas sobre o website ou landing page e monta o plano para codificar. Salve em `00_briefing/entrevista.md`.
-3. **Crie os prompts de imagens.** Usando o plano da entrevista como referência, o Claude escreve em `00_briefing/prompts_imagens.md` os prompts para gerar:
-   - **mockups** de cada página (desktop e mobile), com as seções na ordem do plano — salve as imagens em `01_referencias/prints/gerados/`; elas passam pelo Passo 3 (wireframe) como qualquer print;
+2. **Faça a entrevista** (digite `/grill-me`). A `grilling` faz uma série de perguntas sobre o website ou landing page e monta o plano para codificar. Salve em `etapas/00_briefing/entrevista.md`.
+3. **Crie os prompts de imagens.** Usando o plano da entrevista como referência, o Claude escreve em `etapas/00_briefing/prompts_imagens.md` os prompts para gerar:
+   - **mockups** de cada página (desktop e mobile), com as seções na ordem do plano — salve as imagens em `etapas/03_mockup/`; elas passam pelo Passo 3 (wireframe) como qualquer print;
    - **imagens de conteúdo** (hero, ilustrações, ícones) que vão para o site.
 4. **Instale as demais skills** (`./scripts/setup-skills.sh obrigatorias`; lista em `docs/skills-obrigatorias.md`).
 5. **Siga os passos abaixo**, a partir do Passo 0 — que reaproveita as respostas da entrevista.

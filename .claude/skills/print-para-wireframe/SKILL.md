@@ -10,9 +10,9 @@ A IA erra detalhes finos quando lê imagens: tamanhos de fonte, espaçamentos, c
 ## Entradas
 
 - Prints/imagens das seções (idealmente um por seção, em largura desktop; prints de mobile ajudam muito na responsividade).
-- Mockups gerados por IA em `01_referencias/prints/gerados/` (a partir de `00_briefing/prompts_imagens.md`). Eles já refletem o plano do site, então servem bem para a estrutura; como não têm HTML, todo valor tirado deles é "(estimado)".
-- `02_html_referencias/<site>/resumo.md`, se existir.
-- `00_briefing/briefing.md` e `01_referencias/referencias.md`.
+- Mockups gerados por IA em `etapas/03_mockup/` (a partir de `etapas/00_briefing/prompts_imagens.md`). Eles já refletem o plano do site, então servem bem para a estrutura; como não têm HTML, todo valor tirado deles é "(estimado)".
+- `etapas/01_extracao/codigo/<site>/resumo.md`, se existir.
+- `etapas/00_briefing/briefing.md` e `etapas/00_briefing/referencias.md`.
 
 ## Parte 1 — Wireframe SVG (só estrutura)
 
@@ -22,8 +22,8 @@ Comece copiando `assets/wireframe_template.svg` e siga as convenções dele.
 
 ### Arquivos
 
-- `03_wireframes/wireframe_<pagina>-desktop.svg` — obrigatório, largura 1440 (`viewBox="0 0 1440 <altura>"`).
-- `03_wireframes/wireframe_<pagina>-mobile.svg` — recomendado, largura 390. Se não houver print mobile, deduza a partir do desktop e marque as suposições com `(incerto)`.
+- `etapas/04_wireframes/wireframe_<pagina>-desktop.svg` — obrigatório, largura 1440 (`viewBox="0 0 1440 <altura>"`).
+- `etapas/04_wireframes/wireframe_<pagina>-mobile.svg` — recomendado, largura 390. Se não houver print mobile, deduza a partir do desktop e marque as suposições com `(incerto)`.
 
 ### Convenções do SVG
 
@@ -60,14 +60,14 @@ O wireframe final é do site do usuário, não da referência. Remova seções q
 
 1. Rode o validador (sintaxe, atributos obrigatórios e itens proibidos):
    ```bash
-   python3 .claude/skills/print-para-wireframe/scripts/validar_wireframe.py 03_wireframes/*.svg
+   python3 .claude/skills/print-para-wireframe/scripts/validar_wireframe.py etapas/04_wireframes/*.svg
    ```
    Corrija tudo o que aparecer com ✗.
 2. Mostre o SVG ao usuário (abra no navegador) e peça aprovação antes da Parte 2. Mudar estrutura depois é caro.
 
 ## Parte 2 — Especificação de componentes
 
-Com o wireframe aprovado, detalhe cada componente em `03_wireframes/especificacao_componentes.md` (modelo em `assets/especificacao_template.md`):
+Com o wireframe aprovado, detalhe cada componente em `etapas/04_wireframes/especificacao_componentes.md` (modelo em `assets/especificacao_template.md`):
 
 - **Tipografia:** estilo do design system (H1, H2, body...), peso, alinhamento.
 - **Posição e alinhamento** dentro da seção.

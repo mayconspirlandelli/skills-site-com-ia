@@ -45,9 +45,9 @@ A skill `site-com-referencias` conduz o processo:
 
 1. **Entrevista:** a `grill-me` faz uma série de perguntas sobre o site ou landing page
    (objetivo, público, páginas, conteúdo, stack, animações...) e monta o plano para codificar
-   em `00_briefing/entrevista.md`.
+   em `etapas/00_briefing/entrevista.md`.
 2. **Prompts de imagens:** a partir do plano, o Claude cria os prompts para gerar mockups das
-   páginas e imagens do site (`00_briefing/prompts_imagens.md`). Os mockups gerados viram
+   páginas e imagens do site (`etapas/00_briefing/prompts_imagens.md`). Os mockups gerados viram
    referência visual na etapa de wireframes.
 3. **Demais skills:** você roda `./scripts/setup-skills.sh obrigatorias` (e `animacao`, se
    houver animações ou vídeos).
@@ -77,12 +77,15 @@ A skill `site-com-referencias` conduz o processo:
 ├── scripts/
 │   ├── setup-skills.sh    audita e instala as skills de terceiros do template
 │   └── adicionar-skill.sh audita e instala qualquer outra skill
-├── 00_briefing/           entrevista.md, prompts_imagens.md e briefing.md
-├── 01_referencias/        referencias.md + prints/
-├── 02_html_referencias/   HTML limpo e resumo de cada referência
-├── 03_wireframes/         wireframes SVG e especificação de componentes
-├── 04_design_system/      design_system.md + tokens.css
-└── 05_site/               código do site
+├── etapas/                construção do site, uma pasta por etapa
+│   ├── 00_briefing/       briefing.md + prints/ enviados
+│   ├── 01_extracao/       design extraído do código (codigo/) e dos prints (prints/)
+│   ├── 02_previa/         prévia do site
+│   ├── 03_mockup/         prompt e imagem do site
+│   ├── 04_wireframes/     wireframes SVG
+│   ├── 05_design_system/  design_system.md + tokens.css
+│   └── 06_construcao/     plano de construção e relatório de validação
+└── site/                  código do site (pronto para Docker e deploy)
 ```
 
 ## Skills incluídas

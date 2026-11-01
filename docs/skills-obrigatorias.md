@@ -11,9 +11,9 @@ dela). Elas são auditadas e instaladas no seu projeto pelo script `scripts/setu
 1. **`grill-me` primeiro, sempre.** É a primeira skill a ser instalada, junto com a `grilling`
    (a `grill-me` é só um atalho que chama a `grilling`, onde estão as instruções da entrevista).
 2. **Entrevista.** Com a `grill-me`, o Claude faz uma série de perguntas sobre o website ou
-   landing page e monta o plano para codificar. Saída: `00_briefing/entrevista.md`.
+   landing page e monta o plano para codificar. Saída: `etapas/00_briefing/entrevista.md`.
 3. **Prompts de imagens.** A partir do plano da entrevista, o Claude cria os prompts para gerar
-   as imagens do site — mockups das páginas e imagens de conteúdo. Saída: `00_briefing/prompts_imagens.md`.
+   as imagens do site — mockups das páginas e imagens de conteúdo. Saída: `etapas/00_briefing/prompts_imagens.md`.
 4. **Instalar as demais skills** obrigatórias — e as de animação, se a entrevista indicar
    animações ou vídeos.
 5. **Seguir os passos do plano** [`docs/plano.md`](plano.md)
@@ -136,8 +136,8 @@ auditado e o veredito de cada skill, e reinicie o Claude Code. Atualizou alguma 
 ## Checklist
 
 - [ ] `grill-me` e `grilling` — auditadas e instaladas **(primeiras)**
-- [ ] Entrevista feita → `00_briefing/entrevista.md`
-- [ ] Prompts de imagens criados → `00_briefing/prompts_imagens.md`
+- [ ] Entrevista feita → `etapas/00_briefing/entrevista.md`
+- [ ] Prompts de imagens criados → `etapas/00_briefing/prompts_imagens.md`
 - [ ] `frontend-design` — auditada e instalada
 - [ ] `web-design-guidelines` — auditada e instalada
 - [ ] `image-to-code` — auditada e instalada

@@ -15,22 +15,22 @@ A IA gera sites melhores quando recebe **texto estruturado** (HTML, wireframes e
 
 | # | Etapa | Skill | Saída principal |
 |---|-------|-------|-----------------|
-| S | Setup: `grill-me`, entrevista, demais skills | `grilling` (via `grill-me`) + `auditar-skill` | `00_briefing/entrevista.md`, `prompts_imagens.md`, skills instaladas |
-| 0–1 | Briefing e referências | `referencias-briefing` | `00_briefing/briefing.md`, `01_referencias/referencias.md` |
-| 2 | Extrair HTML das referências | `extrair-html-referencia` | `02_html_referencias/<site>/resumo.md` |
-| 3 | Prints → wireframe SVG → especificação | `print-para-wireframe` | `03_wireframes/wireframe_<pagina>-desktop.svg` (+ `-mobile.svg`), `especificacao_componentes.md` |
-| 4 | Design system | `gerar-design-system` | `04_design_system/design_system.md`, `tokens.css` |
-| 5–6 | Construir e validar | `construir-site` | `05_site/` |
+| S | Setup: `grill-me`, entrevista, demais skills | `grilling` (via `grill-me`) + `auditar-skill` | `etapas/00_briefing/entrevista.md`, `prompts_imagens.md`, skills instaladas |
+| 0–1 | Briefing e referências | `referencias-briefing` | `etapas/00_briefing/briefing.md`, `etapas/00_briefing/referencias.md` |
+| 2 | Extrair HTML das referências | `extrair-html-referencia` | `etapas/01_extracao/codigo/<site>/resumo.md` |
+| 3 | Prints → wireframe SVG → especificação | `print-para-wireframe` | `etapas/04_wireframes/wireframe_<pagina>-desktop.svg` (+ `-mobile.svg`), `especificacao_componentes.md` |
+| 4 | Design system | `gerar-design-system` | `etapas/05_design_system/design_system.md`, `tokens.css` |
+| 5–6 | Construir e validar | `construir-site` | `site/` |
 
 ## Etapa S — Setup (sempre a primeira)
 
 Nenhuma outra etapa começa antes desta.
 
 1. **Instalar `grill-me` e `grilling`.** A `grill-me` é só um atalho para a `grilling` (que tem as instruções da entrevista). Se elas ainda não estiverem disponíveis, peça ao usuário para rodar `./scripts/setup-skills.sh inicial` (audita e instala o commit auditado). Peça ao usuário para reiniciar o Claude Code se a skill não aparecer.
-2. **Entrevista.** Acione a skill `grilling` (a `grill-me` não pode ser acionada pelo modelo, só pelo usuário com `/grill-me`) para fazer uma série de perguntas sobre o website ou landing page (tipo — site ou landing page —, objetivo, público, páginas e seções, conteúdo, stack, tom, restrições, animações/vídeos). Salve as respostas e o plano para codificar em `00_briefing/entrevista.md`.
-3. **Prompts de imagens.** Com base **só** no plano de `00_briefing/entrevista.md`, gere `00_briefing/prompts_imagens.md` usando o modelo `assets/prompts_imagens_template.md`:
+2. **Entrevista.** Acione a skill `grilling` (a `grill-me` não pode ser acionada pelo modelo, só pelo usuário com `/grill-me`) para fazer uma série de perguntas sobre o website ou landing page (tipo — site ou landing page —, objetivo, público, páginas e seções, conteúdo, stack, tom, restrições, animações/vídeos). Salve as respostas e o plano para codificar em `etapas/00_briefing/entrevista.md`.
+3. **Prompts de imagens.** Com base **só** no plano de `etapas/00_briefing/entrevista.md`, gere `etapas/00_briefing/prompts_imagens.md` usando o modelo `assets/prompts_imagens_template.md`:
    - uma **base comum** (tipo de site, público, tom, paleta e tipografia vindos do plano);
-   - **mockups** de cada página do plano, desktop e mobile, descrevendo as seções na ordem do plano — as imagens geradas vão para `01_referencias/prints/gerados/` e entram na `print-para-wireframe` como qualquer print (nunca são referência final);
+   - **mockups** de cada página do plano, desktop e mobile, descrevendo as seções na ordem do plano — as imagens geradas vão para `etapas/03_mockup/` e entram na `print-para-wireframe` como qualquer print (nunca são referência final);
    - **imagens de conteúdo** (hero, ilustrações, ícones) com onde entram e formato.
    Não invente o que o plano não diz: o que estiver "a definir" fica genérico. Nunca peça para gerar pessoas reais (ex.: equipe, alunos, egressos) — use fotos autorizadas ou `[FOTO: ...]`. Mostre os prompts ao usuário; ele gera as imagens na ferramenta de sua preferência.
 4. **Instalar as demais skills** com `./scripts/setup-skills.sh obrigatorias` (lista em `docs/skills-obrigatorias.md`). Se a entrevista indicar animações ou vídeos, também `./scripts/setup-skills.sh animacao`.
@@ -40,12 +40,17 @@ Nenhuma outra etapa começa antes desta.
 
 ```
 projeto-site/
-├── 00_briefing/briefing.md
-├── 01_referencias/referencias.md  (+ prints/)
-├── 02_html_referencias/<site>/
-├── 03_wireframes/
-├── 04_design_system/design_system.md, tokens.css
-└── 05_site/
+├── etapas/                    construção do site, na ordem do fluxo
+│   ├── 00_briefing/           briefing.md (aprovado) + prints/ enviados pelo usuário
+│   ├── 01_extracao/
+│   │   ├── codigo/<site>/     design extraído do HTML/CSS/JS das referências
+│   │   └── prints/            design extraído dos prints
+│   ├── 02_previa/             previa_site.md
+│   ├── 03_mockup/             prompt da imagem + imagem do site aprovada
+│   ├── 04_wireframes/         wireframes SVG de todas as páginas (aprovados)
+│   ├── 05_design_system/      design_system.md + design_system.html + tokens.css
+│   └── 06_construcao/         plano_construcao.md + relatorio_validacao.md
+└── site/                      só o código do site (pronto para Docker e deploy)
 ```
 
 Crie essa estrutura no início se ela não existir.

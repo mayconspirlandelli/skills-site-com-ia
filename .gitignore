@@ -5,5 +5,5 @@ __pycache__/
 .claude/settings.local.json
 .env
 # HTML baixado de referências pode ser grande; descomente se não quiser versionar
-# 02_html_referencias/**/limpo.html
-# 02_html_referencias/**/estilos.css
+# etapas/01_extracao/codigo/**/limpo.html
+# etapas/01_extracao/codigo/**/estilos.css

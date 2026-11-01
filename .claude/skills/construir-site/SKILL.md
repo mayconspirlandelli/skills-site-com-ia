@@ -8,10 +8,10 @@ description: Constrói o código de um site seção por seção seguindo design_
 ## Antes de escrever qualquer código
 
 Leia sempre, nesta ordem:
-1. `04_design_system/design_system.md` e `tokens.css`
-2. `03_wireframes/wireframe_<pagina>-desktop.svg` e `-mobile.svg` (leia os atributos `data-*` de cada `<g class="secao">`)
-3. `03_wireframes/especificacao_componentes.md`
-4. `00_briefing/briefing.md` (stack, conteúdo real)
+1. `etapas/05_design_system/design_system.md` e `tokens.css`
+2. `etapas/04_wireframes/wireframe_<pagina>-desktop.svg` e `-mobile.svg` (leia os atributos `data-*` de cada `<g class="secao">`)
+3. `etapas/04_wireframes/especificacao_componentes.md`
+4. `etapas/00_briefing/briefing.md` (stack, conteúdo real)
 
 Se o design system não existir, pare e avise: sem ele o site fica genérico e inconsistente. Ofereça rodar `gerar-design-system` rapidamente.
 

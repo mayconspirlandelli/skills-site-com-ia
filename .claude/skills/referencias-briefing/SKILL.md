@@ -20,11 +20,11 @@ Informações necessárias:
 - Tom da marca (sério, divertido, minimalista, premium, técnico)
 - Restrições (cores obrigatórias da marca, acessibilidade, prazo)
 
-Se `00_briefing/entrevista.md` existir (entrevista feita com a `grill-me` no setup), use-o como base e pergunte apenas o que ainda faltar.
+Se `etapas/00_briefing/entrevista.md` existir (entrevista feita com a `grill-me` no setup), use-o como base e pergunte apenas o que ainda faltar.
 
 Se o usuário não souber algo, registre como "a definir" e siga em frente — não trave o processo.
 
-Gere `00_briefing/briefing.md` usando o modelo em `assets/briefing_template.md`.
+Gere `etapas/00_briefing/briefing.md` usando o modelo em `assets/briefing_template.md`.
 
 ## Parte 2 — Referências
 
@@ -38,7 +38,7 @@ Boas práticas para orientar o usuário:
 - Indicar páginas específicas (`/precos`, `/sobre`), não só a home.
 - Pedir prints das seções que ele mais gosta — eles serão usados na etapa de wireframe.
 
-Gere `01_referencias/referencias.md` usando `assets/referencias_template.md`.
+Gere `etapas/00_briefing/referencias.md` usando `assets/referencias_template.md`.
 
 ## Validação antes de avançar
 

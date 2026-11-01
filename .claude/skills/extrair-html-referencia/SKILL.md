@@ -25,9 +25,9 @@ Instruções para passar ao usuário quando for preciso salvar a página:
 
 ```bash
 pip install beautifulsoup4 --break-system-packages  # se necessário
-python scripts/extrair_referencia.py --html pagina.html --css estilo.css --saida 02_html_referencias/<nome-site>
+python scripts/extrair_referencia.py --html pagina.html --css estilo.css --saida etapas/01_extracao/codigo/<nome-site>
 # ou
-python scripts/extrair_referencia.py --url https://exemplo.com --saida 02_html_referencias/<nome-site>
+python scripts/extrair_referencia.py --url https://exemplo.com --saida etapas/01_extracao/codigo/<nome-site>
 ```
 
 Use `--base-url` junto com `--html` quando o CSS estiver linkado com caminho relativo e houver rede.

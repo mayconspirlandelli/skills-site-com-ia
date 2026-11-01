@@ -10,10 +10,10 @@ O `design_system.md` é a **fonte única da verdade** visual do site. Todo códi
 ## Entradas
 
 Leia, se existirem:
-- `00_briefing/briefing.md` — tom da marca e cores obrigatórias.
-- `01_referencias/referencias.md` — o que aproveitar e evitar de cada referência.
-- `02_html_referencias/*/resumo.md` — valores reais (fontes, cores, tamanhos, breakpoints).
-- `03_wireframes/especificacao_componentes.md` — papéis tipográficos e espaçamentos usados.
+- `etapas/00_briefing/briefing.md` — tom da marca e cores obrigatórias.
+- `etapas/00_briefing/referencias.md` — o que aproveitar e evitar de cada referência.
+- `etapas/01_extracao/codigo/*/resumo.md` — valores reais (fontes, cores, tamanhos, breakpoints).
+- `etapas/04_wireframes/especificacao_componentes.md` — papéis tipográficos e espaçamentos usados.
 
 ## Como montar
 
@@ -46,9 +46,9 @@ Cole o resultado na tabela de contraste do design system. Se algum par de texto 
 ## Gerar os arquivos de tokens
 
 ```bash
-python scripts/gerar_tokens.py 04_design_system/design_system.md \
-  --saida 04_design_system/tokens.css \
-  --tailwind 04_design_system/tailwind.tokens.js   # só se a stack usar Tailwind
+python scripts/gerar_tokens.py etapas/05_design_system/design_system.md \
+  --saida etapas/05_design_system/tokens.css \
+  --tailwind etapas/05_design_system/tailwind.tokens.js   # só se a stack usar Tailwind
 ```
 
 Observação: variáveis CSS não funcionam dentro de `@media`. Os tokens `--bp-*` são documentação; nas media queries, use os valores literais.

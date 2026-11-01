@@ -2,7 +2,7 @@
 """Valida um wireframe SVG gerado pela skill print-para-wireframe.
 
 Uso:
-    python3 validar_wireframe.py 03_wireframes/wireframe_home-desktop.svg [outros.svg ...]
+    python3 validar_wireframe.py etapas/04_wireframes/wireframe_home-desktop.svg [outros.svg ...]
 
 Verifica:
   - XML válido com raiz <svg>, viewBox, data-pagina e data-viewport;
