@@ -1,82 +1,82 @@
 ---
 name: site-com-referencias
-description: Orquestra o processo completo de criar um site ou landing page com IA generativa em 8 passos — entrevista e briefing, extração do design das referências (código e prints), prévia, imagem do site, wireframes, design system e construção com validação — com aprovação do usuário entre as etapas. Use sempre que o usuário quiser criar, redesenhar ou "fazer um site parecido com" outros sites, mencionar sites de referência/inspiração, ou começar um projeto de site/landing page do zero, mesmo que não cite as etapas. Também use quando o usuário perguntar "em que etapa estou" ou "qual o próximo passo" num projeto de site.
+description: Orchestrates the complete process of building a website or landing page with generative AI in 8 steps — interview and briefing, design extraction from references (code and screenshots), preview, site image, wireframes, design system and build with validation — with user approval between steps. Use whenever the user wants to create, redesign or "make a site like" other sites, mentions reference/inspiration sites, or starts a website/landing page project from scratch, even if they don't name the steps. Also use when the user asks "which step am I on" or "what's the next step" in a website project.
 ---
 
-# Site com referências — orquestrador
+# Site from references — orchestrator
 
-Esta skill coordena um fluxo de 8 passos. Cada passo tem sua própria skill com as instruções detalhadas. O papel daqui é descobrir em que passo o projeto está, garantir que nenhum seja pulado, respeitar as aprovações do usuário e passar os arquivos certos de um passo para o outro.
+This skill coordinates an 8-step workflow. Each step has its own skill with the detailed instructions. The job here is to find out which step the project is on, make sure none is skipped, respect the user's approvals and pass the right files from one step to the next.
 
-## Por que esse fluxo existe
+## Why this workflow exists
 
-A IA gera sites melhores quando recebe **texto estruturado** (briefing, design extraído, wireframes em SVG, tokens) do que quando improvisa a partir de imagens. O fluxo primeiro entende o negócio, depois extrai o design das referências, deixa a criatividade acontecer numa imagem do site, fixa a estrutura em wireframes e o estilo no design system — e só então escreve código. As aprovações existem porque decisões tomadas cedo contaminam todo o resto: corrigir um briefing custa minutos, corrigir um site pronto custa horas.
+AI builds better sites when it receives **structured text** (briefing, extracted design, SVG wireframes, tokens) than when it improvises from images. The workflow first understands the business, then extracts the design from the references, lets creativity happen in a site image, pins down the structure in wireframes and the style in the design system — and only then writes code. The approvals exist because decisions made early contaminate everything else: fixing a briefing takes minutes, fixing a finished site takes hours.
 
-## Passos e skills
+## Steps and skills
 
-| # | Passo | Skill | Saída principal | Aprovação |
-|---|-------|-------|-----------------|-----------|
-| 1 | Entrevista e briefing | `entrevista-site` | `etapas/00_briefing/briefing.md` (+ `prints/`) | ✅ obrigatória |
-| 2 | Design extraído do código das referências | `extrair-html-referencia` | `etapas/01_extracao/codigo/<site>/resumo.md` | — |
-| 3 | Design extraído dos prints | `extrair-design-prints` | `etapas/01_extracao/prints/resumo.md` | — |
-| 4 | Prévia do site | `gerar-previa` | `etapas/02_previa/previa_site.md` | — |
-| 5 | Imagem do site | `gerar-mockup` | `etapas/03_mockup/prompt_imagem.md` + imagem (PNG ou SVG) | ✅ obrigatória |
-| 6 | Wireframes de todas as páginas | `gerar-wireframes` | `etapas/04_wireframes/*.svg` + `especificacao_componentes.md` | ✅ obrigatória |
-| 7 | Design system | `gerar-design-system` | `etapas/05_design_system/design_system.md`, `design_system.html`, `tokens.css` | ✅ obrigatória |
-| 8 | Plano, construção e validação | `construir-site` | `etapas/06_construcao/plano_construcao.md`, `site/`, `relatorio_validacao.md` | — |
+| # | Step | Skill | Main output | Approval |
+|---|------|-------|-------------|----------|
+| 1 | Interview and briefing | `entrevista-site` | `etapas/00_briefing/briefing.md` (+ `prints/`) | ✅ required |
+| 2 | Design extracted from the references' code | `extrair-html-referencia` | `etapas/01_extracao/codigo/<site>/resumo.md` | — |
+| 3 | Design extracted from screenshots | `extrair-design-prints` | `etapas/01_extracao/prints/resumo.md` | — |
+| 4 | Site preview | `gerar-previa` | `etapas/02_previa/previa_site.md` | — |
+| 5 | Site image | `gerar-mockup` | `etapas/03_mockup/prompt_imagem.md` + image (PNG or SVG) | ✅ required |
+| 6 | Wireframes of every page | `gerar-wireframes` | `etapas/04_wireframes/*.svg` + `especificacao_componentes.md` | ✅ required |
+| 7 | Design system | `gerar-design-system` | `etapas/05_design_system/design_system.md`, `design_system.html`, `tokens.css` | ✅ required |
+| 8 | Plan, build and validation | `construir-site` | `etapas/06_construcao/plano_construcao.md`, `site/`, `relatorio_validacao.md` | — |
 
-Passos sem referência de um tipo são pulados com registro: sem URLs, o passo 2 não se aplica; sem prints, o passo 3 não se aplica. Anote "não se aplica" em `etapas/aprovacoes.md` e siga.
+Steps without a reference of a given type are skipped and recorded: without URLs, step 2 doesn't apply; without screenshots, step 3 doesn't apply. Write "not applicable" in `etapas/aprovacoes.md` and move on.
 
-## Antes do passo 1 — setup das skills
+## Before step 1 — skills setup
 
-As skills de terceiros não vêm no template. Se `frontend-design`, `playwright-cli` e as demais obrigatórias (lista em `docs/skills-obrigatorias.md`) não estiverem disponíveis, peça ao usuário para rodar `./scripts/setup-skills.sh obrigatorias` e reiniciar o Claude Code. Se a entrevista indicar animações ou vídeos, depois também `./scripts/setup-skills.sh animacao`. Nunca instale skill de terceiros sem a auditoria do script.
+Third-party skills don't ship with the template. If `frontend-design`, `playwright-cli` and the other required ones (listed in `docs/skills-obrigatorias.md`) aren't available, ask the user to run `./scripts/setup-skills.sh obrigatorias` and restart Claude Code. If the interview points to animations or videos, afterwards also `./scripts/setup-skills.sh animacao`. Never install a third-party skill without the script's audit.
 
-## Aprovações
+## Approvals
 
-Os passos 1, 5, 6 e 7 só terminam quando o usuário aprova explicitamente o resultado.
+Steps 1, 5, 6 and 7 only finish when the user explicitly approves the result.
 
-1. Ao concluir um desses passos, mostre o que foi gerado (abra a imagem, os SVGs ou o HTML no navegador quando possível) e pergunte se aprova ou o que quer mudar.
-2. Ajuste e mostre de novo até ele aprovar. Não interprete silêncio ou "ok, e agora?" como aprovação — pergunte.
-3. Aprovado, registre em `etapas/aprovacoes.md`: passo, arquivos aprovados, data e observações. Só então avance.
-4. Se o usuário mudar algo de um passo já aprovado, atualize o arquivo de origem, marque a aprovação como "revisada" e confira se os passos seguintes precisam ser refeitos (ex.: mudar o briefing pode mudar a prévia e a imagem).
+1. When one of these steps is done, show what was generated (open the image, SVGs or HTML in the browser when possible) and ask whether they approve or what they want to change.
+2. Adjust and show it again until they approve. Don't interpret silence or "ok, what now?" as approval — ask.
+3. Once approved, record it in `etapas/aprovacoes.md`: step, approved files, date and notes. Only then move on.
+4. If the user changes something in an already-approved step, update the source file, mark the approval as "revised" and check whether the following steps need to be redone (e.g. changing the briefing may change the preview and the image).
 
-## Estrutura de pastas do projeto
+## Project folder structure
 
 ```
-projeto-site/
-├── etapas/                    construção do site, na ordem do fluxo
-│   ├── aprovacoes.md          registro das aprovações do usuário
-│   ├── auditorias/            relatórios de auditoria das skills + exceções revisadas
-│   ├── 00_briefing/           briefing.md (aprovado) + prints/ enviados pelo usuário
+site-project/
+├── etapas/                    site construction, in workflow order
+│   ├── aprovacoes.md          log of the user's approvals
+│   ├── auditorias/            skill audit reports + reviewed exceptions
+│   ├── 00_briefing/           briefing.md (approved) + prints/ (screenshots) sent by the user
 │   ├── 01_extracao/
-│   │   ├── codigo/<site>/     design extraído do HTML/CSS/JS das referências
-│   │   └── prints/            design extraído dos prints
+│   │   ├── codigo/<site>/     design extracted from the references' HTML/CSS/JS
+│   │   └── prints/            design extracted from screenshots
 │   ├── 02_previa/             previa_site.md
-│   ├── 03_mockup/             prompt da imagem + imagem do site aprovada
-│   ├── 04_wireframes/         wireframes SVG de todas as páginas (aprovados)
+│   ├── 03_mockup/             image prompt + approved site image
+│   ├── 04_wireframes/         SVG wireframes of every page (approved)
 │   ├── 05_design_system/      design_system.md + design_system.html + tokens.css
 │   └── 06_construcao/         plano_construcao.md + relatorio_validacao.md
-└── site/                      só o código do site (pronto para Docker e deploy)
+└── site/                      site code only (ready for Docker and deploy)
 ```
 
-Crie as pastas que faltarem.
+Create any missing folders.
 
-## Como conduzir
+## How to drive it
 
-1. **Descubra o passo atual.** Leia `etapas/aprovacoes.md` e veja quais saídas da tabela já existem. O passo atual é o primeiro cuja saída não existe — ou, nos passos com aprovação, cuja aprovação não está registrada.
-2. **Leia a skill do passo atual** e siga as instruções dela.
-3. **Ao terminar um passo sem aprovação** (2, 3, 4), mostre um resumo curto do que foi gerado e siga para o próximo, a menos que o usuário queira revisar.
-4. **Não pule passos.** Se o usuário pedir "já cria o site", explique em uma frase que sem briefing, wireframes e design system aprovados o resultado fica genérico, e ofereça fazer os passos de forma rápida. Se ele insistir, respeite, mas registre as suposições no `plano_construcao.md`.
-5. **Ajustes de estilo voltam para a fonte.** Uma cor que muda durante a construção muda no `design_system.md` (e em `tokens.css` pelo script), não só no CSS.
+1. **Find the current step.** Read `etapas/aprovacoes.md` and see which outputs in the table already exist. The current step is the first one whose output doesn't exist — or, for steps with approval, whose approval isn't recorded.
+2. **Read the current step's skill** and follow its instructions.
+3. **When a step without approval finishes** (2, 3, 4), show a short summary of what was generated and move on to the next one, unless the user wants to review.
+4. **Don't skip steps.** If the user says "just build the site", explain in one sentence that without an approved briefing, wireframes and design system the result is generic, and offer to do the steps quickly. If they insist, respect it, but record the assumptions in `plano_construcao.md`.
+5. **Style adjustments go back to the source.** A color that changes during the build changes in `design_system.md` (and in `tokens.css` via the script), not just in the CSS.
 
-## Ordem de confiança dos valores de design
+## Trust order for design values
 
-Quando fontes diferentes discordam (tamanho de fonte, cor, espaçamento):
+When different sources disagree (font size, color, spacing):
 
-1. Decisão do usuário registrada no briefing ou numa aprovação.
-2. Valor extraído do código das referências (passo 2) — é medido, não estimado.
-3. Valor estimado dos prints (passo 3) — sempre marcado como "(estimado)".
-4. Valor proposto pela imagem do site (passo 5) — direção criativa, não medida.
+1. User decision recorded in the briefing or in an approval.
+2. Value extracted from the references' code (step 2) — it's measured, not estimated.
+3. Value estimated from screenshots (step 3) — always marked "(estimated)".
+4. Value proposed by the site image (step 5) — creative direction, not measured.
 
-## Regra de conteúdo das referências
+## Reference content rule
 
-Referências servem para estrutura e estilo. Textos, imagens, logos e código proprietário dos sites de referência nunca vão para o site final — use o conteúdo do briefing ou placeholders claramente marcados (`[TEXTO: ...]`, `[FOTO: ...]`). Nunca gere por IA imagens de pessoas reais que o site apresenta como reais (equipe, clientes, alunos).
+References are for structure and style. Text, images, logos and proprietary code from the reference sites never go into the final site — use the briefing's content or clearly marked placeholders (`[TEXT: ...]`, `[PHOTO: ...]`). Never use AI to generate images of real people that the site presents as real (team, clients, students).

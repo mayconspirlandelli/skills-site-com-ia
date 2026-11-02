@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Audita e instala as skills de terceiros do template (lista em docs/skills-obrigatorias.md).
-# Cada skill passa por ./scripts/adicionar-skill.sh: baixa em pasta temporária, audita
-# e só instala o commit auditado em .claude/skills/. Uma entrada pode fixar o commit (3º campo).
+# Audits and installs the template's third-party skills (listed in docs/skills-obrigatorias.md).
+# Each skill goes through ./scripts/adicionar-skill.sh: downloads to a temporary folder, audits
+# and installs only the audited commit into .claude/skills/. An entry can pin the commit (3rd field).
 #
-# Uso:
-#   ./scripts/setup-skills.sh obrigatorias  # antes do passo 1: skills usadas pelo fluxo
-#   ./scripts/setup-skills.sh animacao      # só se o briefing indicar animações ou vídeos
-#   ./scripts/setup-skills.sh extras        # opcional: grill-me + grilling (entrevistas fora do fluxo)
+# Usage:
+#   ./scripts/setup-skills.sh obrigatorias  # before step 1: skills used by the workflow
+#   ./scripts/setup-skills.sh animacao      # only if the briefing calls for animations or videos
+#   ./scripts/setup-skills.sh extras        # optional: grill-me + grilling (interviews outside the workflow)
 set -euo pipefail
 
 OBRIGATORIAS=(
@@ -16,7 +16,7 @@ OBRIGATORIAS=(
   "https://github.com/leonxlnx/taste-skill design-taste-frontend"
   "https://github.com/microsoft/playwright-cli playwright-cli"
   "https://github.com/cathrynlavery/diagram-design diagram-design"
-  "https://github.com/pbakaus/impeccable .claude/skills/impeccable e89e3ada3e875a89ac2c5d33d11e65ebef6fe285"   # commit fixo: exceção revisada
+  "https://github.com/pbakaus/impeccable .claude/skills/impeccable e89e3ada3e875a89ac2c5d33d11e65ebef6fe285"   # fixed commit: reviewed exception
 )
 ANIMACAO=(
   "https://github.com/remotion-dev/skills remotion-best-practices"
@@ -24,7 +24,7 @@ ANIMACAO=(
 )
 EXTRAS=(
   "https://github.com/mattpocock/skills grill-me"
-  "https://github.com/mattpocock/skills grilling"   # a grill-me só chama a grilling
+  "https://github.com/mattpocock/skills grilling"   # grill-me just calls grilling
 )
 
 case "${1:-}" in
@@ -45,8 +45,8 @@ done
 
 echo
 if [ ${#FALHAS[@]} -eq 0 ]; then
-  echo "✅ Todas as skills instaladas. Registre-as na tabela do CLAUDE.md e reinicie o Claude Code."
+  echo "✅ All skills installed. Record them in the CLAUDE.md table and restart Claude Code."
 else
-  echo "⚠️  Não instaladas: ${FALHAS[*]} — veja os relatórios em etapas/auditorias/."
+  echo "⚠️  Not installed: ${FALHAS[*]} — see the reports in etapas/auditorias/."
   exit 1
 fi

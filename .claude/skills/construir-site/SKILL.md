@@ -1,71 +1,71 @@
 ---
 name: construir-site
-description: Planeja, constrói e valida o site — escreve o plano de construção a partir do briefing, wireframes e design system aprovados, gera o código em site/ seção por seção (só com tokens), prepara Docker e deploy conforme a hospedagem do briefing e, ao final, valida tudo contra o plano num relatório. Use no passo 8 do fluxo, depois do design system aprovado, ou quando o usuário pedir "agora cria o site", "monta a página", "cria o hero/header/footer", deploy, Dockerfile, ou revisar/validar o site gerado.
+description: Plans, builds and validates the site — writes the build plan from the approved briefing, wireframes and design system, generates the code in site/ section by section (tokens only), prepares Docker and deployment according to the briefing's hosting and, at the end, validates everything against the plan in a report. Use in step 8 of the workflow, after the design system is approved, or when the user asks to "now build the site", "put the page together", "create the hero/header/footer", deploy, Dockerfile, or to review/validate the generated site.
 ---
 
-# Plano, construção e validação (passo 8)
+# Plan, build and validation (step 8)
 
-Objetivo: transformar o que foi aprovado (briefing, wireframes, design system) num site funcionando em `site/`, pronto para a hospedagem escolhida — e provar, num relatório, que ele cumpre o plano.
+Goal: turn what was approved (briefing, wireframes, design system) into a working site in `site/`, ready for the chosen hosting — and prove, in a report, that it meets the plan.
 
-## Antes de começar
+## Before you start
 
-Confirme em `etapas/aprovacoes.md` que os passos 1, 6 e 7 estão aprovados. Se o design system não estiver, pare e avise: sem ele o site fica genérico e inconsistente. Leia, nesta ordem:
+Confirm in `etapas/aprovacoes.md` that steps 1, 6 and 7 are approved. If the design system isn't, stop and say so: without it the site comes out generic and inconsistent. Read, in this order:
 
-1. `etapas/05_design_system/design_system.md` e `tokens.css`
-2. `etapas/04_wireframes/wireframe_<pagina>-desktop.svg` e `-mobile.svg` (os atributos `data-*` de cada `<g class="secao">`) e `especificacao_componentes.md`
-3. `etapas/00_briefing/briefing.md` — stack, hospedagem, Docker, conteúdo, funcionalidades
-4. `etapas/02_previa/previa_site.md` e `etapas/03_mockup/prompt_imagem.md` (imagens de conteúdo)
+1. `etapas/05_design_system/design_system.md` and `tokens.css`
+2. `etapas/04_wireframes/wireframe_<page>-desktop.svg` and `-mobile.svg` (the `data-*` attributes of each `<g class="secao">`) and `especificacao_componentes.md`
+3. `etapas/00_briefing/briefing.md` — stack, hosting, Docker, content, features
+4. `etapas/02_previa/previa_site.md` and `etapas/03_mockup/prompt_imagem.md` (content images)
 
-## Fase 1 — Plano de construção
+## Phase 1 — Build plan
 
-Escreva `etapas/06_construcao/plano_construcao.md` a partir de `assets/plano_construcao_template.md`:
+Write `etapas/06_construcao/plano_construcao.md` from `assets/plano_construcao_template.md`:
 
-- **Stack e estrutura de pastas** de `site/` (veja `references/stacks.md`).
-- **Páginas e seções**: uma linha por seção de cada wireframe aprovado, com os componentes que ela usa. Essa lista vira o checklist da validação.
-- **Componentes reutilizáveis** (header, footer, botão, card...) e onde aparecem.
-- **Tokens**: como o design system entra no código (`tokens.css` importado; Tailwind estendido com `tailwind.tokens.js`).
-- **Conteúdo**: textos do briefing por seção e a lista de placeholders `[TEXTO: ...]` / `[FOTO: ...]` que o usuário vai preencher.
-- **Funcionalidades**: formulário, WhatsApp, analytics, PWA... e como cada uma será feita.
-- **Entrega**: hospedagem, Docker (sim/não), deploy automático — os arquivos que serão criados (veja `references/deploy.md`).
-- **Critérios de aceite**: o que a validação vai checar (seções, responsividade, acessibilidade, Lighthouse, build/Docker).
-- **Suposições** feitas por falta de informação.
+- **Stack and folder structure** of `site/` (see `references/stacks.md`).
+- **Pages and sections**: one line per section of each approved wireframe, with the components it uses. This list becomes the validation checklist.
+- **Reusable components** (header, footer, button, card...) and where they appear.
+- **Tokens**: how the design system enters the code (`tokens.css` imported; Tailwind extended with `tailwind.tokens.js`).
+- **Content**: briefing text per section and the list of `[TEXT: ...]` / `[PHOTO: ...]` placeholders the user will fill in.
+- **Features**: form, WhatsApp, analytics, PWA... and how each will be done.
+- **Delivery**: hosting, Docker (yes/no), automatic deploy — the files that will be created (see `references/deploy.md`).
+- **Acceptance criteria**: what validation will check (sections, responsiveness, accessibility, Lighthouse, build/Docker).
+- **Assumptions** made for lack of information.
 
-Mostre o plano ao usuário e confirme antes de escrever código. Mudanças de escopo depois disso entram no plano primeiro.
+Show the plan to the user and confirm before writing code. Scope changes after that go into the plan first.
 
-## Fase 2 — Construção em `site/`
+## Phase 2 — Build in `site/`
 
-### Regras de código
-- **Só tokens.** Cores, fontes, tamanhos, espaços, raios e sombras vêm de `tokens.css` (ou das classes Tailwind geradas a partir dele). Nada de hex ou px soltos. Valor novo → proponha acrescentar ao design system primeiro.
-- **Os tokens no site são gerados, não copiados à mão:** gere `tokens.css` (e `tailwind.tokens.js`) direto no caminho do site com `gerar_tokens.py --saida site/<caminho>/tokens.css`, e regenere sempre que o design system mudar.
-- **HTML semântico:** `header`, `nav`, `main`, `section` com `aria-labelledby`, `footer`; um único `h1` por página; títulos sem pular níveis.
-- **Mobile-first**, seguindo o `data-mobile` dos wireframes e a especificação.
-- **Acessibilidade:** foco visível, `alt` em imagens, labels em campos, área de toque ≥ 44px, `prefers-reduced-motion`.
-- **Conteúdo:** textos do briefing; onde faltar, placeholder marcado. Nunca textos, imagens ou logos das referências.
-- `site/` contém só o que vai para produção: nada de arquivos das etapas lá dentro.
+### Code rules
+- **Tokens only.** Colors, fonts, sizes, spacing, radii and shadows come from `tokens.css` (or the Tailwind classes generated from it). No loose hex or px. New value → propose adding it to the design system first.
+- **The site's tokens are generated, not copied by hand:** generate `tokens.css` (and `tailwind.tokens.js`) straight into the site path with `gerar_tokens.py --saida site/<path>/tokens.css`, and regenerate whenever the design system changes.
+- **Semantic HTML:** `header`, `nav`, `main`, `section` with `aria-labelledby`, `footer`; a single `h1` per page; headings without skipping levels.
+- **Mobile-first**, following the wireframes' `data-mobile` and the specification.
+- **Accessibility:** visible focus, `alt` on images, labels on inputs, touch target ≥ 44px, `prefers-reduced-motion`.
+- **Content:** briefing text; where it's missing, a marked placeholder. Never text, images or logos from the references.
+- `site/` contains only what goes to production: no step files inside it.
 
-### Ordem
-Gerar tudo de uma vez produz resultado genérico. Construa em partes, conferindo cada uma:
+### Order
+Generating everything at once produces a generic result. Build in parts, checking each one:
 
-1. **Base:** estrutura de pastas, tokens, estilos globais (reset, tipografia base, container).
-2. **Header e footer.**
-3. **Uma seção por vez**, na ordem do wireframe. Ao terminar cada seção: confira com o wireframe (elementos, quantidades, alinhamento) e com a especificação (tipografia, espaçamento, estados, celular); marque no plano; mostre ao usuário. Se ele preferir velocidade, agrupe 2–3 seções por rodada, mantendo a conferência.
-4. **Demais páginas**, reutilizando os componentes.
-5. **Funcionalidades** (formulário, integrações, PWA).
+1. **Base:** folder structure, tokens, global styles (reset, base typography, container).
+2. **Header and footer.**
+3. **One section at a time**, in wireframe order. When each section is done: check it against the wireframe (elements, quantities, alignment) and the specification (typography, spacing, states, mobile); tick it in the plan; show the user. If they prefer speed, group 2–3 sections per round, keeping the check.
+4. **Other pages**, reusing the components.
+5. **Features** (form, integrations, PWA).
 
-Ajuste de estilo pedido pelo usuário (cor, fonte, espaçamento) muda o `design_system.md` e os tokens são regenerados — não só o CSS.
+A style adjustment requested by the user (color, font, spacing) changes `design_system.md` and the tokens are regenerated — not just the CSS.
 
-## Fase 3 — Entrega
+## Phase 3 — Delivery
 
-Conforme o briefing, crie os arquivos de entrega descritos em `references/deploy.md`: `Dockerfile` + `nginx.conf` (se Docker), workflow do GitHub Pages, `netlify.toml`, `vercel.json`, `.dockerignore`. Teste o que puder testar localmente (`npm run build`; `docker build` se o Docker estiver instalado). Nunca faça deploy, push ou publicação sem o usuário pedir.
+According to the briefing, create the delivery files described in `references/deploy.md`: `Dockerfile` + `nginx.conf` (if Docker), GitHub Pages workflow, `netlify.toml`, `vercel.json`, `.dockerignore`. Test what can be tested locally (`npm run build`; `docker build` if Docker is installed). Never deploy, push or publish without the user asking.
 
-## Fase 4 — Validação contra o plano
+## Phase 4 — Validation against the plan
 
-Valide e escreva `etapas/06_construcao/relatorio_validacao.md` a partir de `assets/relatorio_validacao_template.md`:
+Validate and write `etapas/06_construcao/relatorio_validacao.md` from `assets/relatorio_validacao_template.md`:
 
-1. **Plano item a item:** cada seção de cada página — existe, na ordem, com as quantidades do wireframe? Cada funcionalidade e arquivo de entrega do plano foi feito?
-2. **Checklist** de `references/checklist_validacao.md` (design system, responsividade, acessibilidade, performance/SEO, conteúdo e direitos).
-3. **No navegador** (com `playwright-cli`): abra cada página em 375, 768 e 1280px, tire screenshots para `etapas/06_construcao/screenshots/`, confira rolagem horizontal, menu do celular, foco por teclado e erros no console.
-4. **Build e Docker:** o build passa? A imagem Docker sobe e serve o site?
-5. **Lighthouse:** rode se houver ferramenta; senão, explique ao usuário como rodar (DevTools → Lighthouse → Analyze).
+1. **Plan item by item:** each section of each page — does it exist, in order, with the wireframe's quantities? Was each feature and delivery file in the plan done?
+2. **Checklist** from `references/checklist_validacao.md` (design system, responsiveness, accessibility, performance/SEO, content and rights).
+3. **In the browser** (with `playwright-cli`): open each page at 375, 768 and 1280px, take screenshots into `etapas/06_construcao/screenshots/`, check horizontal scrolling, mobile menu, keyboard focus and console errors.
+4. **Build and Docker:** does the build pass? Does the Docker image start and serve the site?
+5. **Lighthouse:** run it if a tool is available; otherwise explain to the user how to run it (DevTools → Lighthouse → Analyze).
 
-O relatório diz, para cada item: ✅ passou, ❌ falhou (e o que foi corrigido ou o que falta) ou ⚠️ não verificado (e por quê). Seja honesto: item não testado não é item aprovado. Corrija as falhas que puder, revalide, e entregue ao usuário o resumo e a lista de pendências (placeholders a preencher, itens não verificados). Registre `concluído` em `etapas/aprovacoes.md`.
+For each item the report says: ✅ passed, ❌ failed (and what was fixed or what's missing) or ⚠️ not verified (and why). Be honest: an untested item is not an approved item. Fix the failures you can, revalidate, and give the user the summary and the list of open items (placeholders to fill, unverified items). Record `done` in `etapas/aprovacoes.md`.

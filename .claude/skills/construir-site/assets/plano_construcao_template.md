@@ -1,69 +1,69 @@
-# Plano de construção — <Projeto>
+# Build plan — <Project>
 
-> Baseado em: briefing (aprovado <data>) · wireframes (aprovados <data>) · design system (aprovado <data>)
-> Status: <rascunho | confirmado pelo usuário em <data>>
+> Based on: briefing (approved <date>) · wireframes (approved <date>) · design system (approved <date>)
+> Status: <draft | confirmed by the user on <date>>
 
-## Stack e estrutura
-- **Stack:** <ex.: Vite + Tailwind>
-- **Node / gerenciador:** <ex.: Node 20, npm>
+## Stack and structure
+- **Stack:** <e.g. Vite + Tailwind>
+- **Node / package manager:** <e.g. Node 20, npm>
 
 ```
 site/
-├── <estrutura de pastas da stack>
+├── <the stack's folder structure>
 └── ...
 ```
 
 ## Tokens
-- `tokens.css` gerado em `site/<caminho>/tokens.css` por `gerar_tokens.py` (regenerar quando o design system mudar)
-- <Tailwind: `tailwind.tokens.js` em `theme.extend`>
-- Fontes: <família — como carregar (Google Fonts com display=swap / self-host)>
+- `tokens.css` generated at `site/<path>/tokens.css` by `gerar_tokens.py` (regenerate when the design system changes)
+- <Tailwind: `tailwind.tokens.js` in `theme.extend`>
+- Fonts: <family — how to load (Google Fonts with display=swap / self-host)>
 
-## Páginas e seções (checklist da validação)
-| Página | # | Seção | Layout (wireframe) | Componentes | Feito |
-|--------|---|-------|--------------------|-------------|-------|
-| home | 1 | HEADER | 3 zonas | Logo, Menu, Botão | [ ] |
-| home | 2 | HERO | 2 colunas 50/50 | Botão primário/secundário | [ ] |
+## Pages and sections (validation checklist)
+| Page | # | Section | Layout (wireframe) | Components | Done |
+|------|---|---------|--------------------|------------|------|
+| home | 1 | HEADER | 3 zones | Logo, Menu, Button | [ ] |
+| home | 2 | HERO | 2 columns 50/50 | Primary/secondary button | [ ] |
 
-## Componentes reutilizáveis
-| Componente | Variantes / estados | Onde aparece |
-|------------|---------------------|--------------|
-| Botão | primário, secundário · hover, foco, desabilitado | header, hero, CTA |
+## Reusable components
+| Component | Variants / states | Where it appears |
+|-----------|-------------------|------------------|
+| Button | primary, secondary · hover, focus, disabled | header, hero, CTA |
 
-## Conteúdo
-| Página / seção | Conteúdo | Origem |
-|----------------|----------|--------|
-| home / hero | título, subtítulo | briefing |
+## Content
+| Page / section | Content | Source |
+|----------------|---------|--------|
+| home / hero | heading, subheading | briefing |
 
-**Placeholders a preencher pelo usuário**
-- [ ] `[TEXTO: ...]` — <onde>
-- [ ] `[FOTO: ...]` — <onde>
+**Placeholders for the user to fill in**
+- [ ] `[TEXT: ...]` — <where>
+- [ ] `[PHOTO: ...]` — <where>
 
-## Funcionalidades
-| Funcionalidade | Como será feita |
-|----------------|-----------------|
-| <Formulário de contato> | <ex.: Formspree / Netlify Forms / backend próprio> |
+## Features
+| Feature | How it will be done |
+|---------|---------------------|
+| <Contact form> | <e.g. Formspree / Netlify Forms / own backend> |
 
-## Entrega
-- **Hospedagem:** <...>
-- **Docker:** <não | sim — Nginx servindo o build estático>
-- **Arquivos:** <Dockerfile, nginx.conf, .dockerignore, .github/workflows/deploy.yml, netlify.toml...>
-- **Deploy automático:** <...>
+## Delivery
+- **Hosting:** <...>
+- **Docker:** <no | yes — Nginx serving the static build>
+- **Files:** <Dockerfile, nginx.conf, .dockerignore, .github/workflows/deploy.yml, netlify.toml...>
+- **Automatic deploy:** <...>
 
-## Critérios de aceite
-- Todas as seções acima existem, na ordem e com as quantidades dos wireframes
-- Só tokens no código; contraste AA
-- Sem rolagem horizontal em 375 / 768 / 1280px; menu do celular funcional
-- Build sem erros <e `docker build` + container servindo o site>
-- Lighthouse ≥ 90 em Performance, Acessibilidade, Boas práticas e SEO
+## Acceptance criteria
+- Every section above exists, in order and with the wireframes' quantities
+- Tokens only in the code; AA contrast
+- No horizontal scrolling at 375 / 768 / 1280px; working mobile menu
+- Build without errors <and `docker build` + container serving the site>
+- Lighthouse ≥ 90 in Performance, Accessibility, Best Practices and SEO
 
-## Ordem de construção
-1. Base (pastas, tokens, estilos globais)
-2. Header e footer
-3. Seções da Home, uma por vez
-4. Demais páginas
-5. Funcionalidades
-6. Arquivos de entrega
-7. Validação
+## Build order
+1. Base (folders, tokens, global styles)
+2. Header and footer
+3. Home sections, one at a time
+4. Other pages
+5. Features
+6. Delivery files
+7. Validation
 
-## Suposições
-- <ex.: textos da página Sobre ainda não fornecidos — placeholders>
+## Assumptions
+- <e.g. About page text not provided yet — placeholders>

@@ -1,30 +1,30 @@
 ---
 name: gerar-previa
-description: Compila o briefing aprovado e o design extraído das referências (código e prints) numa prévia do site em Markdown — páginas e seções na ordem, conteúdo de cada uma, direção visual (paleta e tipografia candidatas), o que vem de cada referência e decisões técnicas — que serve de base para o prompt da imagem e para os wireframes. Use no passo 4 do fluxo, depois das extrações, ou quando o usuário pedir uma "prévia", "visão geral" ou "resumo do site" antes de desenhar.
+description: Compiles the approved briefing and the design extracted from the references (code and screenshots) into a Markdown site preview — pages and sections in order, content of each, visual direction (candidate palette and typography), what comes from each reference and technical decisions — which is the basis for the image prompt and the wireframes. Use in step 4 of the workflow, after the extractions, or when the user asks for a "preview", "overview" or "site summary" before designing.
 ---
 
-# Prévia do site (passo 4)
+# Site preview (step 4)
 
-Objetivo: juntar tudo o que se sabe até aqui num único documento que descreve o site **antes** de desenhá-lo — `etapas/02_previa/previa_site.md`. A imagem do site (passo 5) e os wireframes (passo 6) leem este arquivo; ele é a ponte entre "o que o usuário quer" e "como vai ficar".
+Goal: bring everything known so far into a single document that describes the site **before** designing it — `etapas/02_previa/previa_site.md`. The site image (step 5) and the wireframes (step 6) read this file; it is the bridge between "what the user wants" and "how it will look".
 
-## Entradas
+## Inputs
 
-- `etapas/00_briefing/briefing.md` (aprovado) — a fonte principal.
-- `etapas/01_extracao/codigo/<site>/resumo.md` — design medido no código (passo 2), se houver.
-- `etapas/01_extracao/prints/resumo.md` — design estimado dos prints (passo 3), se houver.
+- `etapas/00_briefing/briefing.md` (approved) — the main source.
+- `etapas/01_extracao/codigo/<site>/resumo.md` — design measured in code (step 2), if any.
+- `etapas/01_extracao/prints/resumo.md` — design estimated from screenshots (step 3), if any.
 
-## Como compilar
+## How to compile
 
-1. **Estrutura vem do briefing.** As páginas e seções da prévia são as do briefing, na mesma ordem. Use as referências só para sugerir *como* cada seção se organiza (ex.: "hero em 2 colunas, como na Ref 1"), nunca para acrescentar seções que o usuário não pediu.
-2. **Conteúdo real ou placeholder.** Para cada seção, diga o que ela comunica e qual conteúdo do briefing entra. O que não existe vira `[TEXTO: ...]`, `[FOTO: ...]`, `[DEPOIMENTO: ...]`. Nunca use textos das referências.
-3. **Direção visual por consenso.** Monte a paleta e a tipografia candidatas cruzando as fontes, na ordem de confiança do projeto: decisão do usuário (cores da marca, gostos do briefing) > valor medido no código > valor estimado dos prints. Para cada cor e fonte, diga de onde veio. Descarte o que o usuário disse querer **evitar**.
-4. **Conflitos à vista.** Se as referências puxam para lados opostos (uma escura e densa, outra clara e arejada), não escolha em silêncio: liste o conflito e proponha uma decisão.
-5. **Decisões técnicas no fim.** Stack, hospedagem, Docker, responsivo/PWA, funcionalidades — copiadas do briefing, para o passo 8 ter tudo num lugar.
+1. **Structure comes from the briefing.** The preview's pages and sections are the briefing's, in the same order. Use the references only to suggest *how* each section is organized (e.g. "2-column hero, like Ref 1"), never to add sections the user didn't ask for.
+2. **Real content or placeholder.** For each section, say what it communicates and which briefing content goes in. Whatever doesn't exist becomes `[TEXT: ...]`, `[PHOTO: ...]`, `[TESTIMONIAL: ...]`. Never use text from the references.
+3. **Visual direction by consensus.** Build the candidate palette and typography by cross-checking the sources, in the project's trust order: user decision (brand colors, tastes in the briefing) > value measured in code > value estimated from screenshots. For each color and font, say where it came from. Discard what the user said they want to **avoid**.
+4. **Conflicts in plain sight.** If the references pull in opposite directions (one dark and dense, another light and airy), don't choose silently: list the conflict and propose a decision.
+5. **Technical decisions at the end.** Stack, hosting, Docker, responsive/PWA, features — copied from the briefing, so step 8 has everything in one place.
 
 Use `assets/previa_template.md`.
 
-## Fechar
+## Wrap up
 
-Mostre ao usuário o mapa de páginas e a direção visual (paleta + tipografia em uma tabela curta) e os conflitos encontrados, se houver. Este passo não exige aprovação formal, mas resolva os conflitos com o usuário antes de seguir — a imagem do site vai materializar essas escolhas. Registre `concluído` em `etapas/aprovacoes.md`.
+Show the user the page map and the visual direction (palette + typography in a short table) and any conflicts found. This step doesn't require formal approval, but resolve the conflicts with the user before moving on — the site image will materialize these choices. Record `done` in `etapas/aprovacoes.md`.
 
-Próximo passo: `gerar-mockup` (passo 5).
+Next step: `gerar-mockup` (step 5).

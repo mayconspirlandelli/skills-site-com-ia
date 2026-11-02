@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Gera tokens.css (e opcionalmente tailwind.tokens.js) a partir do design_system.md.
+Generates tokens.css (and optionally tailwind.tokens.js) from design_system.md.
 
-Lê toda linha de tabela Markdown cuja primeira célula seja um token no formato `--nome`
-e cuja segunda célula seja o valor.
+Reads every Markdown table row whose first cell is a token in the `--name` format
+and whose second cell is the value.
 
-Uso:
+Usage:
   python gerar_tokens.py design_system.md --saida tokens.css [--tailwind tailwind.tokens.js]
 """
 import argparse
@@ -18,7 +18,7 @@ LINHA = re.compile(r"^\|\s*`?(--[a-zA-Z][\w-]*)`?\s*\|\s*([^|]+?)\s*\|")
 
 
 def ler_tokens(md: str):
-    tokens, secao = [], "geral"
+    tokens, secao = [], "general"
     for linha in md.splitlines():
         if linha.startswith("## "):
             secao = linha[3:].strip()
@@ -29,12 +29,12 @@ def ler_tokens(md: str):
 
 
 def gerar_css(tokens):
-    out = ["/* Gerado a partir de design_system.md — não edite à mão. */", ":root {"]
+    out = ["/* Generated from design_system.md — do not edit by hand. */", ":root {"]
     secao_atual = None
     vistos = set()
     for secao, nome, valor in tokens:
         if nome in vistos:
-            print(f"[aviso] token duplicado ignorado: {nome}", file=sys.stderr)
+            print(f"[warning] duplicate token ignored: {nome}", file=sys.stderr)
             continue
         vistos.add(nome)
         if secao != secao_atual:
@@ -55,13 +55,13 @@ def gerar_tailwind(tokens):
                 valor = f"var({nome})"
                 tema[chave][nome[len(prefixo):]] = [valor] if chave == "fontFamily" else valor
     corpo = json.dumps({k: v for k, v in tema.items() if v}, indent=2, ensure_ascii=False)
-    return ("// Gerado a partir de design_system.md. Use em tailwind.config.js:\n"
+    return ("// Generated from design_system.md. Use in tailwind.config.js:\n"
             "// theme: { extend: require('./tailwind.tokens.js') }\n"
             f"module.exports = {corpo};\n")
 
 
 def main():
-    # Evita UnicodeEncodeError em consoles Windows (cp1252) ao imprimir acentos e símbolos.
+    # Avoids UnicodeEncodeError on Windows consoles (cp1252) when printing accents and symbols.
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser()
@@ -72,7 +72,7 @@ def main():
 
     tokens = ler_tokens(Path(a.design_system).read_text(encoding="utf-8"))
     if not tokens:
-        sys.exit("Nenhum token encontrado. As tabelas precisam ter a 1ª coluna no formato `--nome`.")
+        sys.exit("No tokens found. Tables need their 1st column in the `--name` format.")
     Path(a.saida).write_text(gerar_css(tokens), encoding="utf-8")
     print(f"OK → {a.saida} ({len(tokens)} tokens)")
     if a.tailwind:

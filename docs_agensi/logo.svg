@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#1F3D36"/>
+  <!-- browser window -->
+  <rect x="96" y="120" width="320" height="236" rx="22" fill="#FAF7F2"/>
+  <rect x="96" y="120" width="320" height="44" rx="22" fill="#E8E1D6"/>
+  <rect x="96" y="142" width="320" height="22" fill="#E8E1D6"/>
+  <circle cx="126" cy="142" r="7" fill="#D98E5F"/>
+  <circle cx="150" cy="142" r="7" fill="#C9BFB0"/>
+  <circle cx="174" cy="142" r="7" fill="#C9BFB0"/>
+  <!-- wireframe inside -->
+  <rect x="124" y="188" width="150" height="18" rx="6" fill="#1F3D36"/>
+  <rect x="124" y="216" width="110" height="12" rx="6" fill="#B9B0A3"/>
+  <rect x="124" y="252" width="84" height="30" rx="15" fill="#D98E5F"/>
+  <rect x="296" y="188" width="92" height="94" rx="12" fill="#C9D8D1"/>
+  <rect x="124" y="304" width="76" height="28" rx="8" fill="#E8E1D6"/>
+  <rect x="218" y="304" width="76" height="28" rx="8" fill="#E8E1D6"/>
+  <rect x="312" y="304" width="76" height="28" rx="8" fill="#E8E1D6"/>
+  <!-- 8 steps -->
+  <g fill="#FAF7F2">
+    <circle cx="116" cy="408" r="9"/><circle cx="156" cy="408" r="9"/>
+    <circle cx="196" cy="408" r="9"/><circle cx="236" cy="408" r="9"/>
+    <circle cx="276" cy="408" r="9"/><circle cx="316" cy="408" r="9"/>
+    <circle cx="356" cy="408" r="9"/>
+  </g>
+  <circle cx="396" cy="408" r="13" fill="#D98E5F"/>
+  <path d="M116 408 H396" stroke="#FAF7F2" stroke-width="3" opacity="0.5"/>
+</svg>

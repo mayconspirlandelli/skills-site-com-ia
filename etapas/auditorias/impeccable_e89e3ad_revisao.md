@@ -1,29 +1,29 @@
-# Revisão manual da skill `impeccable`
+# Manual review of the `impeccable` skill
 
-- **Repositório:** https://github.com/pbakaus/impeccable (≈99 mil estrelas, Apache-2.0)
-- **Caminho instalado:** `.claude/skills/impeccable` (o repositório traz uma variante por ferramenta; esta é a do Claude Code)
-- **Commit revisado:** `e89e3ad` (versão 4.8.0)
-- **Data:** 2026-11-02
-- **Veredito automático:** ⛔ BLOQUEAR · **Decisão do usuário:** ✅ incluir completa, como obrigatória, aceitando o binário
+- **Repository:** https://github.com/pbakaus/impeccable (≈99k stars, Apache-2.0)
+- **Installed path:** `.claude/skills/impeccable` (the repository ships one variant per tool; this is the Claude Code one)
+- **Reviewed commit:** `e89e3ad` (version 4.8.0)
+- **Date:** 2026-11-02
+- **Automatic verdict:** ⛔ BLOCK · **User decision:** ✅ include in full, as required, accepting the binary
 
-## O que a skill faz
+## What the skill does
 
-Guias de design de interface (crítica, auditoria, polimento, tipografia, cor, layout, movimento, acessibilidade, design system) e um motor de linha de comando com detector de problemas de design, modo "live" de variantes no navegador e hooks pós-edição.
+Interface design guides (critique, audit, polish, typography, color, layout, motion, accessibility, design system) and a command-line engine with a design-issue detector, a "live" in-browser variants mode and post-edit hooks.
 
-## Achados
+## Findings
 
-| Item | Avaliação |
-|------|-----------|
-| 8 alertas CRÍTICOS em `reference/*.md` | Falsos positivos: frases como "não diga ao usuário que precisa invocar `craft`", "não mostre os achados antes da síntese", "não desative a segurança do navegador". |
-| `modern-screenshot.umd.js` "ofuscado" | Biblioteca de terceiros minificada (captura de tela no navegador), não ofuscação maliciosa. |
-| Rede nos scripts JS | Só `http://localhost` (o servidor local da própria skill). Sem telemetria. |
-| **Binário do motor** | O launcher `scripts/impeccable` baixa da página de releases do GitHub um binário compilado (Go) para o sistema e o executa, guardando em cache. Há `engine-checksums.txt` no commit (o checksum fixa o binário), mas **binário não é auditável pela leitura**. |
-| **Hooks** | O comando `hooks` grava hooks pós-edição em `.claude/settings.local.json` (ou `~/.claude/settings.json`). Pede consentimento antes. |
-| **Modo live** | Injeta um script na página aberta no navegador e orienta a IA a seguir o campo `_instructions` devolvido pela própria ferramenta. Restrito a servidores locais. |
+| Item | Assessment |
+|------|------------|
+| 8 CRITICAL alerts in `reference/*.md` | False positives: phrases like "don't tell the user they need to invoke `craft`", "don't show the findings before the synthesis", "don't disable browser security". |
+| "Obfuscated" `modern-screenshot.umd.js` | Minified third-party library (in-browser screenshots), not malicious obfuscation. |
+| Network in JS scripts | Only `http://localhost` (the skill's own local server). No telemetry. |
+| **Engine binary** | The `scripts/impeccable` launcher downloads a compiled (Go) binary for the OS from the GitHub releases page and runs it, caching it. There is an `engine-checksums.txt` in the commit (the checksum pins the binary), but **a binary cannot be audited by reading**. |
+| **Hooks** | The `hooks` command writes post-edit hooks to `.claude/settings.local.json` (or `~/.claude/settings.json`). It asks for consent first. |
+| **Live mode** | Injects a script into the page open in the browser and tells the AI to follow the `_instructions` field returned by the tool itself. Restricted to local servers. |
 
-## Condições de uso no projeto
+## Conditions of use in the project
 
-1. Instalar sempre o commit fixo `e89e3ad` (o `setup-skills.sh` faz isso), o que também fixa a versão e o checksum do binário.
-2. Exceção registrada em `auditorias/excecoes.txt`; o script ainda pede confirmação na instalação.
-3. Ativar os hooks só quando o usuário pedir (o comando pede consentimento).
-4. Atualizar para outro commit exige nova revisão.
+1. Always install the fixed commit `e89e3ad` (`setup-skills.sh` does this), which also pins the binary's version and checksum.
+2. Exception recorded in `auditorias/excecoes.txt`; the script still asks for confirmation on install.
+3. Enable the hooks only when the user asks (the command asks for consent).
+4. Updating to another commit requires a new review.

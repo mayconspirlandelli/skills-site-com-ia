@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """
-Gera design_system.html — a versão visual do design_system.md — para o usuário revisar e aprovar.
+Generates design_system.html — the visual version of design_system.md — for the user to review and approve.
 
-Uso:
+Usage:
   python gerar_html.py etapas/05_design_system/design_system.md --saida etapas/05_design_system/design_system.html
 
-Lê os mesmos tokens que gerar_tokens.py (tabelas com a 1ª coluna `--nome`) e monta uma página
-autocontida com: paleta (amostras + contraste calculado), tipografia (famílias e escala renderizada),
-espaçamento, raios, sombras, layout/breakpoints e componentes de exemplo (botões, card, campo)
-desenhados só com os tokens. As regras e explicações continuam no design_system.md.
+Reads the same tokens as gerar_tokens.py (tables with the 1st column `--name`) and builds a
+self-contained page with: palette (swatches + computed contrast), typography (families and rendered scale),
+spacing, radii, shadows, layout/breakpoints and sample components (buttons, card, input)
+drawn only with the tokens. Rules and explanations stay in design_system.md.
 
-Não edite o HTML à mão: mude o design_system.md e rode de novo.
-Sem dependências externas.
+Don't edit the HTML by hand: change design_system.md and run it again.
+No external dependencies.
 """
 import argparse
 import html
@@ -52,11 +52,11 @@ def contraste(a, b):
 
 
 def selo(r):
-    return "AA" if r >= 4.5 else ("AA grande" if r >= 3 else "falha")
+    return "AA" if r >= 4.5 else ("AA large" if r >= 3 else "fail")
 
 
 def colunas_extras(md):
-    """Para cada token, as células depois do valor (uso, peso, altura de linha...)."""
+    """For each token, the cells after the value (use, weight, line height...)."""
     extras = {}
     for linha in md.splitlines():
         m = RE_LINHA.match(linha.strip())
@@ -77,24 +77,24 @@ def secao_cores(cores, extras, fundo, texto):
             pares = []
             if fundo and RE_HEX.match(fundo) and nome != "--color-bg":
                 r = contraste(valor, fundo)
-                pares.append(f"sobre o fundo {r:.2f}:1 · {selo(r)}")
+                pares.append(f"on background {r:.2f}:1 · {selo(r)}")
             r_branco = contraste(valor, "#ffffff")
             r_texto = contraste(valor, texto) if texto and RE_HEX.match(texto) else None
-            melhor = ("branco", r_branco) if r_texto is None or r_branco >= r_texto else ("texto", r_texto)
-            pares.append(f"texto {melhor[0]} sobre ela {melhor[1]:.2f}:1 · {selo(melhor[1])}")
+            melhor = ("white", r_branco) if r_texto is None or r_branco >= r_texto else ("text", r_texto)
+            pares.append(f"{melhor[0]} text on it {melhor[1]:.2f}:1 · {selo(melhor[1])}")
             medidas = "".join(f"<li>{esc(p)}</li>" for p in pares)
         cards.append(
             f'<figure class="cor"><div class="amostra" style="background:var({esc(nome)})"></div>'
             f'<figcaption><code>{esc(nome)}</code><span>{esc(valor)}</span>'
             f'<em>{esc(uso)}</em><ul>{medidas}</ul></figcaption></figure>'
         )
-    return '<section><h2>Paleta</h2><div class="grade-cores">' + "".join(cards) + "</div></section>"
+    return '<section><h2>Palette</h2><div class="grade-cores">' + "".join(cards) + "</div></section>"
 
 
 def secao_tipografia(fontes, textos, extras, tem_heading):
     if not fontes and not textos:
         return ""
-    partes = ['<section><h2>Tipografia</h2>']
+    partes = ['<section><h2>Typography</h2>']
     for nome, valor in fontes:
         uso = extras.get(nome, [""])[0] if extras.get(nome) else ""
         partes.append(
@@ -112,7 +112,7 @@ def secao_tipografia(fontes, textos, extras, tem_heading):
             partes.append(
                 f'<div class="linha-escala"><code>{esc(nome)}<br><small>{esc(valor)} · {esc(peso)} · {esc(altura)}</small></code>'
                 f'<p style="font-size:var({esc(nome)});font-weight:{esc(peso)};line-height:{esc(altura)};font-family:{familia}">'
-                f'{esc(uso or "Texto de exemplo")}</p></div>'
+                f'{esc(uso or "Sample text")}</p></div>'
             )
         partes.append("</div>")
     return "".join(partes) + "</section>"
@@ -125,7 +125,7 @@ def secao_espacos(espacos):
         f'<div class="linha-espaco"><code>{esc(n)}</code><span class="barra" style="width:var({esc(n)})"></span><small>{esc(v)}</small></div>'
         for n, v in espacos
     )
-    return f"<section><h2>Espaçamento</h2>{linhas}</section>"
+    return f"<section><h2>Spacing</h2>{linhas}</section>"
 
 
 def secao_formas(raios, sombras):
@@ -136,29 +136,29 @@ def secao_formas(raios, sombras):
     ) + "".join(
         f'<div class="forma sombra" style="box-shadow:var({esc(n)})"><code>{esc(n)}</code><small>{esc(v)}</small></div>' for n, v in sombras
     )
-    return f'<section><h2>Raios e sombras</h2><div class="grade-formas">{itens}</div></section>'
+    return f'<section><h2>Radii and shadows</h2><div class="grade-formas">{itens}</div></section>'
 
 
 def secao_layout(layout):
     if not layout:
         return ""
     linhas = "".join(f"<tr><td><code>{esc(n)}</code></td><td>{esc(v)}</td></tr>" for n, v in layout)
-    return f"<section><h2>Layout e breakpoints</h2><table>{linhas}</table></section>"
+    return f"<section><h2>Layout and breakpoints</h2><table>{linhas}</table></section>"
 
 
 def secao_componentes(nomes):
     if "--color-primary" not in nomes:
         return ""
-    return """<section><h2>Componentes de exemplo</h2>
-<p class="nota">Montados só com os tokens. A especificação completa (estados, variantes) está no design_system.md.</p>
+    return """<section><h2>Sample components</h2>
+<p class="nota">Built only with the tokens. The full specification (states, variants) is in design_system.md.</p>
 <div class="demo">
-  <button class="btn btn-prim">Botão primário</button>
-  <button class="btn btn-sec">Botão secundário</button>
-  <a href="#" class="link">Link de texto</a>
+  <button class="btn btn-prim">Primary button</button>
+  <button class="btn btn-sec">Secondary button</button>
+  <a href="#" class="link">Text link</a>
 </div>
 <div class="demo">
-  <article class="card"><h3>Título do card</h3><p>Texto de apoio do card, com duas linhas para mostrar a altura de linha do corpo de texto.</p></article>
-  <label class="campo">Campo de formulário<input type="text" placeholder="Digite aqui"></label>
+  <article class="card"><h3>Card title</h3><p>Card supporting text, with two lines to show the body text line height.</p></article>
+  <label class="campo">Form field<input type="text" placeholder="Type here"></label>
 </div>
 </section>"""
 
@@ -166,7 +166,7 @@ def secao_componentes(nomes):
 def main():
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-    ap = argparse.ArgumentParser(description="Gera design_system.html a partir do design_system.md")
+    ap = argparse.ArgumentParser(description="Generates design_system.html from design_system.md")
     ap.add_argument("design_system")
     ap.add_argument("--saida", default="design_system.html")
     a = ap.parse_args()
@@ -174,7 +174,7 @@ def main():
     md = Path(a.design_system).read_text(encoding="utf-8")
     tokens = ler_tokens(md)
     if not tokens:
-        sys.exit("Nenhum token encontrado. As tabelas precisam ter a 1ª coluna no formato `--nome`.")
+        sys.exit("No tokens found. Tables need their 1st column in the `--name` format.")
     vistos, unicos = set(), []
     for _, n, v in tokens:
         if n not in vistos:
@@ -196,7 +196,7 @@ def main():
     ])
 
     pagina = f"""<!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -240,7 +240,7 @@ table{{border-collapse:collapse}} td{{padding:6px 16px 6px 0;border-bottom:1px s
 <body>
 <main>
 <header class="topo"><h1>{esc(titulo)}</h1>
-<p>Versão visual gerada a partir de <code>design_system.md</code> — não edite este arquivo; mude o .md e gere de novo.</p></header>
+<p>Visual version generated from <code>design_system.md</code> — don't edit this file; change the .md and generate again.</p></header>
 {corpo}
 </main>
 </body>

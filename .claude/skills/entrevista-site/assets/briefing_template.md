@@ -1,88 +1,88 @@
-# Briefing — <Nome do projeto>
+# Briefing — <Project name>
 
-> Status: rascunho · aprovação registrada em `etapas/aprovacoes.md`
-> Entrevista feita em: <data>
+> Status: draft · approval recorded in `etapas/aprovacoes.md`
+> Interview done on: <date>
 
-## A. Negócio
-- **Domínio de negócio:** <o que a empresa/projeto faz>
-- **O que oferece / diferencial:** <...>
-- **Tipo de site:** <landing page | site institucional | portfólio | blog | catálogo>
-- **Site ou marca existente:** <link, logo, manual de marca — ou "não há">
-- **Concorrentes / projetos parecidos:** <...>
+## A. Business
+- **Business domain:** <what the company/project does>
+- **What it offers / differentiator:** <...>
+- **Type of site:** <landing page | company site | portfolio | blog | catalog>
+- **Existing site or brand:** <link, logo, brand guide — or "none">
+- **Competitors / similar projects:** <...>
 
-## B. Objetivo
-- **Ação principal do visitante (CTA):** <...>
-- **Objetivos secundários:** <...>
-- **Como medir:** <formulário enviado, cliques, analytics...>
+## B. Goal
+- **Visitor's main action (CTA):** <...>
+- **Secondary goals:** <...>
+- **How to measure:** <form submitted, clicks, analytics...>
 
-## C. Público
-- **Quem visita:** <perfil, o que procura, o que convence>
-- **Dispositivo principal:** <celular | computador | ambos>
-- **Idioma(s):** <pt-BR, ...>
-- **Acessibilidade:** <necessidades específicas — mínimo WCAG AA>
+## C. Audience
+- **Who visits:** <profile, what they look for, what convinces them>
+- **Main device:** <mobile | desktop | both>
+- **Language(s):** <en, ...>
+- **Accessibility:** <specific needs — minimum WCAG AA>
 
-## D. Páginas e conteúdo
-### <Página 1 — ex.: Home>
-- <Seção — ex.: Hero com proposta de valor e CTA>
+## D. Pages and content
+### <Page 1 — e.g. Home>
+- <Section — e.g. Hero with value proposition and CTA>
 - <...>
 
-### <Página 2>
+### <Page 2>
 - <...>
 
-**Conteúdo disponível**
-| Item | Status | Observação |
-|------|--------|------------|
-| Logo | ok / falta | |
-| Textos | | |
-| Fotos | | |
-| Depoimentos / números | | |
+**Available content**
+| Item | Status | Note |
+|------|--------|------|
+| Logo | ok / missing | |
+| Text | | |
+| Photos | | |
+| Testimonials / numbers | | |
 
-**Funcionalidades:** <formulário, WhatsApp, newsletter, mapa, analytics...>
-**Animações / vídeos:** <não | sim — quais>
+**Features:** <form, WhatsApp, newsletter, map, analytics...>
+**Animations / videos:** <no | yes — which>
 
-## E. Arquitetura
-- **Stack:** <ex.: Vite + Tailwind>
-- **CMS / edição pelo cliente:** <não | sim — qual>
-- **SEO:** <importante | não se aplica>
+## E. Architecture
+- **Stack:** <e.g. Vite + Tailwind>
+- **CMS / client editing:** <no | yes — which>
+- **SEO:** <important | not applicable>
 
-## F. Hospedagem e entrega
-- **Hospedagem:** <GitHub Pages | Netlify | Vercel | Cloudflare Pages | VPS | servidor próprio>
-- **Docker:** <não | sim — ex.: Nginx servindo os arquivos estáticos>
-- **Domínio:** <...>
-- **Deploy automático (CI/CD):** <não | sim — como>
+## F. Hosting and delivery
+- **Hosting:** <GitHub Pages | Netlify | Vercel | Cloudflare Pages | VPS | own server>
+- **Docker:** <no | yes — e.g. Nginx serving the static files>
+- **Domain:** <...>
+- **Automatic deploy (CI/CD):** <no | yes — how>
 
 ## G. Design
-- **Cores de que gosta:** <...>
-- **Cores a evitar:** <...>
-- **Cores obrigatórias da marca:** <hex — ou "não há">
-- **Tipografia:** <estilo e/ou fontes>
-- **Tom visual:** <minimalista, acolhedor, premium...>
-- **Modo escuro:** <não | sim>
-- **Celular:** <responsivo, mobile-first | responsivo + PWA instalável>
+- **Colors they like:** <...>
+- **Colors to avoid:** <...>
+- **Mandatory brand colors:** <hex — or "none">
+- **Typography:** <style and/or fonts>
+- **Visual tone:** <minimalist, warm, premium...>
+- **Dark mode:** <no | yes>
+- **Mobile:** <responsive, mobile-first | responsive + installable PWA>
 
-## H. Referências
+## H. References
 
-### Referência 1 — <nome>
+### Reference 1 — <name>
 - **URL:** https://...
-- **Páginas relevantes:** /, /precos
-- **Aproveitar:** <ex.: estrutura do hero, menu fixo>
-- **Evitar:** <ex.: paleta escura>
-- **Aspecto principal:** layout | tipografia | cores | espaçamento | conteúdo
+- **Relevant pages:** /, /pricing
+- **Take:** <e.g. hero structure, sticky menu>
+- **Avoid:** <e.g. dark palette>
+- **Main aspect:** layout | typography | colors | spacing | content
 
-### Referência 2 — <nome>
+### Reference 2 — <name>
 - ...
 
-**Prints recebidos** (em `etapas/00_briefing/prints/`)
-| Arquivo | De qual site | O que mostra / o que aproveitar |
-|---------|--------------|---------------------------------|
-| `ref1_hero.png` | Referência 1 | <...> |
+**Screenshots received** (in `etapas/00_briefing/prints/`)
+| File | From which site | What it shows / what to take |
+|------|-----------------|------------------------------|
+| `ref1_hero.png` | Reference 1 | <...> |
 
-**Mapa página → referência**
-| Página | Referência de layout | Referência de estilo |
-|--------|----------------------|----------------------|
+**Page → reference map**
+| Page | Layout reference | Style reference |
+|------|------------------|-----------------|
 | Home | Ref 1 | Ref 2 |
 
-## A definir
-| Pendência | Precisa estar resolvida até |
-|-----------|-----------------------------|
-| <ex.: textos da seção Sobre> | passo 8 (construção) |
+## To be defined
+| Open item | Must be resolved by |
+|-----------|---------------------|
+| <e.g. About section text> | step 8 (build) |

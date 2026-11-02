@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 """
-Extrai a paleta de cores de prints de tela de sites.
+Extracts the color palette from website screenshots.
 
-Uso:
+Usage:
   python extrair_cores.py etapas/00_briefing/prints --saida etapas/01_extracao/prints
   python extrair_cores.py ref1_hero.png ref2_footer.jpg --saida etapas/01_extracao/prints --cores 10
 
-Para cada imagem: dimensões e escala provável do print (1x ou retina), cores dominantes com
-percentual de área, cor de destaque provável (a mais saturada com área relevante) e contraste
-dos pares texto/fundo mais prováveis. No fim, uma paleta combinada de todos os prints.
+For each image: dimensions and likely screenshot scale (1x or retina), dominant colors with
+area percentage, likely accent color (the most saturated one with relevant area) and contrast
+of the most likely text/background pairs. At the end, a combined palette of all screenshots.
 
-Gera na pasta de saída: cores.md e cores.json.
-Todos os valores são ESTIMADOS: compressão JPEG, antialiasing e sombras alteram as cores.
+Writes to the output folder: cores.md and cores.json.
+All values are ESTIMATED: JPEG compression, antialiasing and shadows change the colors.
 
-Dependência: Pillow (pip install pillow)
+Dependency: Pillow (pip install pillow)
 """
 import argparse
 import colorsys
@@ -24,13 +24,13 @@ from pathlib import Path
 try:
     from PIL import Image
 except ImportError:
-    sys.exit("Instale a dependência: pip install pillow")
+    sys.exit("Install the dependency: pip install pillow")
 
 EXTENSOES = {".png", ".jpg", ".jpeg", ".webp", ".bmp", ".gif"}
-LADO_MAX = 480          # reduz a imagem antes de quantizar (velocidade; a paleta não muda)
-CORES_INTERNAS = 32     # quantiza com folga para não engolir cores pequenas (botões, links)
-DISTANCIA_FUSAO = 18    # cores mais próximas que isso (RGB euclidiano) viram uma só
-AREA_MIN_DESTAQUE = 0.8  # % mínima de área para uma cor saturada contar como destaque
+LADO_MAX = 480          # shrinks the image before quantizing (speed; the palette doesn't change)
+CORES_INTERNAS = 32     # quantizes loosely so small colors (buttons, links) aren't swallowed
+DISTANCIA_FUSAO = 18    # colors closer than this (Euclidean RGB) merge into one
+AREA_MIN_DESTAQUE = 0.8  # minimum area % for a saturated color to count as an accent
 
 
 def hex_de(rgb):
@@ -52,7 +52,7 @@ def contraste(a, b):
 
 def saturacao(rgb):
     _, l, s = colorsys.rgb_to_hls(*(c / 255 for c in rgb))
-    # Cores muito escuras ou muito claras não contam como saturadas (ex.: azul-marinho de fundo).
+    # Very dark or very light colors don't count as saturated (e.g. a navy background).
     return 0 if l < 0.15 or l > 0.92 else s
 
 
@@ -62,12 +62,12 @@ def distancia(a, b):
 
 def escala_provavel(largura):
     if largura >= 2400:
-        return "retina 2x de desktop (divida as medidas por 2)"
+        return "desktop retina 2x (divide measurements by 2)"
     if largura >= 1200:
-        return "desktop 1x (medidas em px direto)"
+        return "desktop 1x (measurements in px directly)"
     if largura >= 700:
-        return "celular 2x/3x ou tablet (confira pelo conteúdo; provavelmente divida por 2 ou 3)"
-    return "celular 1x (medidas em px direto)"
+        return "mobile 2x/3x or tablet (check by the content; probably divide by 2 or 3)"
+    return "mobile 1x (measurements in px directly)"
 
 
 def paleta(img):
@@ -96,20 +96,20 @@ def paleta(img):
 
 def analisar(cores):
     fundo = cores[0]
-    # Texto provável: a cor com maior contraste em relação ao fundo, entre as que têm área relevante.
+    # Likely text: the color with the highest contrast against the background, among those with relevant area.
     candidatas = [c for c in cores[1:] if c["area"] >= 0.5] or cores[1:]
     texto = max(candidatas, key=lambda c: contraste(c["rgb"], fundo["rgb"])) if candidatas else None
     saturadas = [c for c in cores[1:] if c["saturacao"] >= 0.35 and c["area"] >= AREA_MIN_DESTAQUE]
     destaque = max(saturadas, key=lambda c: (c["saturacao"], c["area"])) if saturadas else None
     pares = []
     if texto:
-        pares.append(("texto provável", texto, fundo))
+        pares.append(("likely text", texto, fundo))
     if destaque:
-        pares.append(("destaque sobre o fundo", destaque, fundo))
+        pares.append(("accent on background", destaque, fundo))
         branco_ou_texto = max((c for c in cores if c is not destaque),
                               key=lambda c: contraste(c["rgb"], destaque["rgb"]), default=None)
         if branco_ou_texto:
-            pares.append(("texto sobre o destaque (ex.: botão)", branco_ou_texto, destaque))
+            pares.append(("text on accent (e.g. button)", branco_ou_texto, destaque))
     return {
         "fundo": fundo["hex"],
         "texto": texto["hex"] if texto else None,
@@ -122,7 +122,7 @@ def analisar(cores):
 
 
 def resumir(cores, n):
-    """As n cores de maior área, mais qualquer cor saturada relevante que tenha ficado de fora."""
+    """The n colors with the largest area, plus any relevant saturated color left out."""
     topo = cores[:n]
     extras = [c for c in cores[n:] if c["saturacao"] >= 0.35 and c["area"] >= AREA_MIN_DESTAQUE / 2]
     return topo + extras
@@ -140,21 +140,21 @@ def listar_imagens(entradas):
 
 
 def selo_aa(razao):
-    return "✅" if razao >= 4.5 else ("só texto grande" if razao >= 3 else "❌")
+    return "✅" if razao >= 4.5 else ("large text only" if razao >= 3 else "❌")
 
 
 def main():
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-    ap = argparse.ArgumentParser(description="Extrai a paleta de cores de prints de sites")
-    ap.add_argument("entradas", nargs="+", help="imagens ou pastas com imagens")
-    ap.add_argument("--saida", required=True, help="pasta de saída")
-    ap.add_argument("--cores", type=int, default=8, help="cores listadas por imagem (padrão 8; cores saturadas relevantes sempre entram)")
+    ap = argparse.ArgumentParser(description="Extracts the color palette from website screenshots")
+    ap.add_argument("entradas", nargs="+", help="images or folders with images")
+    ap.add_argument("--saida", required=True, help="output folder")
+    ap.add_argument("--cores", type=int, default=8, help="colors listed per image (default 8; relevant saturated colors are always included)")
     a = ap.parse_args()
 
     imagens = listar_imagens(a.entradas)
     if not imagens:
-        sys.exit("Nenhuma imagem encontrada (png, jpg, jpeg, webp, bmp, gif).")
+        sys.exit("No images found (png, jpg, jpeg, webp, bmp, gif).")
 
     resultados, combinada = [], []
     for caminho in imagens:
@@ -163,7 +163,7 @@ def main():
                 largura, altura = img.size
                 cores = paleta(img)
         except OSError as e:
-            print(f"[aviso] não foi possível abrir {caminho}: {e}")
+            print(f"[warning] could not open {caminho}: {e}")
             continue
         resultados.append({
             "arquivo": caminho.name,
@@ -182,7 +182,7 @@ def main():
                 combinada.append({"rgb": c["rgb"], "area": c["area"], "prints": {caminho.name}})
 
     if not resultados:
-        sys.exit("Nenhuma imagem pôde ser analisada.")
+        sys.exit("No image could be analyzed.")
 
     n = len(resultados)
     combinada = sorted(combinada, key=lambda c: -c["area"])[:12]
@@ -194,25 +194,25 @@ def main():
     (saida / "cores.json").write_text(json.dumps({"prints": resultados, "combinada": paleta_comb},
                                                  ensure_ascii=False, indent=2), encoding="utf-8")
 
-    md = ["# Cores extraídas dos prints", "",
-          "Valores **estimados** a partir das imagens (compressão e antialiasing alteram as cores).", "",
-          "## Paleta combinada", "",
-          "| Cor | Área média | Saturação | Aparece em |", "|---|---|---|---|"]
-    md += [f"| `{c['hex']}` | {c['area_media']}% | {c['saturacao']} | {c['prints']} de {n} print(s) |" for c in paleta_comb]
+    md = ["# Colors extracted from screenshots", "",
+          "Values **estimated** from the images (compression and antialiasing change the colors).", "",
+          "## Combined palette", "",
+          "| Color | Average area | Saturation | Appears in |", "|---|---|---|---|"]
+    md += [f"| `{c['hex']}` | {c['area_media']}% | {c['saturacao']} | {c['prints']} of {n} screenshot(s) |" for c in paleta_comb]
     md.append("")
     for r in resultados:
         md += [f"## {r['arquivo']}", "",
-               f"- Tamanho: {r['largura']}×{r['altura']} px — escala provável: {r['escala']}",
-               f"- Fundo provável: `{r['fundo']}` · texto provável: `{r['texto']}` · destaque provável: `{r['destaque']}`", "",
-               "| Cor | Área | Saturação |", "|---|---|---|"]
+               f"- Size: {r['largura']}×{r['altura']} px — likely scale: {r['escala']}",
+               f"- Likely background: `{r['fundo']}` · likely text: `{r['texto']}` · likely accent: `{r['destaque']}`", "",
+               "| Color | Area | Saturation |", "|---|---|---|"]
         md += [f"| `{c['hex']}` | {c['area']}% | {c['saturacao']} |" for c in r["cores"]]
         if r["contrastes"]:
-            md += ["", "| Par | Frente | Fundo | Contraste | AA |", "|---|---|---|---|---|"]
+            md += ["", "| Pair | Foreground | Background | Contrast | AA |", "|---|---|---|---|---|"]
             md += [f"| {c['par']} | `{c['frente']}` | `{c['fundo']}` | {c['razao']}:1 | {selo_aa(c['razao'])} |"
                    for c in r["contrastes"]]
         md.append("")
     (saida / "cores.md").write_text("\n".join(md), encoding="utf-8")
-    print(f"OK → {saida / 'cores.md'} ({len(resultados)} print(s))")
+    print(f"OK → {saida / 'cores.md'} ({len(resultados)} screenshot(s))")
 
 
 if __name__ == "__main__":

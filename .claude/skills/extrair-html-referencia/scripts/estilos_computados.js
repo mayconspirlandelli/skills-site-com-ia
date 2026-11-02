@@ -1,8 +1,8 @@
-// Mede os estilos que o navegador realmente aplicou na página (depois do JavaScript do site rodar).
-// É uma única expressão: rode com
+// Measures the styles the browser actually applied to the page (after the site's JavaScript runs).
+// It's a single expression: run it with
 //   playwright-cli --raw eval "$(cat .claude/skills/extrair-html-referencia/scripts/estilos_computados.js)" > computados-desktop.json
-// e depois resuma com scripts/resumir_computados.py.
-// Só lê a página; não altera nada nem envia dados para lugar nenhum.
+// and then summarize with scripts/resumir_computados.py.
+// Only reads the page; changes nothing and sends no data anywhere.
 (() => {
   const LIMITE_ELEMENTOS = 5000;
   const visivel = (el) => {
@@ -43,23 +43,23 @@
     if (s.gap && s.gap !== 'normal' && s.gap !== '0px') somar(gaps, s.gap);
   }
 
-  // Fundo da página: body ou html, o que não for transparente.
+  // Page background: body or html, whichever isn't transparent.
   const fundoPagina = [document.body, document.documentElement]
     .map((el) => getComputedStyle(el).backgroundColor)
     .find((c) => !transparente(c)) || 'rgb(255, 255, 255)';
 
-  // Estilo de um elemento representativo de cada papel.
+  // Style of a representative element for each role.
   const papeis = {
     body: 'body',
     h1: 'h1', h2: 'h2', h3: 'h3', h4: 'h4',
-    paragrafo: 'main p, p',
+    paragraph: 'main p, p',
     link: 'main a, a',
-    botao: 'button, [role="button"], a[class*="btn"], a[class*="button"], .btn, .button',
-    campo: 'input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]), textarea, select',
+    button: 'button, [role="button"], a[class*="btn"], a[class*="button"], .btn, .button',
+    input: 'input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]), textarea, select',
     header: 'header',
     nav: 'nav',
     footer: 'footer',
-    secao: 'main section, section',
+    section: 'main section, section',
   };
   const estiloPapel = {};
   for (const [papel, seletor] of Object.entries(papeis)) {
@@ -75,7 +75,7 @@
     };
   }
 
-  // Variáveis CSS (:root) e breakpoints das folhas de estilo acessíveis.
+  // CSS variables (:root) and breakpoints from the accessible stylesheets.
   const variaveis = {}, breakpoints = {};
   let folhasBloqueadas = 0;
   const raiz = getComputedStyle(document.documentElement);

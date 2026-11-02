@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 """
-Extrai e limpa o HTML de um site de referência e gera um resumo estruturado.
+Extracts and cleans the HTML of a reference site and produces a structured summary.
 
-Uso:
-  python extrair_referencia.py --html pagina.html --saida etapas/01_extracao/codigo/site-a
-  python extrair_referencia.py --url https://exemplo.com --saida etapas/01_extracao/codigo/site-a
-  python extrair_referencia.py --html pagina.html --css estilo1.css estilo2.css --saida ...
+Usage:
+  python extrair_referencia.py --html page.html --saida etapas/01_extracao/codigo/site-a
+  python extrair_referencia.py --url https://example.com --saida etapas/01_extracao/codigo/site-a
+  python extrair_referencia.py --html page.html --css style1.css style2.css --saida ...
 
-Gera na pasta de saída:
-  limpo.html   HTML sem scripts, trackers, SVGs gigantes e comentários
-  estilos.css  todo o CSS encontrado (inline + arquivos), concatenado
-  resumo.md    estrutura de seções, títulos, fontes, cores, variáveis CSS, breakpoints
-  dados.json   os mesmos dados do resumo em formato estruturado
+Writes to the output folder:
+  limpo.html   HTML without scripts, trackers, huge SVGs and comments
+  estilos.css  all CSS found (inline + files), concatenated
+  resumo.md    section structure, headings, fonts, colors, CSS variables, breakpoints
+  dados.json   the same data as the summary in structured form
 
-Dependência: beautifulsoup4 (pip install beautifulsoup4)
+Dependency: beautifulsoup4 (pip install beautifulsoup4)
 """
 import argparse
 import json
@@ -27,7 +27,7 @@ from urllib.parse import urljoin
 try:
     from bs4 import BeautifulSoup, Comment
 except ImportError:
-    sys.exit("Instale a dependência: pip install beautifulsoup4")
+    sys.exit("Install the dependency: pip install beautifulsoup4")
 
 UA = {"User-Agent": "Mozilla/5.0 (referencia-design-extractor)"}
 
@@ -66,8 +66,8 @@ def coletar_css(soup, base_url, arquivos_css):
         if base_url and href:
             try:
                 partes.append(baixar(urljoin(base_url, href)))
-            except Exception as e:  # rede bloqueada, 404 etc.
-                print(f"[aviso] não baixou CSS {href}: {e}", file=sys.stderr)
+            except Exception as e:  # network blocked, 404 etc.
+                print(f"[warning] did not download CSS {href}: {e}", file=sys.stderr)
     for caminho in arquivos_css or []:
         partes.append(Path(caminho).read_text(encoding="utf-8", errors="replace"))
     return "\n".join(partes), fontes_links
@@ -119,9 +119,9 @@ def estrutura(soup):
                 headings = [] if tem_subsecoes else [f"{h.name.upper()}: {h.get_text(' ', strip=True)[:70]}"
                             for h in filho.find_all(re.compile("^h[1-6]$"))][:4]
                 contagem = {
-                    "botões": len(filho.find_all("button")) + len(filho.select("a[class*=btn], a[class*=button]")),
+                    "buttons": len(filho.find_all("button")) + len(filho.select("a[class*=btn], a[class*=button]")),
                     "links": len(filho.find_all("a")),
-                    "imagens": len(filho.find_all(["img", "picture", "video"])),
+                    "images": len(filho.find_all(["img", "picture", "video"])),
                     "forms": len(filho.find_all("form")),
                 }
                 resumo_cont = ", ".join(f"{k}={v}" for k, v in contagem.items() if v)
@@ -168,64 +168,64 @@ def analisar_css(css):
 
 
 def gerar_resumo(meta, secoes, css_info, fontes_links, avisos):
-    out = [f"# Resumo da referência: {meta['titulo'] or '(sem título)'}", ""]
+    out = [f"# Reference summary: {meta['titulo'] or '(untitled)'}", ""]
     if meta.get("origem"):
-        out.append(f"Origem: {meta['origem']}")
+        out.append(f"Source: {meta['origem']}")
     if meta.get("descricao"):
-        out.append(f"Descrição: {meta['descricao']}")
+        out.append(f"Description: {meta['descricao']}")
     out.append("")
     if avisos:
-        out.append("## ⚠️ Avisos")
+        out.append("## ⚠️ Warnings")
         out += [f"- {a}" for a in avisos] + [""]
-    out.append("## Estrutura de seções (ordem no HTML)")
-    out += (secoes or ["(nenhuma seção semântica encontrada)"]) + [""]
+    out.append("## Section structure (HTML order)")
+    out += (secoes or ["(no semantic section found)"]) + [""]
 
-    out.append("## Tipografia")
+    out.append("## Typography")
     if fontes_links:
-        out.append("Links de fontes: " + ", ".join(fontes_links))
+        out.append("Font links: " + ", ".join(fontes_links))
     if css_info["font_face"]:
         out.append("@font-face: " + ", ".join(css_info["font_face"]))
     out += [f"- font-family `{f}` ({n}x)" for f, n in css_info["font_family"]]
     if css_info["font_size"]:
-        out.append("Tamanhos mais usados: " + ", ".join(f"`{s}` ({n}x)" for s, n in css_info["font_size"]))
+        out.append("Most used sizes: " + ", ".join(f"`{s}` ({n}x)" for s, n in css_info["font_size"]))
     out.append("")
 
-    out.append("## Cores (por frequência)")
-    out += [f"- `{c}` ({n}x)" for c, n in css_info["cores"]] or ["(nenhuma)"]
+    out.append("## Colors (by frequency)")
+    out += [f"- `{c}` ({n}x)" for c, n in css_info["cores"]] or ["(none)"]
     out.append("")
 
-    out.append("## Variáveis CSS")
+    out.append("## CSS variables")
     vars_ = list(css_info["variaveis_css"].items())
-    out += [f"- `{k}: {v}`" for k, v in vars_[:60]] or ["(nenhuma)"]
+    out += [f"- `{k}: {v}`" for k, v in vars_[:60]] or ["(none)"]
     if len(vars_) > 60:
-        out.append(f"- … e mais {len(vars_) - 60} variáveis (ver dados.json)")
+        out.append(f"- … and {len(vars_) - 60} more variables (see dados.json)")
     out.append("")
 
     out.append("## Breakpoints")
-    out += [f"- `{b}` ({n}x)" for b, n in css_info["breakpoints"]] or ["(nenhum)"]
+    out += [f"- `{b}` ({n}x)" for b, n in css_info["breakpoints"]] or ["(none)"]
     out.append("")
-    out.append("## Bordas e sombras")
+    out.append("## Borders and shadows")
     out += [f"- radius `{r}` ({n}x)" for r, n in css_info["border_radius"]]
     out += [f"- shadow `{s}` ({n}x)" for s, n in css_info["box_shadow"]]
     return "\n".join(out) + "\n"
 
 
 def main():
-    # Evita UnicodeEncodeError em consoles Windows (cp1252) ao imprimir acentos e símbolos.
+    # Avoids UnicodeEncodeError on Windows consoles (cp1252) when printing accents and symbols.
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser()
     fonte = ap.add_mutually_exclusive_group(required=True)
-    fonte.add_argument("--html", help="arquivo HTML salvo localmente")
-    fonte.add_argument("--url", help="URL da página (requer acesso à rede)")
-    ap.add_argument("--css", nargs="*", help="arquivos CSS extras salvos localmente")
-    ap.add_argument("--base-url", help="URL original, para resolver CSS relativo ao usar --html")
-    ap.add_argument("--saida", required=True, help="pasta de saída")
+    fonte.add_argument("--html", help="locally saved HTML file")
+    fonte.add_argument("--url", help="page URL (requires network access)")
+    ap.add_argument("--css", nargs="*", help="extra locally saved CSS files")
+    ap.add_argument("--base-url", help="original URL, to resolve relative CSS when using --html")
+    ap.add_argument("--saida", required=True, help="output folder")
     a = ap.parse_args()
 
     base_url = a.url or a.base_url
     html = baixar(a.url) if a.url else Path(a.html).read_text(encoding="utf-8", errors="replace")
-    # HTML capturado com `playwright-cli --raw eval` pode vir como string JSON (entre aspas, com \n escapado).
+    # HTML captured with `playwright-cli --raw eval` may come as a JSON string (quoted, with escaped \n).
     if html.lstrip().startswith('"'):
         try:
             html = json.loads(html)
@@ -243,10 +243,10 @@ def main():
     soup = limpar(soup)
     texto_visivel = (soup.body.get_text(" ", strip=True) if soup.body else "")
     if len(texto_visivel) < 300:
-        avisos.append("Pouco texto no HTML: a página provavelmente é renderizada por JavaScript "
-                      "(React/Vue/Next). Salve o HTML renderizado pelo DevTools (Elements → Copy outerHTML).")
+        avisos.append("Little text in the HTML: the page is probably rendered by JavaScript "
+                      "(React/Vue/Next). Save the rendered HTML from DevTools (Elements → Copy outerHTML).")
     if not css.strip():
-        avisos.append("Nenhum CSS encontrado. Salve a página como 'completa' ou passe os arquivos com --css.")
+        avisos.append("No CSS found. Save the page as 'complete' or pass the files with --css.")
 
     secoes = estrutura(soup)
     css_info = analisar_css(css)
@@ -261,9 +261,9 @@ def main():
         ensure_ascii=False, indent=2), encoding="utf-8")
 
     tam_orig, tam_limpo = len(html), len(str(soup))
-    print(f"OK → {saida}/  (HTML {tam_orig:,} → {tam_limpo:,} caracteres)")
+    print(f"OK → {saida}/  (HTML {tam_orig:,} → {tam_limpo:,} characters)")
     for av in avisos:
-        print("[aviso]", av)
+        print("[warning]", av)
 
 
 if __name__ == "__main__":

@@ -1,40 +1,40 @@
-# Checklist de validação
+# Validation checklist
 
-## Fidelidade
-- [ ] Todas as seções do wireframe existem, na ordem certa
-- [ ] Quantidades batem (cards, itens de menu, logos)
-- [ ] Tipografia e espaçamentos seguem a especificação
+## Fidelity
+- [ ] Every wireframe section exists, in the right order
+- [ ] Quantities match (cards, menu items, logos)
+- [ ] Typography and spacing follow the specification
 
 ## Design system
-- [ ] Nenhuma cor, tamanho ou espaçamento fora dos tokens (buscar `#`, `px` e `rgb(` soltos no CSS/JSX)
-- [ ] Botões com todos os estados (hover, foco, ativo, desabilitado)
-- [ ] Máximo de 2 famílias tipográficas carregadas
+- [ ] No color, size or spacing outside the tokens (search for loose `#`, `px` and `rgb(` in CSS/JSX)
+- [ ] Buttons with every state (hover, focus, active, disabled)
+- [ ] At most 2 font families loaded
 
-## Responsividade
+## Responsiveness
 - [ ] 375px (mobile), 768px (tablet), 1280px (desktop)
-- [ ] Sem rolagem horizontal
-- [ ] Menu mobile funcional
-- [ ] Imagens não estouram o container
+- [ ] No horizontal scrolling
+- [ ] Working mobile menu
+- [ ] Images don't overflow the container
 
-## Acessibilidade
-- [ ] Um único `h1` por página; hierarquia de títulos correta
-- [ ] Contraste AA (usar `contraste.py` da skill gerar-design-system)
-- [ ] Foco visível e navegação completa por teclado
-- [ ] `alt` em imagens; labels em inputs
-- [ ] `prefers-reduced-motion` respeitado
+## Accessibility
+- [ ] A single `h1` per page; correct heading hierarchy
+- [ ] AA contrast (use `contraste.py` from the gerar-design-system skill)
+- [ ] Visible focus and full keyboard navigation
+- [ ] `alt` on images; labels on inputs
+- [ ] `prefers-reduced-motion` respected
 
-## Performance e SEO
-- [ ] `title` e `meta description` por página
-- [ ] Imagens com `width`/`height` e `loading="lazy"` abaixo da dobra
-- [ ] Fontes com `display=swap`
-- [ ] Lighthouse: Performance, Acessibilidade, Boas práticas e SEO ≥ 90
+## Performance and SEO
+- [ ] `title` and `meta description` per page
+- [ ] Images with `width`/`height` and `loading="lazy"` below the fold
+- [ ] Fonts with `display=swap`
+- [ ] Lighthouse: Performance, Accessibility, Best Practices and SEO ≥ 90
 
-## Entrega
-- [ ] Build sem erros (`npm run build`, se houver build)
-- [ ] Docker (se pedido): `docker build` passa e o container serve o site em `http://localhost:8080`
-- [ ] Arquivos de deploy da hospedagem escolhida criados (workflow, `netlify.toml`...)
-- [ ] `site/` contém só arquivos de produção (nada de `etapas/`, `.env` ou rascunhos)
+## Delivery
+- [ ] Build without errors (`npm run build`, if there is a build)
+- [ ] Docker (if requested): `docker build` passes and the container serves the site at `http://localhost:8080`
+- [ ] Deploy files for the chosen hosting created (workflow, `netlify.toml`...)
+- [ ] `site/` contains only production files (no `etapas/`, `.env` or drafts)
 
-## Conteúdo e direitos
-- [ ] Nenhum texto, imagem, logo ou código copiado das referências
-- [ ] Placeholders `[TEXTO: ...]` listados para o usuário preencher
+## Content and rights
+- [ ] No text, image, logo or code copied from the references
+- [ ] `[TEXT: ...]` placeholders listed for the user to fill in

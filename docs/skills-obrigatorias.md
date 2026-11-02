@@ -1,93 +1,93 @@
-# Skills de terceiros do template
+# Template third-party skills
 
-Todo projeto de website criado a partir deste template deve ter as skills abaixo instaladas,
-além das skills do fluxo que já vêm em `.claude/skills/`.
+Every website project created from this template must have the skills below installed,
+in addition to the workflow skills already shipped in `.claude/skills/`.
 
-As skills de terceiros **não vêm versionadas no template** (cada uma tem a licença e o autor
-dela). Elas são auditadas e instaladas no seu projeto pelo script `scripts/setup-skills.sh`.
+Third-party skills are **not versioned in the template** (each one has its own license and
+author). They are audited and installed in your project by the `scripts/setup-skills.sh` script.
 
-## Quando instalar
+## When to install
 
-1. **Antes do passo 1:** as **obrigatórias** (`./scripts/setup-skills.sh obrigatorias`). Elas são usadas
-   pelo fluxo: `playwright-cli` mede as referências (passo 2) e valida o site (passo 8);
-   `frontend-design` e `design-taste-frontend` dão direção ao mockup (passo 5) e à construção.
-2. **Depois da entrevista:** as de **animação**, só se o briefing pedir animações ou vídeos.
-3. **Opcional:** os **extras**, para entrevistas fora do fluxo.
+1. **Before step 1:** the **required** ones (`./scripts/setup-skills.sh obrigatorias`). They are used
+   by the workflow: `playwright-cli` measures the references (step 2) and validates the site (step 8);
+   `frontend-design` and `design-taste-frontend` give direction to the mockup (step 5) and the build.
+2. **After the interview:** the **animation** ones, only if the briefing asks for animations or videos.
+3. **Optional:** the **extras**, for interviews outside the workflow.
 
-A entrevista do fluxo é a skill `entrevista-site`, que já vem no template — não depende de skill de terceiros.
+The workflow's interview is the `entrevista-site` skill, which ships with the template — it does not depend on third-party skills.
 
 ## Skills
 
-### Obrigatórias (antes do passo 1)
+### Required (before step 1)
 
-| Skill | Repositório | Para que serve |
-|-------|-------------|----------------|
-| `frontend-design` | [anthropics/skills](https://github.com/anthropics/skills) | Direção visual intencional, tipografia e escolhas que não parecem template |
-| `web-design-guidelines` | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | Revisão da interface contra boas práticas de web design e acessibilidade |
-| `image-to-code` | [leonxlnx/taste-skill](https://github.com/leonxlnx/taste-skill) | Converte imagens/prints em código de interface |
-| `design-taste-frontend` | [leonxlnx/taste-skill](https://github.com/leonxlnx/taste-skill) | Evita interfaces genéricas em landing pages, portfólios e redesigns |
-| `playwright-cli` | [microsoft/playwright-cli](https://github.com/microsoft/playwright-cli) | Abre o site no navegador para testar, tirar prints e validar responsividade |
-| `diagram-design` | [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design) | Diagramas (fluxograma, sequência, arquitetura, jornada do usuário, sitemap/árvore...) em HTML/SVG/PNG, com importação de Mermaid, draw.io e Excalidraw. A auditoria dá **REVISAR** por falsos positivos (frases como "do not silently ship" e exemplos de OAuth/git); revisada manualmente no commit `0cf73c3` |
-| `impeccable` | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | Direção de design, crítica, auditoria e polimento de interfaces, com detector de problemas de design. **Instalada no commit fixo `e89e3ad`** (exceção revisada): baixa e executa um binário do GitHub verificado por checksum e pode instalar hooks no Claude Code (pede consentimento). Revisão em `etapas/auditorias/impeccable_e89e3ad_revisao.md` |
+| Skill | Repository | What it's for |
+|-------|------------|---------------|
+| `frontend-design` | [anthropics/skills](https://github.com/anthropics/skills) | Intentional visual direction, typography and choices that don't look like a template |
+| `web-design-guidelines` | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | Reviews the interface against web design and accessibility best practices |
+| `image-to-code` | [leonxlnx/taste-skill](https://github.com/leonxlnx/taste-skill) | Converts images/screenshots into interface code |
+| `design-taste-frontend` | [leonxlnx/taste-skill](https://github.com/leonxlnx/taste-skill) | Avoids generic interfaces in landing pages, portfolios and redesigns |
+| `playwright-cli` | [microsoft/playwright-cli](https://github.com/microsoft/playwright-cli) | Opens the site in the browser to test, take screenshots and validate responsiveness |
+| `diagram-design` | [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design) | Diagrams (flowchart, sequence, architecture, user journey, sitemap/tree...) in HTML/SVG/PNG, with Mermaid, draw.io and Excalidraw import. The audit gives **REVIEW** due to false positives (phrases like "do not silently ship" and OAuth/git examples); manually reviewed at commit `0cf73c3` |
+| `impeccable` | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | Design direction, critique, audit and polish of interfaces, with a design-issue detector. **Installed at fixed commit `e89e3ad`** (reviewed exception): downloads and runs a binary from GitHub verified by checksum and can install hooks in Claude Code (asks for consent). Review in `etapas/auditorias/impeccable_e89e3ad_revisao.md` |
 
-### Animação e vídeo (só quando precisar)
+### Animation and video (only when needed)
 
-| Skill | Repositório | Quando instalar |
-|-------|-------------|-----------------|
-| `remotion-best-practices` | [remotion-dev/skills](https://github.com/remotion-dev/skills) | Animações ou vídeos gerados com código (Remotion/React) |
-| `motion-design` | [lottiefiles/motion-design-skill](https://github.com/lottiefiles/motion-design-skill) | Animações / motion design (ex.: Lottie) |
+| Skill | Repository | When to install |
+|-------|------------|-----------------|
+| `remotion-best-practices` | [remotion-dev/skills](https://github.com/remotion-dev/skills) | Animations or videos generated with code (Remotion/React) |
+| `motion-design` | [lottiefiles/motion-design-skill](https://github.com/lottiefiles/motion-design-skill) | Animations / motion design (e.g. Lottie) |
 
-### Extras (opcional)
+### Extras (optional)
 
-| Skill | Repositório | Para que serve |
-|-------|-------------|----------------|
-| `grill-me` | [mattpocock/skills](https://github.com/mattpocock/skills) | Atalho `/grill-me` para uma entrevista em rodadas sobre qualquer plano (só o usuário aciona) |
-| `grilling` | [mattpocock/skills](https://github.com/mattpocock/skills) | A entrevista em si, chamada pela `grill-me` |
+| Skill | Repository | What it's for |
+|-------|------------|---------------|
+| `grill-me` | [mattpocock/skills](https://github.com/mattpocock/skills) | `/grill-me` shortcut for a round-based interview about any plan (user-triggered only) |
+| `grilling` | [mattpocock/skills](https://github.com/mattpocock/skills) | The interview itself, called by `grill-me` |
 
-## Como instalar
+## How to install
 
-> 🔒 Regra do projeto (ver `CLAUDE.md`): **nenhuma skill de terceiros é instalada sem auditoria.**
+> 🔒 Project rule (see `CLAUDE.md`): **no third-party skill is installed without an audit.**
 
-### Opção 1 — Script de setup (recomendado)
+### Option 1 — Setup script (recommended)
 
-Na raiz do projeto (no Windows, use o Git Bash):
+From the project root (on Windows, use Git Bash):
 
 ```bash
 ./scripts/setup-skills.sh obrigatorias
 ```
 
-Só se o briefing pedir animações ou vídeos:
+Only if the briefing asks for animations or videos:
 
 ```bash
 ./scripts/setup-skills.sh animacao
 ```
 
-Opcional:
+Optional:
 
 ```bash
 ./scripts/setup-skills.sh extras
 ```
 
-Para cada skill, o script baixa o repositório numa pasta temporária, roda a auditoria
-(`auditar-skill`), salva o relatório em `etapas/auditorias/` e só instala em `.claude/skills/`
-**o mesmo commit que foi auditado**:
+For each skill, the script downloads the repository to a temporary folder, runs the audit
+(`auditar-skill`), saves the report in `etapas/auditorias/` and installs into `.claude/skills/`
+**only the same commit that was audited**:
 
-- ✅ **OK** — instala.
-- ⚠️ **REVISAR** — mostra os achados e pede sua confirmação.
-- ⛔ **BLOQUEAR** — não instala.
+- ✅ **OK** — installs.
+- ⚠️ **REVIEW** — shows the findings and asks for your confirmation.
+- ⛔ **BLOCK** — does not install.
 
-**Commit fixo e exceções revisadas.** Uma entrada do `setup-skills.sh` pode fixar o commit
-(3º campo), para instalar sempre a versão revisada. Skills com REVISAR/BLOQUEAR aprovadas pelo
-usuário depois de revisão manual ficam em `etapas/auditorias/excecoes.txt` (`<skill> <commit> <motivo>`):
-para esse commit exato, o script mostra os achados e pede confirmação em vez de bloquear.
-Para instalar uma skill avulsa num commit: `./scripts/adicionar-skill.sh <url> <caminho> --commit <sha-completo>`.
+**Fixed commit and reviewed exceptions.** An entry in `setup-skills.sh` can pin the commit
+(3rd field), so the reviewed version is always installed. Skills with REVIEW/BLOCK approved by the
+user after manual review are listed in `etapas/auditorias/excecoes.txt` (`<skill> <commit> <reason>`):
+for that exact commit, the script shows the findings and asks for confirmation instead of blocking.
+To install a single skill at a given commit: `./scripts/adicionar-skill.sh <url> <path> --commit <full-sha>`.
 
-Requisitos: Git, Python 3 e Bash (no Windows, Git Bash).
+Requirements: Git, Python 3 and Bash (on Windows, Git Bash).
 
-### Opção 2 — `npx skills add` (manual)
+### Option 2 — `npx skills add` (manual)
 
-O `npx` instala direto, **sem auditar**, e sempre a versão mais nova do repositório. Use só
-depois de auditar a skill pedindo ao Claude Code: *"audite a skill `<nome>` do repositório `<url>`"*.
+`npx` installs directly, **without auditing**, and always the latest version of the repository. Use it only
+after auditing the skill by asking Claude Code: *"audit the `<name>` skill from repository `<url>`"*.
 
 ```bash
 npx skills add https://github.com/anthropics/skills --skill frontend-design
@@ -116,7 +116,7 @@ npx skills add https://github.com/cathrynlavery/diagram-design --skill diagram-d
 ```bash
 npx skills add https://github.com/pbakaus/impeccable --skill impeccable
 ```
-(o `npx` instala a versão mais nova, não o commit revisado — prefira o script)
+(`npx` installs the latest version, not the reviewed commit — prefer the script)
 
 ```bash
 npx skills add https://github.com/remotion-dev/skills --skill remotion-best-practices
@@ -134,23 +134,23 @@ npx skills add https://github.com/mattpocock/skills --skill grill-me
 npx skills add https://github.com/mattpocock/skills --skill grilling
 ```
 
-Requisito: Node.js.
+Requirement: Node.js.
 
-## Depois de instalar
+## After installing
 
-Preencha a tabela **Skills adicionais deste projeto** no `CLAUDE.md` com a origem, o commit
-auditado e o veredito de cada skill, e reinicie o Claude Code. Atualizou alguma skill? Audite de novo.
+Fill in the **Additional skills in this project** table in `CLAUDE.md` with the source, audited
+commit and verdict of each skill, and restart Claude Code. Updated a skill? Audit it again.
 
 ## Checklist
 
-- [ ] `frontend-design` — auditada e instalada
-- [ ] `web-design-guidelines` — auditada e instalada
-- [ ] `image-to-code` — auditada e instalada
-- [ ] `design-taste-frontend` — auditada e instalada
-- [ ] `playwright-cli` — auditada e instalada
-- [ ] `diagram-design` — auditada e instalada
-- [ ] `impeccable` — instalada no commit revisado `e89e3ad`
-- [ ] `remotion-best-practices` — só se houver animações/vídeos
-- [ ] `motion-design` — só se houver animações/motion design
-- [ ] `grill-me` e `grilling` — opcionais
-- [ ] Tabela do `CLAUDE.md` preenchida
+- [ ] `frontend-design` — audited and installed
+- [ ] `web-design-guidelines` — audited and installed
+- [ ] `image-to-code` — audited and installed
+- [ ] `design-taste-frontend` — audited and installed
+- [ ] `playwright-cli` — audited and installed
+- [ ] `diagram-design` — audited and installed
+- [ ] `impeccable` — installed at reviewed commit `e89e3ad`
+- [ ] `remotion-best-practices` — only if there are animations/videos
+- [ ] `motion-design` — only if there are animations/motion design
+- [ ] `grill-me` and `grilling` — optional
+- [ ] `CLAUDE.md` table filled in

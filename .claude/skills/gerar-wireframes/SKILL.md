@@ -1,75 +1,75 @@
 ---
 name: gerar-wireframes
-description: Gera os wireframes em SVG (tons de cinza, seções anotadas) de todas as páginas e subpáginas do site, em desktop e celular, a partir da imagem do site aprovada e da prévia, com página de revisão para aprovação do usuário; depois detalha a especificação de componentes. Use no passo 6 do fluxo, depois da imagem do site aprovada, ou quando o usuário pedir wireframe, esqueleto de página, estrutura de layout, mapa das páginas ou especificação de componentes.
+description: Generates SVG wireframes (grayscale, annotated sections) of every page and subpage of the site, desktop and mobile, from the approved site image and the preview, with a review page for the user's approval; then details the component specification. Use in step 6 of the workflow, after the site image is approved, or when the user asks for a wireframe, page skeleton, layout structure, page map or component specification.
 ---
 
-# Wireframes de todas as páginas (passo 6)
+# Wireframes of every page (step 6)
 
-Objetivo: fixar a **estrutura** de cada página do site num wireframe SVG aprovado pelo usuário. A imagem do site (passo 5) mostrou como o site pode ficar; o wireframe diz exatamente quais seções existem, em que ordem, com que layout e quantos elementos — e o que muda no celular. Na construção (passo 8), o wireframe aprovado é a referência oficial de estrutura.
+Goal: pin down the **structure** of each page of the site in an SVG wireframe approved by the user. The site image (step 5) showed how the site could look; the wireframe says exactly which sections exist, in what order, with what layout and how many elements — and what changes on mobile. During the build (step 8), the approved wireframe is the official structure reference.
 
-Os wireframes são em tons de cinza de propósito: separar estrutura de estilo evita discutir cor quando o assunto é layout. O estilo é decidido no passo 7.
+The wireframes are grayscale on purpose: separating structure from style avoids discussing color when the subject is layout. Style is decided in step 7.
 
-## Entradas
+## Inputs
 
-- `etapas/02_previa/previa_site.md` — **todas** as páginas e seções, em ordem. É a lista do que desenhar.
-- `etapas/03_mockup/` — a imagem aprovada (`mockup_home-desktop`, `-mobile`): proporções, organização das seções, ritmo.
-- `etapas/00_briefing/briefing.md` — para conferir funcionalidades e conteúdo.
+- `etapas/02_previa/previa_site.md` — **all** pages and sections, in order. It's the list of what to draw.
+- `etapas/03_mockup/` — the approved image (`mockup_home-desktop`, `-mobile`): proportions, section organization, rhythm.
+- `etapas/00_briefing/briefing.md` — to cross-check features and content.
 
-## Parte 1 — Wireframes SVG
+## Part 1 — SVG wireframes
 
-Desenhe **uma página por vez**, de cima para baixo, seção por seção, copiando `assets/wireframe_template.svg` e seguindo as convenções dele.
+Draw **one page at a time**, top to bottom, section by section, copying `assets/wireframe_template.svg` and following its conventions.
 
-### Quais páginas
-- Toda página da prévia (Home e subpáginas: Sobre, Serviços, Contato, páginas de detalhe...).
-- Páginas que não têm imagem aprovada seguem a linguagem da Home: o mesmo header e footer, a mesma lógica de grid e espaçamento. Componentes que se repetem (header, footer, card, CTA) têm a mesma estrutura em todas as páginas.
-- Landing page: uma página só, mas com todas as seções.
+### Which pages
+- Every page in the preview (Home and subpages: About, Services, Contact, detail pages...).
+- Pages without an approved image follow the Home's language: the same header and footer, the same grid and spacing logic. Repeated components (header, footer, card, CTA) have the same structure on every page.
+- Landing page: a single page, but with all its sections.
 
-### Arquivos
-- `etapas/04_wireframes/wireframe_<pagina>-desktop.svg` — obrigatório, largura 1440 (`viewBox="0 0 1440 <altura>"`).
-- `etapas/04_wireframes/wireframe_<pagina>-mobile.svg` — obrigatório para a Home; recomendado para as demais. Sem imagem de celular, deduza do desktop e marque suposições com `(incerto)`.
-- `<pagina>` em minúsculas, sem acento: `home`, `sobre`, `servicos`, `contato`.
+### Files
+- `etapas/04_wireframes/wireframe_<page>-desktop.svg` — required, width 1440 (`viewBox="0 0 1440 <height>"`).
+- `etapas/04_wireframes/wireframe_<page>-mobile.svg` — required for the Home; recommended for the others. Without a mobile image, infer from desktop and mark assumptions with `(uncertain)`.
+- `<page>` in lowercase, without accents: `home`, `about`, `services`, `contact`.
 
-### Convenções do SVG
-- Raiz `<svg>` com `viewBox`, `data-pagina` e `data-viewport` (`desktop` | `mobile`), seguida de `<title>` e `<desc>`.
-- **Cada seção é um `<g class="secao">`** posicionado com `transform="translate(0,y)"`, com:
-  - `id` em minúsculas (`header`, `hero`, `servicos`...);
-  - `data-nome` — nome da seção em caixa alta (HEADER, HERO, SERVIÇOS, DEPOIMENTOS, CTA, FOOTER...);
-  - `data-layout` — `1 coluna`, `2 colunas 60/40`, `grid 3 colunas`...;
+### SVG conventions
+- Root `<svg>` with `viewBox`, `data-pagina` and `data-viewport` (`desktop` | `mobile`), followed by `<title>` and `<desc>`.
+- **Each section is a `<g class="secao">`** positioned with `transform="translate(0,y)"`, with:
+  - `id` in lowercase (`header`, `hero`, `services`...);
+  - `data-nome` — section name in uppercase (HEADER, HERO, SERVICES, TESTIMONIALS, CTA, FOOTER...);
+  - `data-layout` — `1 column`, `2 columns 60/40`, `3-column grid`...;
   - `data-largura` (`container` | `full-width`), `data-altura` (`auto`, `~100vh`...);
-  - `data-elementos` — lista com quantidades (`H1, parágrafo, 2 botões, imagem`);
-  - `data-mobile` — o que muda no celular (obrigatório no arquivo desktop);
-  - opcionais: `data-alinhamento`, `data-comportamento` (ex.: `fixo no topo`).
-- Rótulo da seção em `<text class="rotulo-sec">`.
-- Elementos com as classes do `<style>` do modelo: `texto` (barras no lugar de textos, uma por linha), `bloco` (logo, cards), `botao-prim` / `botao`, `imagem` + duas linhas `imagem-x`.
-- Cada elemento tem um `<text class="rotulo">` com a **função** do conteúdo (`H1 (proposta de valor, ~8 palavras, 2 linhas)`).
-- Grupos repetidos levam `data-elemento` e `data-quantidade` (`<g data-elemento="card" data-quantidade="3">`).
-- Proporções e posições como na imagem aprovada, dentro do container de 1200px (margens de 120px no desktop).
-- Na dúvida, `(incerto)` num `<text class="nota">` — não invente.
+  - `data-elementos` — list with quantities (`H1, paragraph, 2 buttons, image`);
+  - `data-mobile` — what changes on mobile (required in the desktop file);
+  - optional: `data-alinhamento`, `data-comportamento` (e.g. `sticky at the top`).
+- Section label in `<text class="rotulo-sec">`.
+- Elements use the classes from the template's `<style>`: `texto` (bars instead of text, one per line), `bloco` (logo, cards), `botao-prim` / `botao`, `imagem` + two `imagem-x` lines.
+- Each element has a `<text class="rotulo">` with the content's **function** (`H1 (value proposition, ~8 words, 2 lines)`).
+- Repeated groups carry `data-elemento` and `data-quantidade` (`<g data-elemento="card" data-quantidade="3">`).
+- Proportions and positions as in the approved image, inside the 1200px container (120px margins on desktop).
+- When in doubt, `(uncertain)` in a `<text class="nota">` — don't invent.
 
-### Proibido no SVG
-`<image>`, `<script>`, `<foreignObject>`, links externos, imagens em base64, cores, fontes, logos ou textos copiados das referências.
+### Forbidden in the SVG
+`<image>`, `<script>`, `<foreignObject>`, external links, base64 images, colors, fonts, logos or text copied from the references.
 
-### Validar e montar a revisão
+### Validate and build the review
 ```bash
 S=.claude/skills/gerar-wireframes/scripts
 python $S/validar_wireframe.py etapas/04_wireframes/*.svg
 python $S/gerar_indice.py etapas/04_wireframes
 ```
-Corrija tudo o que o validador marcar com ✗. O `gerar_indice.py` cria `etapas/04_wireframes/index.html` com todas as páginas lado a lado (desktop e celular) e a lista de seções de cada uma.
+Fix everything the validator flags with ✗. `gerar_indice.py` creates `etapas/04_wireframes/index.html` with every page side by side (desktop and mobile) and the list of sections of each.
 
-### Aprovação
-Abra o `index.html` no navegador e peça ao usuário para revisar **todas** as páginas. Ajuste até ele aprovar explicitamente; regenere o índice a cada rodada. Aprovado, registre em `etapas/aprovacoes.md` (passo 6, páginas aprovadas, `aprovado`, data). Mudar estrutura depois da construção é caro — vale a pausa.
+### Approval
+Open `index.html` in the browser and ask the user to review **every** page. Adjust until they explicitly approve; regenerate the index each round. Once approved, record it in `etapas/aprovacoes.md` (step 6, approved pages, `approved`, date). Changing structure after the build is expensive — the pause is worth it.
 
-## Parte 2 — Especificação de componentes
+## Part 2 — Component specification
 
-Com os wireframes aprovados, detalhe cada componente em `etapas/04_wireframes/especificacao_componentes.md` (modelo em `assets/especificacao_template.md`):
+With the wireframes approved, detail each component in `etapas/04_wireframes/especificacao_componentes.md` (template in `assets/especificacao_template.md`):
 
-- **Tipografia:** papel (H1, H2, body...), peso, alinhamento.
-- **Posição e alinhamento** dentro da seção.
-- **Espaçamentos** internos e entre elementos, por papel (`espaço-lg`).
-- **Responsividade:** o que muda em tablet e celular.
-- **Estados:** hover, foco, ativo, desabilitado.
+- **Typography:** role (H1, H2, body...), weight, alignment.
+- **Position and alignment** within the section.
+- **Spacing** inside and between elements, by role (`space-lg`).
+- **Responsiveness:** what changes on tablet and mobile.
+- **States:** hover, focus, active, disabled.
 
-O design system ainda não existe neste ponto: referencie os valores por papel e registre os valores candidatos numa tabela no fim, com a origem, na ordem de confiança do projeto — decisão do usuário > medido no código (passo 2) > estimado dos prints (passo 3) > lido da imagem aprovada (passo 5). O passo 7 transforma esses papéis em tokens.
+The design system doesn't exist yet at this point: reference values by role and record the candidate values in a table at the end, with their source, in the project's trust order — user decision > measured in code (step 2) > estimated from screenshots (step 3) > read from the approved image (step 5). Step 7 turns these roles into tokens.
 
-Próximo passo: `gerar-design-system` (passo 7).
+Next step: `gerar-design-system` (step 7).

@@ -4,6 +4,9 @@ __pycache__/
 *.pyc
 .claude/settings.local.json
 .env
-# HTML baixado de referências pode ser grande; descomente se não quiser versionar
+# HTML downloaded from references can be large; uncomment if you do not want to version it
 # etapas/01_extracao/codigo/**/limpo.html
 # etapas/01_extracao/codigo/**/estilos.css
+
+# Built ZIP for agensi.io (regenerate with docs_agensi/montar_zip.py)
+docs_agensi/dist/

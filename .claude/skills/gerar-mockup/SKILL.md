@@ -1,44 +1,44 @@
 ---
 name: gerar-mockup
-description: Gera a imagem do site a partir da prévia — escreve o prompt e desenha um mockup colorido em SVG — e itera com o usuário até a aprovação. Use no passo 5 do fluxo, depois da prévia, ou quando o usuário pedir "a imagem do site", "um mockup", "como o site vai ficar" ou um prompt para gerar a imagem do site.
+description: Generates the site image from the preview — writes the prompt and draws a full-color SVG mockup — and iterates with the user until approval. Use in step 5 of the workflow, after the preview, or when the user asks for "the site image", "a mockup", "how the site will look" or a prompt to generate the site image.
 ---
 
-# Imagem do site (passo 5)
+# Site image (step 5)
 
-Objetivo: ver o site antes de construí-lo. Este é o passo **criativo** do fluxo: a prévia diz o que o site tem; a imagem propõe como ele fica. Sai daqui uma imagem **aprovada pelo usuário**, que guia os wireframes (passo 6) e o design system (passo 7).
+Goal: see the site before building it. This is the workflow's **creative** step: the preview says what the site has; the image proposes how it looks. What comes out is an image **approved by the user**, which guides the wireframes (step 6) and the design system (step 7).
 
-Entrada: `etapas/02_previa/previa_site.md` (e o briefing para conferir).
-Saída: `etapas/03_mockup/` com `prompt_imagem.md` e as imagens.
+Input: `etapas/02_previa/previa_site.md` (and the briefing to cross-check).
+Output: `etapas/03_mockup/` with `prompt_imagem.md` and the images.
 
-## 1. Escrever o prompt
+## 1. Write the prompt
 
-Gere `etapas/03_mockup/prompt_imagem.md` a partir de `assets/prompt_imagem_template.md`:
+Generate `etapas/03_mockup/prompt_imagem.md` from `assets/prompt_imagem_template.md`:
 
-- **Base comum:** tipo de site, domínio, público, objetivo, clima, paleta (hex), tipografia, formas — tudo da prévia.
-- **Um prompt por tela:** Home desktop e Home celular são o mínimo. Outras páginas só se forem muito diferentes da Home (ex.: página de preços).
-- **Seções na ordem da prévia**, cada uma com a organização sugerida e o conteúdo real curto (título, texto do botão).
-- **Imagens de conteúdo** (hero, ilustrações, ícones) numa tabela à parte — servem ao passo 8.
+- **Common base:** type of site, domain, audience, goal, mood, palette (hex), typography, shapes — all from the preview.
+- **One prompt per screen:** Home desktop and Home mobile are the minimum. Other pages only if they are very different from the Home (e.g. a pricing page).
+- **Sections in the preview's order**, each with the suggested organization and short real content (heading, button text).
+- **Content images** (hero, illustrations, icons) in a separate table — they serve step 8.
 
-Não invente o que a prévia não diz. Nunca peça pessoas reais que o site apresenta como reais.
+Don't invent what the preview doesn't say. Never ask for real people that the site presents as real.
 
-## 2. Desenhar o mockup em SVG
+## 2. Draw the SVG mockup
 
-O Claude desenha o mockup em SVG a partir do prompt — fiel à prévia e fácil de ajustar. Antes de desenhar, carregue as skills `frontend-design` e `design-taste-frontend` para fugir do visual genérico.
+Claude draws the mockup in SVG from the prompt — faithful to the preview and easy to adjust. Before drawing, load the `frontend-design` and `design-taste-frontend` skills to avoid a generic look.
 
-- `mockup_home-desktop_v1.svg` com `viewBox="0 0 1440 <altura>"`; `mockup_home-mobile_v1.svg` com largura 390.
-- **Colorido e com tipografia de verdade** (não é wireframe): paleta e fontes da prévia (`font-family` com fallback), títulos e botões com o texto real curto, demais textos como linhas ou frases neutras.
-- Imagens como blocos com gradiente suave da paleta e um rótulo discreto (`[FOTO: equipe]`). Ícones simples desenhados em SVG.
-- Nada de `<image>` externo, scripts ou recortes de referências.
+- `mockup_home-desktop_v1.svg` with `viewBox="0 0 1440 <height>"`; `mockup_home-mobile_v1.svg` with width 390.
+- **In color and with real typography** (it's not a wireframe): the preview's palette and fonts (`font-family` with fallback), headings and buttons with short real text, other text as lines or neutral sentences.
+- Images as blocks with a soft gradient from the palette and a discreet label (`[PHOTO: team]`). Simple icons drawn in SVG.
+- No external `<image>`, scripts or crops from references.
 
-O `prompt_imagem.md` também serve para o usuário gerar a imagem numa ferramenta de IA de imagem, se quiser. Se ele trouxer uma imagem gerada fora, salve em `etapas/03_mockup/` e trate como mais uma versão para aprovação.
+`prompt_imagem.md` can also be used by the user to generate the image in an AI image tool, if they want. If they bring an image generated elsewhere, save it in `etapas/03_mockup/` and treat it as another version for approval.
 
-## 3. Aprovação
+## 3. Approval
 
-1. Mostre as imagens: abra no navegador do app quando possível, ou diga o caminho dos arquivos.
-2. Pergunte se aprova ou o que quer mudar. Registre cada pedido na tabela "Ajustes pedidos" do `prompt_imagem.md` e gere uma nova versão (`_v2`, `_v3`) — não sobrescreva as anteriores.
-3. Quando um pedido mudar uma decisão da prévia (ex.: outra cor principal), atualize também a `previa_site.md`.
-4. Aprovado: copie a versão escolhida para `mockup_home-desktop.png|svg` (e `-mobile`) e registre em `etapas/aprovacoes.md` (passo 5, arquivos, `aprovado`, data, versão escolhida).
+1. Show the images: open them in the app's browser when possible, or give the file paths.
+2. Ask whether they approve or what they want to change. Record each request in the "Requested adjustments" table of `prompt_imagem.md` and generate a new version (`_v2`, `_v3`) — don't overwrite the previous ones.
+3. When a request changes a preview decision (e.g. a different main color), also update `previa_site.md`.
+4. Approved: copy the chosen version to `mockup_home-desktop.png|svg` (and `-mobile`) and record it in `etapas/aprovacoes.md` (step 5, files, `approved`, date, chosen version).
 
-A imagem aprovada é **direção visual**, não especificação: na ordem de confiança, valores medidos e decisões do usuário valem mais que cores e medidas "lidas" da imagem. A estrutura oficial nasce nos wireframes.
+The approved image is **visual direction**, not specification: in the trust order, measured values and user decisions are worth more than colors and measurements "read" from the image. The official structure is born in the wireframes.
 
-Próximo passo: `gerar-wireframes` (passo 6).
+Next step: `gerar-wireframes` (step 6).

@@ -1,68 +1,68 @@
-# Relatório de validação — <Projeto>
+# Validation report — <Project>
 
-> Validado em: <data> · contra `plano_construcao.md` (confirmado em <data>)
-> Legenda: ✅ passou · ❌ falhou · ⚠️ não verificado (motivo)
+> Validated on: <date> · against `plano_construcao.md` (confirmed on <date>)
+> Legend: ✅ passed · ❌ failed · ⚠️ not verified (reason)
 
-## Resumo
-- **Seções do plano:** <x de y> ✅
+## Summary
+- **Plan sections:** <x of y> ✅
 - **Checklist:** <x> ✅ · <y> ❌ · <z> ⚠️
-- **Build:** <✅/❌> · **Docker:** <✅/❌/não se aplica> · **Lighthouse:** <notas ou ⚠️>
-- **Pendências para o usuário:** <n placeholders, n itens não verificados>
+- **Build:** <✅/❌> · **Docker:** <✅/❌/not applicable> · **Lighthouse:** <scores or ⚠️>
+- **Open items for the user:** <n placeholders, n unverified items>
 
-## 1. Plano item a item
-| Página | Seção | Resultado | Observação |
-|--------|-------|-----------|------------|
+## 1. Plan item by item
+| Page | Section | Result | Note |
+|------|---------|--------|------|
 | home | HEADER | ✅ | |
-| home | HERO | ❌ → corrigido | botão secundário faltando |
+| home | HERO | ❌ → fixed | secondary button missing |
 
-| Funcionalidade / entrega | Resultado | Observação |
-|--------------------------|-----------|------------|
-| Formulário de contato | | |
+| Feature / delivery | Result | Note |
+|--------------------|--------|------|
+| Contact form | | |
 | Dockerfile | | |
 
 ## 2. Checklist
 ### Design system
-| Item | Resultado | Observação |
-|------|-----------|------------|
-| Nenhum valor fora dos tokens | | busca por `#`, `px`, `rgb(` soltos |
+| Item | Result | Note |
+|------|--------|------|
+| No values outside the tokens | | search for loose `#`, `px`, `rgb(` |
 
-### Responsividade
+### Responsiveness
 | Item | 375px | 768px | 1280px |
 |------|-------|-------|--------|
-| Sem rolagem horizontal | | | |
-| Menu funcional | | | |
+| No horizontal scrolling | | | |
+| Working menu | | | |
 
-### Acessibilidade
-| Item | Resultado | Observação |
-|------|-----------|------------|
-| Um h1 por página / hierarquia | | |
-| Contraste AA | | |
-| Foco visível e teclado | | |
+### Accessibility
+| Item | Result | Note |
+|------|--------|------|
+| One h1 per page / hierarchy | | |
+| AA contrast | | |
+| Visible focus and keyboard | | |
 | alt / labels | | |
 | prefers-reduced-motion | | |
 
-### Performance e SEO
-| Item | Resultado | Observação |
-|------|-----------|------------|
-| title e meta description | | |
-| Imagens com dimensões e lazy | | |
+### Performance and SEO
+| Item | Result | Note |
+|------|--------|------|
+| title and meta description | | |
+| Images with dimensions and lazy loading | | |
 | Lighthouse | | |
 
-### Conteúdo e direitos
-| Item | Resultado | Observação |
-|------|-----------|------------|
-| Nada copiado das referências | | |
+### Content and rights
+| Item | Result | Note |
+|------|--------|------|
+| Nothing copied from the references | | |
 
-## 3. Navegador
-Screenshots em `etapas/06_construcao/screenshots/`.
-| Página | 375px | 768px | 1280px | Erros no console |
-|--------|-------|-------|--------|------------------|
-| home | `home-375.png` | | | nenhum |
+## 3. Browser
+Screenshots in `etapas/06_construcao/screenshots/`.
+| Page | 375px | 768px | 1280px | Console errors |
+|------|-------|-------|--------|----------------|
+| home | `home-375.png` | | | none |
 
-## 4. Build e Docker
+## 4. Build and Docker
 ```
-<comandos rodados e resultado>
+<commands run and result>
 ```
 
-## Pendências
-- [ ] <placeholder ou item não verificado>
+## Open items
+- [ ] <placeholder or unverified item>

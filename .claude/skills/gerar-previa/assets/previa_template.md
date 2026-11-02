@@ -1,72 +1,72 @@
-# Prévia do site — <Nome do projeto>
+# Site preview — <Project name>
 
-> Compilada de: `briefing.md` (aprovado em <data>) · extração do código: <sites ou "não se aplica"> · extração dos prints: <sim/"não se aplica">
+> Compiled from: `briefing.md` (approved on <date>) · code extraction: <sites or "not applicable"> · screenshot extraction: <yes/"not applicable">
 
-## Em uma frase
-<Tipo de site> para <público>, cujo objetivo é <ação principal>. Clima: <três adjetivos>.
+## In one sentence
+<Type of site> for <audience>, whose goal is <main action>. Mood: <three adjectives>.
 
-## Mapa de páginas
-| Página | Objetivo da página | Seções (em ordem) |
-|--------|--------------------|-------------------|
+## Page map
+| Page | Page goal | Sections (in order) |
+|------|-----------|---------------------|
 | Home | <...> | Header · Hero · <...> · Footer |
 
-## Páginas e seções
+## Pages and sections
 
 ### Home
 #### 1. Header
-- **Comunica:** <...>
-- **Conteúdo:** logo · menu (<itens>) · botão "<CTA>"
-- **Organização sugerida:** <ex.: logo à esquerda, menu central, CTA à direita — como na Ref 1>
-- **Celular:** <ex.: menu vira hambúrguer>
+- **Communicates:** <...>
+- **Content:** logo · menu (<items>) · "<CTA>" button
+- **Suggested layout:** <e.g. logo on the left, centered menu, CTA on the right — like Ref 1>
+- **Mobile:** <e.g. menu becomes a hamburger>
 
 #### 2. Hero
-- **Comunica:** <proposta de valor>
-- **Conteúdo:** título `[TEXTO: proposta de valor, ~8 palavras]` · subtítulo · CTA · `[FOTO: ...]`
-- **Organização sugerida:** <...>
-- **Celular:** <...>
+- **Communicates:** <value proposition>
+- **Content:** heading `[TEXT: value proposition, ~8 words]` · subheading · CTA · `[PHOTO: ...]`
+- **Suggested layout:** <...>
+- **Mobile:** <...>
 
 #### <...>
 
-### <Outra página>
+### <Another page>
 ...
 
-## Direção visual
+## Visual direction
 
-### Paleta candidata
-| Papel | Cor | Origem | Observação |
-|-------|-----|--------|------------|
-| Fundo | `#...` | Ref 1 (medido) | |
-| Texto | `#...` | | contraste com o fundo: x:1 |
-| Primária / CTA | `#...` | cor da marca (briefing) | |
-| Secundária | `#...` | | |
-| Bordas / divisores | `#...` | | |
+### Candidate palette
+| Role | Color | Source | Note |
+|------|-------|--------|------|
+| Background | `#...` | Ref 1 (measured) | |
+| Text | `#...` | | contrast with background: x:1 |
+| Primary / CTA | `#...` | brand color (briefing) | |
+| Secondary | `#...` | | |
+| Borders / dividers | `#...` | | |
 
-### Tipografia candidata
-| Uso | Fonte | Origem | Tamanho aprox. (desktop / celular) |
-|-----|-------|--------|------------------------------------|
-| Títulos | <...> | | |
-| Texto | <...> | | |
+### Candidate typography
+| Use | Font | Source | Approx. size (desktop / mobile) |
+|-----|------|--------|---------------------------------|
+| Headings | <...> | | |
+| Body | <...> | | |
 
-### Formas e ritmo
-- **Espaçamento:** <generoso / médio / compacto — base de 4 ou 8 px>
-- **Cantos:** <retos / levemente arredondados / pílula>
-- **Sombras:** <sem / sutis>
-- **Imagens:** <fotos / ilustrações / ícones de linha>
-- **Animações:** <nenhuma / sutis — quais>
+### Shapes and rhythm
+- **Spacing:** <generous / medium / compact — 4 or 8 px base>
+- **Corners:** <square / slightly rounded / pill>
+- **Shadows:** <none / subtle>
+- **Images:** <photos / illustrations / line icons>
+- **Animations:** <none / subtle — which>
 
-### O que vem de cada referência
-| Referência | Aproveitamos | Evitamos |
-|------------|--------------|----------|
+### What comes from each reference
+| Reference | We take | We avoid |
+|-----------|---------|----------|
 | Ref 1 | <...> | <...> |
 
-## Conflitos e decisões
-| Conflito | Proposta | Decisão do usuário |
-|----------|----------|--------------------|
-| <ex.: Ref 1 escura × Ref 2 clara> | <...> | <...> |
+## Conflicts and decisions
+| Conflict | Proposal | User decision |
+|----------|----------|---------------|
+| <e.g. dark Ref 1 × light Ref 2> | <...> | <...> |
 
-## Decisões técnicas (do briefing)
+## Technical decisions (from the briefing)
 - **Stack:** <...>
-- **Hospedagem:** <...> · **Docker:** <...>
-- **Celular:** <responsivo mobile-first | + PWA>
-- **Funcionalidades:** <...>
-- **SEO / idiomas / acessibilidade:** <...>
+- **Hosting:** <...> · **Docker:** <...>
+- **Mobile:** <responsive mobile-first | + PWA>
+- **Features:** <...>
+- **SEO / languages / accessibility:** <...>

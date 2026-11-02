@@ -1,167 +1,165 @@
-# Template: sites com IA generativa + Skills
+# Template: AI-generated websites + Skills
 
-🇧🇷 Português · 🇺🇸 [English](README.en.md)
+A template for building **websites, company sites and landing pages** with Claude Code in
+**8 steps**, from understanding the business to a validated site ready to deploy. Each step
+produces a structured text file the next one reads (briefing, design extracted from references,
+preview, SVG wireframes, design system) — and four of them only move on with your approval.
 
-Template para criar **websites, sites institucionais e landing pages** com o Claude Code em
-**8 passos**, do entendimento do negócio ao site validado e pronto para deploy. Cada passo gera um
-arquivo de texto estruturado que o próximo lê (briefing, design extraído das referências, prévia,
-wireframes SVG, design system) — e quatro deles só avançam com a sua aprovação.
+Full plan: [`docs/plano.md`](docs/plano.md) · Process diagram: [`docs/diagrama-processo.html`](docs/diagrama-processo.html)
 
-Plano completo: [`docs/plano.md`](docs/plano.md) · Diagrama do processo: [`docs/diagrama-processo.html`](docs/diagrama-processo.html)
+## The 8 steps
 
-## Os 8 passos
+![Diagram of the 8 steps](docs/diagrama-processo.png)
 
-![Diagrama dos 8 passos](docs/diagrama-processo.png)
+| # | Step | Approval |
+|---|------|----------|
+| 1 | **Interview & briefing** — business, goal, audience, architecture, hosting, Docker, design, reference sites and screenshots | ✅ |
+| 2 | **Design extracted from the references' code** (HTML, CSS and the result of JavaScript) | |
+| 3 | **Design extracted from screenshots** | |
+| 4 | **Site preview** in Markdown | |
+| 5 | **Site image** — prompt + SVG mockup | ✅ |
+| 6 | **SVG wireframes** of every page, desktop and mobile | ✅ |
+| 7 | **Design system** in Markdown and HTML, with tokens | ✅ |
+| 8 | **Plan, build & validation** — code in `site/`, Docker/deploy and a report | |
 
-| # | Passo | Aprovação |
-|---|-------|-----------|
-| 1 | **Entrevista e briefing** — negócio, objetivo, público, arquitetura, hospedagem, Docker, design, referências e prints | ✅ |
-| 2 | **Design extraído do código** das referências (HTML, CSS e o resultado do JavaScript) | |
-| 3 | **Design extraído dos prints** de telas | |
-| 4 | **Prévia do site** em Markdown | |
-| 5 | **Imagem do site** — prompt + mockup em SVG | ✅ |
-| 6 | **Wireframes SVG** de todas as páginas, desktop e celular | ✅ |
-| 7 | **Design system** em Markdown e HTML, com tokens | ✅ |
-| 8 | **Plano, construção e validação** — código em `site/`, Docker/deploy e relatório | |
+## How to use
 
-## Como usar
+### 1. Create your project from the template
 
-### 1. Crie seu projeto a partir do template
-
-No GitHub, abra este repositório e clique em **Use this template → Create a new repository**.
-Ou pela linha de comando, com o [GitHub CLI](https://cli.github.com/):
+On GitHub, open this repository and click **Use this template → Create a new repository**.
+Or from the command line with the [GitHub CLI](https://cli.github.com/):
 
 ```bash
-gh repo create meu-site --template mayconspirlandelli/skills-site-com-ia --private --clone
+gh repo create my-site --template mayconspirlandelli/skills-site-com-ia --private --clone
 ```
 
-Se criou pelo site, clone o novo repositório:
+If you created it on the website, clone the new repository:
 
 ```bash
-git clone https://github.com/<usuario>/<meu-site>.git
+git clone https://github.com/<user>/<my-site>.git
 ```
 
-### 2. Instale as skills de terceiros
+### 2. Install the third-party skills
 
-Na pasta do projeto (no Windows, use o Git Bash). O script audita cada skill antes de instalar:
+From the project folder (on Windows, use Git Bash). The script audits each skill before installing:
 
 ```bash
 ./scripts/setup-skills.sh obrigatorias
 ```
 
-### 3. Abra o Claude Code e comece
+### 3. Open Claude Code and start
 
 ```bash
 claude
 ```
 
-Diga algo como: *"Quero criar uma landing page para [seu negócio]."* A skill `site-com-referencias`
-conduz os 8 passos, começando pela entrevista. O andamento fica nas pastas de `etapas/` e em
-`etapas/aprovacoes.md` — você pode parar e continuar em outra sessão.
+Say something like: *"I want to build a landing page for [your business]."* The
+`site-com-referencias` skill drives the 8 steps, starting with the interview. Progress lives in
+the `etapas/` folders and in `etapas/aprovacoes.md` — you can stop and resume in another session.
 
-### Requisitos
+### Requirements
 
 - [Claude Code](https://claude.com/claude-code)
-- Git e Bash (no Windows, Git Bash)
-- Python 3 e `pip install beautifulsoup4 pillow`
-- Node.js (para o site e para o `playwright-cli`)
+- Git and Bash (Git Bash on Windows)
+- Python 3 and `pip install beautifulsoup4 pillow`
+- Node.js (for the site and for `playwright-cli`)
 
-## O que vem no template
+## What's in the template
 
 ```
-├── CLAUDE.md              instruções permanentes lidas em toda sessão
+├── CLAUDE.md              permanent instructions read in every session
 ├── .claude/
-│   ├── settings.json      marketplaces e plugins do projeto
-│   └── skills/            skills do fluxo (versionadas com o projeto)
+│   ├── settings.json      project marketplaces and plugins
+│   └── skills/            workflow skills (versioned with the project)
 ├── docs/
-│   ├── plano.md           o plano dos 8 passos
-│   ├── diagrama-processo.html  diagrama dos 8 passos (+ .png)
-│   ├── skills-obrigatorias.md  skills de terceiros e como instalar
-│   └── recursos.md        links úteis (referências, animações, skills)
+│   ├── plano.md           the 8-step plan
+│   ├── diagrama-processo.html  8-step diagram (+ .png)
+│   ├── skills-obrigatorias.md  third-party skills and how to install them
+│   └── recursos.md        useful links (references, animations, skills)
 ├── scripts/
-│   ├── setup-skills.sh    audita e instala as skills de terceiros do template
-│   └── adicionar-skill.sh audita e instala qualquer outra skill
-├── etapas/                construção do site, uma pasta por passo
-│   ├── aprovacoes.md      registro das suas aprovações
-│   ├── auditorias/        relatórios de auditoria das skills e exceções revisadas
-│   ├── 00_briefing/       briefing.md + prints/ enviados
-│   ├── 01_extracao/       design extraído do código (codigo/) e dos prints (prints/)
-│   ├── 02_previa/         prévia do site
-│   ├── 03_mockup/         prompt e imagem do site
-│   ├── 04_wireframes/     wireframes SVG
+│   ├── setup-skills.sh    audits and installs the template's third-party skills
+│   └── adicionar-skill.sh audits and installs any other skill
+├── etapas/                site construction, one folder per step
+│   ├── aprovacoes.md      log of your approvals
+│   ├── auditorias/        skill audit reports and reviewed exceptions
+│   ├── 00_briefing/       briefing.md + uploaded prints/ (screenshots)
+│   ├── 01_extracao/       design extracted from code (codigo/) and screenshots (prints/)
+│   ├── 02_previa/         site preview
+│   ├── 03_mockup/         image prompt and site image
+│   ├── 04_wireframes/     SVG wireframes
 │   ├── 05_design_system/  design_system.md + design_system.html + tokens.css
-│   └── 06_construcao/     plano de construção e relatório de validação
-└── site/                  código do site (pronto para Docker e deploy)
+│   └── 06_construcao/     build plan and validation report
+└── site/                  site code (ready for Docker and deploy)
 ```
 
-## Skills incluídas
+## Included skills
 
-| Skill | Passo |
-|-------|-------|
-| `site-com-referencias` | Orquestra o fluxo, as aprovações e indica o próximo passo |
-| `entrevista-site` | 1 — entrevista em rodadas com resposta recomendada e briefing.md |
-| `extrair-html-referencia` | 2 — mede o design das referências no navegador (playwright-cli) e no código |
-| `extrair-design-prints` | 3 — paleta dos prints (script) e análise de tipografia e formas |
-| `gerar-previa` | 4 — prévia do site em Markdown |
-| `gerar-mockup` | 5 — prompt e mockup do site em SVG |
-| `gerar-wireframes` | 6 — wireframes SVG de todas as páginas + página de revisão |
-| `gerar-design-system` | 7 — design_system.md + design_system.html, tokens e contraste |
-| `construir-site` | 8 — plano, código em site/, Docker/deploy e relatório de validação |
-| `auditar-skill` | Auditoria de segurança de skills de terceiros antes de instalar |
+| Skill | Step |
+|-------|------|
+| `site-com-referencias` | Orchestrates the workflow and approvals, and points to the next step |
+| `entrevista-site` | 1 — interview in rounds with recommended answers and briefing.md |
+| `extrair-html-referencia` | 2 — measures the references' design in the browser (playwright-cli) and in the code |
+| `extrair-design-prints` | 3 — screenshot palette (script) and typography/shape analysis |
+| `gerar-previa` | 4 — site preview in Markdown |
+| `gerar-mockup` | 5 — prompt and SVG site mockup |
+| `gerar-wireframes` | 6 — SVG wireframes of every page + review page |
+| `gerar-design-system` | 7 — design_system.md + design_system.html, tokens and contrast |
+| `construir-site` | 8 — plan, code in site/, Docker/deploy and validation report |
+| `auditar-skill` | Security audit of third-party skills before installing |
 
-## Skills de terceiros (instaladas pelo script)
+## Third-party skills (installed by script)
 
-Não vêm versionadas no template — cada uma tem licença e autor próprios. O
-`scripts/setup-skills.sh` audita e instala cada uma no seu projeto. Detalhes e comandos
-`npx` manuais em [`docs/skills-obrigatorias.md`](docs/skills-obrigatorias.md).
+They are **not bundled** with the template — each one has its own license and author.
+`scripts/setup-skills.sh` audits and installs each one in your project. Details and manual
+`npx` commands in [`docs/skills-obrigatorias.md`](docs/skills-obrigatorias.md).
 
-| Grupo | Skills | Comando |
+| Group | Skills | Command |
 |-------|--------|---------|
-| Obrigatórias | `frontend-design`, `web-design-guidelines`, `image-to-code`, `design-taste-frontend`, `playwright-cli`, `diagram-design`, `impeccable` | `./scripts/setup-skills.sh obrigatorias` |
-| Animação/vídeo (se o briefing pedir) | `remotion-best-practices`, `motion-design` | `./scripts/setup-skills.sh animacao` |
-| Extras (opcional) | `grill-me`, `grilling` | `./scripts/setup-skills.sh extras` |
+| Required | `frontend-design`, `web-design-guidelines`, `image-to-code`, `design-taste-frontend`, `playwright-cli`, `diagram-design`, `impeccable` | `./scripts/setup-skills.sh obrigatorias` |
+| Animation/video (if the briefing asks) | `remotion-best-practices`, `motion-design` | `./scripts/setup-skills.sh animacao` |
+| Extras (optional) | `grill-me`, `grilling` | `./scripts/setup-skills.sh extras` |
 
-## Adicionando outras skills
+## Adding other skills
 
-> 🔒 **Toda skill de terceiros passa pela auditoria antes de ser instalada.**
-> Skills dão instruções à IA e podem trazer scripts que rodam no seu computador,
-> com acesso a arquivos, rede e credenciais. A skill `auditar-skill` verifica prompt
-> injection, envio de dados, acesso a credenciais, código ofuscado, persistência e
-> comandos destrutivos, e dá um veredito: ✅ OK, ⚠️ REVISAR ou ⛔ BLOQUEAR.
-> Os relatórios ficam em `etapas/auditorias/`.
+> 🔒 **Every third-party skill is audited before installation.**
+> Skills give instructions to the AI and may ship scripts that run on your machine,
+> with access to files, network and credentials. The `auditar-skill` skill checks for prompt
+> injection, data exfiltration, credential access, obfuscated code, persistence and
+> destructive commands, and gives a verdict: ✅ OK, ⚠️ REVIEW or ⛔ BLOCK.
+> Reports are saved in `etapas/auditorias/`.
 
-**Opção 1 — Script com auditoria automática (recomendado).**
+**Option 1 — Script with automatic audit (recommended).**
 ```bash
-./scripts/adicionar-skill.sh https://github.com/<usuario>/<repo> <nome-ou-caminho-da-skill>
-./scripts/adicionar-skill.sh <url> <skill> --global   # para todos os projetos
+./scripts/adicionar-skill.sh https://github.com/<user>/<repo> <skill-name-or-path>
+./scripts/adicionar-skill.sh <url> <skill> --global   # for all projects
 ```
-Baixa em pasta temporária, audita e só instala o commit auditado (REVISAR pede sua
-confirmação, BLOQUEAR impede a instalação).
+Downloads to a temp folder, audits, and installs only the audited commit (REVIEW asks for your
+confirmation, BLOCK prevents installation).
 
-**Opção 2 — Marketplace de plugins.**
-Antes de instalar um plugin, peça ao Claude Code: *"audite o plugin X do marketplace Y"* —
-a skill `auditar-skill` clona o repositório e audita cada skill, comando e hook do plugin.
-O marketplace oficial da Anthropic já está registrado no `.claude/settings.json`.
-Dentro do Claude Code:
+**Option 2 — Plugin marketplace.**
+Before installing a plugin, ask Claude Code: *"audit plugin X from marketplace Y"* —
+the `auditar-skill` skill clones the repository and audits each skill, command and hook of the plugin.
+Anthropic's official marketplace is already registered in `.claude/settings.json`.
+Inside Claude Code:
 ```
 /plugin install example-skills@anthropic-agent-skills --scope project
 ```
-O `--scope project` grava o plugin no `.claude/settings.json`, então ele vai junto no git.
-Para outros marketplaces: `/plugin marketplace add <usuario>/<repo> --scope project`.
+`--scope project` writes the plugin to `.claude/settings.json`, so it goes along with git.
+For other marketplaces: `/plugin marketplace add <user>/<repo> --scope project`.
 
-**Opção 3 — Criar uma skill nova.**
-Peça ao Claude Code: *"use a skill-creator para criar uma skill que ... e salve em .claude/skills/"*.
+**Option 3 — Create a new skill.**
+Ask Claude Code: *"use skill-creator to create a skill that ... and save it in .claude/skills/"*.
 
-Depois de instalar: registre a skill e o commit auditado na tabela **Skills adicionais**
-do `CLAUDE.md` e reinicie o Claude Code. Atualizou a skill? Audite de novo.
+After installing: record the skill and the audited commit in the **Additional skills** table
+in `CLAUDE.md` and restart Claude Code. Updated the skill? Audit it again.
 
-## Usando no Claude.ai (sem Claude Code)
+## Using on Claude.ai (without Claude Code)
 
-- Instale os arquivos `.skill` em Configurações → Skills.
-- Crie um Projeto, cole o conteúdo do `CLAUDE.md` nas instruções e suba os arquivos
-  do design system e wireframes como conhecimento do projeto conforme ficarem prontos.
+- Install the `.skill` files in Settings → Skills.
+- Create a Project, paste the contents of `CLAUDE.md` into its instructions, and upload the
+  design system and wireframe files as project knowledge as they become ready.
 
-## Licença
+## License
 
-[MIT](LICENSE) — vale para os arquivos deste template. As skills de terceiros instaladas pelo
-`setup-skills.sh` seguem a licença de cada repositório de origem.
+[MIT](LICENSE) — applies to this template's files. Third-party skills installed by
+`setup-skills.sh` keep the license of their own source repositories.

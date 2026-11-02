@@ -1,64 +1,64 @@
-# Prompt da imagem do site — <Projeto>
+# Site image prompt — <Project>
 
-> Gerado a partir de: `etapas/02_previa/previa_site.md` (<data>)
-> O mockup é desenhado em SVG pelo Claude. O prompt também serve para gerar a imagem em qualquer ferramenta de IA, se o usuário quiser.
+> Generated from: `etapas/02_previa/previa_site.md` (<date>)
+> The mockup is drawn in SVG by Claude. The prompt can also be used to generate the image in any AI tool, if the user wants.
 
-## Base comum (vai no início de todo prompt)
+## Common base (goes at the start of every prompt)
 
-> Web design de alta qualidade para <tipo: landing page | site institucional> de <domínio de negócio>,
-> voltado a <público>. Objetivo: <ação principal>. Clima: <três adjetivos da prévia>.
-> Paleta: fundo <#hex>, texto <#hex>, cor principal <#hex>, apoio <#hex>.
-> Tipografia: títulos em <categoria/fonte>, texto em <categoria/fonte>.
-> Formas: <cantos, sombras, espaçamento>. Imagens: <fotos | ilustrações | ícones de linha>.
-> Textos curtos e legíveis apenas nos títulos e botões; o resto como linhas de texto genéricas.
-> Sem logos ou marcas reais de terceiros, sem marca-d'água.
+> High-quality web design for a <type: landing page | company site> in <business domain>,
+> aimed at <audience>. Goal: <main action>. Mood: <three adjectives from the preview>.
+> Palette: background <#hex>, text <#hex>, main color <#hex>, support <#hex>.
+> Typography: headings in <category/font>, body in <category/font>.
+> Shapes: <corners, shadows, spacing>. Images: <photos | illustrations | line icons>.
+> Short, legible text only in headings and buttons; the rest as generic text lines.
+> No real third-party logos or brands, no watermark.
 
 ## 1. Home — desktop
-Formato: 16:10 (1440 × 900 visível; pode ser página longa, 1440 × ~3000)
+Format: 16:10 (1440 × 900 visible; can be a long page, 1440 × ~3000)
 
 ```
-<base comum>
-Mockup frontal e plano da página inteira, tela desktop 1440px, sem moldura de navegador.
-De cima para baixo:
-1) HEADER — <da prévia>
-2) HERO — <organização, título "<texto real ou curto>", botão "<CTA>", imagem de <assunto>>
-3) <SEÇÃO> — <...>
+<common base>
+Flat, front-facing mockup of the whole page, 1440px desktop screen, no browser frame.
+Top to bottom:
+1) HEADER — <from the preview>
+2) HERO — <layout, heading "<real or short text>", "<CTA>" button, image of <subject>>
+3) <SECTION> — <...>
 ...
 N) FOOTER — <...>
-Hierarquia clara, espaçamento <generoso>, alinhamento em grid de 12 colunas, contêiner de ~1200px.
+Clear hierarchy, <generous> spacing, 12-column grid alignment, ~1200px container.
 ```
 
-## 2. Home — celular
-Formato: 9:19.5 (390 × ~2400)
+## 2. Home — mobile
+Format: 9:19.5 (390 × ~2400)
 
 ```
-<base comum>
-A mesma página em tela de celular 390px: menu hambúrguer, seções empilhadas em 1 coluna na mesma
-ordem do desktop, botões com largura total, textos maiores que o normal para leitura no celular.
+<common base>
+The same page on a 390px phone screen: hamburger menu, sections stacked in 1 column in the same
+order as desktop, full-width buttons, text larger than usual for reading on a phone.
 ```
 
-## 3. <Outra página> — desktop (opcional)
+## 3. <Another page> — desktop (optional)
 ```
-<base comum> ...
+<common base> ...
 ```
 
-## Ajustes pedidos pelo usuário
-| Versão | Pedido | Resultado |
-|--------|--------|-----------|
-| v1 → v2 | <ex.: hero com mais respiro, botão maior> | `mockup_home-desktop_v2.png` |
+## Requested adjustments
+| Version | Request | Result |
+|---------|---------|--------|
+| v1 → v2 | <e.g. more breathing room in the hero, bigger button> | `mockup_home-desktop_v2.png` |
 
 ---
 
-## Imagens de conteúdo (para usar no passo 8)
+## Content images (for use in step 8)
 
-Imagens que entram no site — geradas depois, na construção, ou trocadas por fotos reais.
-Destino: `site/` (pasta de imagens da stack). Sempre com texto alternativo (`alt`).
+Images that go into the site — generated later, during the build, or replaced by real photos.
+Destination: `site/` (the stack's images folder). Always with alternative text (`alt`).
 
-| # | Onde entra | Formato | Prompt |
-|---|-----------|---------|--------|
-| 1 | Hero | 16:9, 1920×1080 | `<base comum, sem a parte de layout> Fotografia/ilustração de <assunto>, <enquadramento>, <luz>, espaço livre à <esquerda/direita> para texto.` |
-| 2 | <Seção> | 1:1, 800×800 | `<...>` |
-| 3 | Ícones de <seção> | SVG | `conjunto de <n> ícones de linha, traço uniforme, estilo consistente` |
+| # | Where it goes | Format | Prompt |
+|---|---------------|--------|--------|
+| 1 | Hero | 16:9, 1920×1080 | `<common base, without the layout part> Photo/illustration of <subject>, <framing>, <lighting>, free space on the <left/right> for text.` |
+| 2 | <Section> | 1:1, 800×800 | `<...>` |
+| 3 | <Section> icons | SVG | `set of <n> line icons, uniform stroke, consistent style` |
 
-Pessoas reais que o site apresenta como reais (equipe, clientes, alunos) **não** são geradas por IA:
-use fotos autorizadas ou `[FOTO: ...]`.
+Real people that the site presents as real (team, clients, students) are **not** generated by AI:
+use authorized photos or `[PHOTO: ...]`.

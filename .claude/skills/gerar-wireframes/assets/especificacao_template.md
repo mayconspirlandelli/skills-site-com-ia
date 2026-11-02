@@ -1,19 +1,19 @@
-# Especificação de componentes
+# Component specification
 
 ## HEADER
-| Elemento | Tipografia | Posição/alinhamento | Espaçamento | Responsivo | Estados |
-|----------|-----------|---------------------|-------------|------------|---------|
-| Logo | — | esquerda, centro vertical | — | mantém | — |
-| Item de menu | body-sm, 500 | centro, gap espaço-lg | padding espaço-xs | vira menu lateral < 768px | hover: cor primária; ativo: sublinhado |
-| Botão CTA | body-sm, 600 | direita | padding espaço-sm × espaço-md | oculto < 768px | hover: primária escura; foco: anel 2px |
+| Element | Typography | Position/alignment | Spacing | Responsive | States |
+|---------|------------|--------------------|---------|------------|--------|
+| Logo | — | left, vertically centered | — | unchanged | — |
+| Menu item | body-sm, 500 | center, gap space-lg | padding space-xs | becomes side menu < 768px | hover: primary color; active: underline |
+| CTA button | body-sm, 600 | right | padding space-sm × space-md | hidden < 768px | hover: dark primary; focus: 2px ring |
 
 ## HERO
 ...
 
 ---
 
-## Valores reais encontrados (origem)
-| Papel | Valor | Origem |
-|-------|-------|--------|
+## Actual values found (source)
+| Role | Value | Source |
+|------|-------|--------|
 | H1 | 48px / 700 / 1.1 | resumo.md ref1 |
-| espaço-lg | 32px | estimado do print |
+| space-lg | 32px | estimated from screenshot |

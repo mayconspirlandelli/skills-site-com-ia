@@ -1,51 +1,51 @@
-# Design System — <Nome do site>
+# Design System — <Site name>
 
-> Fonte única da verdade visual. Qualquer mudança de estilo é feita aqui primeiro.
-> Tokens em tabelas com a coluna **Token** no formato `--nome` são convertidos
-> automaticamente em `tokens.css` por `scripts/gerar_tokens.py`.
+> Single visual source of truth. Any style change is made here first.
+> Tokens in tables whose **Token** column uses the `--name` format are converted
+> automatically into `tokens.css` by `scripts/gerar_tokens.py`.
 
-## Princípios
-- <ex.: espaço generoso, pouca cor, foco no conteúdo>
-- Referências: <Ref 2 (tipografia), Ref 3 (cores)>
+## Principles
+- <e.g. generous space, little color, focus on content>
+- References: <Ref 2 (typography), Ref 3 (colors)>
 
-## Paleta de cores
-| Token | Valor | Uso |
+## Color palette
+| Token | Value | Use |
 |-------|-------|-----|
-| `--color-primary` | #1A56DB | Botões primários, links |
-| `--color-primary-hover` | #1E429F | Hover do primário |
-| `--color-secondary` | #0E9F6E | Destaques |
-| `--color-text` | #111827 | Texto principal |
-| `--color-text-muted` | #6B7280 | Texto secundário |
-| `--color-bg` | #FFFFFF | Fundo |
-| `--color-surface` | #F9FAFB | Cards, seções alternadas |
-| `--color-border` | #E5E7EB | Bordas |
-| `--color-error` | #DC2626 | Erros |
-| `--color-success` | #16A34A | Sucesso |
+| `--color-primary` | #1A56DB | Primary buttons, links |
+| `--color-primary-hover` | #1E429F | Primary hover |
+| `--color-secondary` | #0E9F6E | Highlights |
+| `--color-text` | #111827 | Main text |
+| `--color-text-muted` | #6B7280 | Secondary text |
+| `--color-bg` | #FFFFFF | Background |
+| `--color-surface` | #F9FAFB | Cards, alternating sections |
+| `--color-border` | #E5E7EB | Borders |
+| `--color-error` | #DC2626 | Errors |
+| `--color-success` | #16A34A | Success |
 
-Contrastes verificados (WCAG AA ≥ 4.5:1 para texto):
-| Combinação | Razão | OK? |
-|------------|-------|-----|
-| text sobre bg | | |
-| branco sobre primary | | |
+Verified contrast (WCAG AA ≥ 4.5:1 for text):
+| Combination | Ratio | OK? |
+|-------------|-------|-----|
+| text on bg | | |
+| white on primary | | |
 
-## Tipografia
-| Token | Valor | Uso |
+## Typography
+| Token | Value | Use |
 |-------|-------|-----|
-| `--font-heading` | 'Inter', system-ui, sans-serif | Títulos |
-| `--font-body` | 'Inter', system-ui, sans-serif | Texto |
+| `--font-heading` | 'Inter', system-ui, sans-serif | Headings |
+| `--font-body` | 'Inter', system-ui, sans-serif | Body |
 
 Import: `<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">`
 
-| Token | Valor | Peso | Altura de linha | Uso |
-|-------|-------|------|-----------------|-----|
-| `--text-h1` | clamp(2.25rem, 5vw, 3rem) | 700 | 1.1 | Título do hero |
-| `--text-h2` | 2.25rem | 700 | 1.2 | Título de seção |
-| `--text-h3` | 1.5rem | 600 | 1.3 | Título de card |
-| `--text-body` | 1rem | 400 | 1.6 | Texto |
-| `--text-sm` | 0.875rem | 400 | 1.5 | Legendas, menu |
+| Token | Value | Weight | Line height | Use |
+|-------|-------|--------|-------------|-----|
+| `--text-h1` | clamp(2.25rem, 5vw, 3rem) | 700 | 1.1 | Hero heading |
+| `--text-h2` | 2.25rem | 700 | 1.2 | Section heading |
+| `--text-h3` | 1.5rem | 600 | 1.3 | Card heading |
+| `--text-body` | 1rem | 400 | 1.6 | Body |
+| `--text-sm` | 0.875rem | 400 | 1.5 | Captions, menu |
 
-## Espaçamento (escala de 4px)
-| Token | Valor |
+## Spacing (4px scale)
+| Token | Value |
 |-------|-------|
 | `--space-1` | 4px |
 | `--space-2` | 8px |
@@ -57,10 +57,10 @@ Import: `<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500
 | `--space-16` | 64px |
 | `--space-24` | 96px |
 
-Espaço vertical entre seções: `--space-24` desktop, `--space-16` mobile.
+Vertical space between sections: `--space-24` desktop, `--space-16` mobile.
 
-## Layout e breakpoints
-| Token | Valor |
+## Layout and breakpoints
+| Token | Value |
 |-------|-------|
 | `--container-max` | 1200px |
 | `--container-padding` | 24px |
@@ -68,35 +68,35 @@ Espaço vertical entre seções: `--space-24` desktop, `--space-16` mobile.
 | `--bp-md` | 768px |
 | `--bp-lg` | 1024px |
 
-Grid: 12 colunas, gap `--space-6`. Abordagem mobile-first.
+Grid: 12 columns, gap `--space-6`. Mobile-first approach.
 
-## Bordas e sombras
-| Token | Valor | Uso |
+## Borders and shadows
+| Token | Value | Use |
 |-------|-------|-----|
 | `--radius-sm` | 4px | Inputs |
-| `--radius-md` | 8px | Botões, cards |
-| `--radius-full` | 999px | Pílulas, avatares |
+| `--radius-md` | 8px | Buttons, cards |
+| `--radius-full` | 999px | Pills, avatars |
 | `--shadow-sm` | 0 1px 2px rgba(0,0,0,.05) | Inputs |
 | `--shadow-md` | 0 4px 12px rgba(0,0,0,.08) | Cards |
 
-## Componentes
-### Botão
-| Variante | Fundo | Texto | Borda | Hover | Foco |
-|----------|-------|-------|-------|-------|------|
-| Primário | primary | branco | — | primary-hover | anel 2px primary, offset 2px |
-| Secundário | transparente | primary | 1px primary | fundo surface | idem |
+## Components
+### Button
+| Variant | Background | Text | Border | Hover | Focus |
+|---------|------------|------|--------|-------|-------|
+| Primary | primary | white | — | primary-hover | 2px primary ring, 2px offset |
+| Secondary | transparent | primary | 1px primary | surface background | same |
 Padding `--space-3` × `--space-6`, `--radius-md`, `--text-body` 600.
 
 ### Card
-Fundo bg, borda border, `--radius-md`, `--shadow-md`, padding `--space-6`.
+bg background, border border, `--radius-md`, `--shadow-md`, padding `--space-6`.
 
 ### Input
 ...
 
-## Movimento
-Transições 150–200ms ease-out. Respeitar `prefers-reduced-motion`.
+## Motion
+150–200ms ease-out transitions. Respect `prefers-reduced-motion`.
 
-## Regras
-- Não usar cores, tamanhos ou espaçamentos fora dos tokens.
-- Todo elemento interativo tem estado de foco visível.
-- Imagens com `alt` descritivo.
+## Rules
+- Don't use colors, sizes or spacing outside the tokens.
+- Every interactive element has a visible focus state.
+- Images with descriptive `alt`.

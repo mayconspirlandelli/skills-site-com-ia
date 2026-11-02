@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Calcula a razão de contraste WCAG entre pares de cores hex.
+Computes the WCAG contrast ratio between pairs of hex colors.
 
-Uso:
+Usage:
   python contraste.py "#111827:#FFFFFF" "#FFFFFF:#1A56DB"
-Formato de cada par: TEXTO:FUNDO
+Format of each pair: TEXT:BACKGROUND
 """
 import sys
 
@@ -27,13 +27,13 @@ def razao(a, b):
 
 
 if __name__ == "__main__":
-    # Evita caracteres corrompidos em consoles Windows (cp1252).
+    # Avoids garbled characters on Windows consoles (cp1252).
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     if len(sys.argv) < 2:
         sys.exit(__doc__)
-    print("| Texto | Fundo | Razão | AA texto (4.5) | AA grande (3.0) |")
-    print("|-------|-------|-------|----------------|-----------------|")
+    print("| Text | Background | Ratio | AA text (4.5) | AA large (3.0) |")
+    print("|------|------------|-------|---------------|----------------|")
     for par in sys.argv[1:]:
         t, f = par.split(":")
         r = razao(t, f)
